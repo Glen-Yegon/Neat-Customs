@@ -1,0 +1,1838 @@
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  h1{
+    font-style: oblique;
+ font-family: 'Caveat', cursive;
+    text-decoration: none;
+  }
+
+  /* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: center;
+ font-family: 'Caveat', cursive;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 80px;
+  padding: 0 20px;
+  margin-top: 0px;
+  background: linear-gradient(to bottom, #5d39ff, white);
+  z-index: 0;
+}
+
+.heading{
+  text-decoration: none;
+}
+
+/* Unique Background Effect (Diagonal Stripes) */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Company Logo Container */
+.company-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rotating Logo */
+.rotating-logo {
+  width: 80px;
+  margin-top: 0px;
+  height: auto;
+  animation: rotateLogo 10s linear infinite;
+  transition: transform 0.3s ease;
+}
+
+/* Smooth Rotation Animation */
+@keyframes rotateLogo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover Effect - Grows slightly */
+.rotating-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .rotating-logo {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rotating-logo {
+    width: 50px;
+  }
+}
+
+/* Back Button */
+.back-button {
+  background-color: transparent;
+  color: black;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #5d39ff;
+  cursor: crosshair;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    height: 60px;
+    padding: 0 10px;
+  }
+
+  .company-name h1 {
+    font-size: 20px;
+  }
+
+  .back-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    height: 55px;
+    padding: 0 8px;
+  }
+
+  .company-name h1 {
+    font-size: 18px;
+  }
+
+  .back-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+
+/* User Icon */
+.user-icon {
+  display: flex;
+  align-items: right;
+  margin-right: 0px;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.user-icon:hover {
+  background-color: #5d39ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Adjust for mobile screens */
+@media (max-width: 768px) {
+  .user-icon {
+    padding-top: 0px;
+    padding: 4px;
+    margin-right: 5px;
+  }
+
+  .user-icon .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+/* Menu Styling */
+#graphicMenu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hidden initially */
+  width: 300px;
+  height: 100%;
+  background: white;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  padding: 20px;
+  transition: left 0.3s ease; /* Smooth slide effect */
+  overflow-y: auto;
+}
+
+/* Menu Header */
+#graphicMenu h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: black;
+}
+
+/* Menu Items */
+#graphicMenu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* From Uiverse.io by niat786 */ 
+.men {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  margin: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.men:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(0, 0, 0);
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
+.upload-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  fill: #000; /* Set the color of the icon */
+  transition: fill 0.3s ease;
+}
+
+.upload-icon:hover {
+  fill: #007bff; /* Change color on hover */
+}
+
+
+.left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background: linear-gradient(to bottom, #6220fb, #1c1c1c);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+ font-family: 'Poppins', sans-serif;
+}
+
+.hidden-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 1100;
+  padding: 20px;
+  display: none;
+}
+
+.hidden-menu h3 {
+  margin-top: 0;
+  text-decoration: underline;
+
+}
+
+.graphic-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+}
+
+.graphic-item img {
+  display: flex;
+  max-width: 100%;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.graphic-item p{
+  align-items: baseline;
+  justify-content: baseline;
+
+}
+
+button {
+  margin-top: 10px;
+}
+
+.div2{
+  height: 50px;
+  display: flex;
+}
+
+
+
+  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 500px;   /* Fixed size on larger screens */
+  box-sizing: border-box;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+  border: solid 1px #000;
+  border-radius: 10px;
+  width: 750px;   /* Fixed size on larger screens */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ensure canvas scales inside container */
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  max-width: 1000px;
+  max-height: 1000px;
+}
+@media(max-width: 468px){
+  .container{
+    margin-top: 40px;
+  }
+  .canvas-container{
+    max-width: 430px;
+    max-height: 430px;
+  }
+  .canvas{
+    max-width: 430px;
+    max-height: 430px;
+  }
+}
+
+
+.div1{
+  display: flex;
+  flex-direction: row;
+ font-family: 'Raleway', sans-serif;
+  gap: 20px;
+}
+/* From Uiverse.io by Navarog21 */ 
+.next-btn {
+  margin-top: 40px;
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #5d39ff;
+  outline: none;
+  background-color: transparent;
+  color: #000000;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.next-btn::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.next-btn::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.next-btn:hover::before, button:hover::after {
+  transform: scale(0)
+}
+
+.next-btn:hover {
+  box-shadow: inset 0px 0px 25px #5d39ff;
+}
+
+/* From Uiverse.io by Navarog21 */ 
+.prev-btn {
+  margin-top: 40px;
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #5d39ff;
+  outline: none;
+  background-color: transparent;
+  color: #333;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.prev-btn:after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.prev-btn::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.prev-btn:hover::before, button:hover::after {
+  transform: scale(0)
+}
+
+.prev-btn:hover {
+  box-shadow: inset 0px 0px 25px #5d39ff;
+}
+
+@media (max-width: 768px) {
+  .canvas {
+    width: auto;
+      align-items:center;
+      justify-content: center;
+      height: auto;
+  }
+  .prev-btn{
+    width: 120px;
+    height: 75px;
+  }
+  .next-btn{
+    width: 120px;
+    height: 75px;
+  }
+}
+
+#menu {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 55px;
+  padding: 5px 10px;
+  background: linear-gradient(to top, white, #5d39ff);
+  max-width: 600px;
+  border-radius: 6px;
+  margin-top: 10px;
+  min-width: 80px;
+}
+
+#menu i {
+  font-size: 24px;
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+#menu i:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+    /* Responsive Menu for Smaller Screens */
+    @media (max-width: 768px) {
+
+      #menu {
+        flex-direction: row;
+        justify-content: center;
+        border-right: none;
+        border-top: 2px solid #ddd;
+        gap: 35px;
+      }
+
+      #menu i {
+        font-size: 20px;
+        margin: 0 10px;
+      }
+    }
+    @media(max-width: 468px){
+      #menu{
+        gap: 20px;
+      }
+    }
+
+/* Container for the input form */
+.text-form-container {
+  display: none;
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  animation: fadeInSlide 0.4s ease-out;
+  font-family: 'Raleway', sans-serif;
+  max-width: 320px;
+}
+
+/* Text input */
+.text-form-container input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 3px solid #000000;
+font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.text-form-container input:focus {
+  border-color: #5d39ff;
+}
+
+/* Submit button */
+.text-form-container button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #000000;
+  border: none;
+  border-bottom: 1px solid black;
+  font-family: "Raleway" sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.text-form-container button:hover {
+  transform: scale(1.15);
+}
+
+/* Entrance Animation */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.close-text-form-btn {
+  position: relative;
+  top: 10px;
+  background: #5d39ff;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+ font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-text-form-btn:hover {
+  color: #020202;
+  transform: scale(1.15);
+}
+
+
+#textMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  max-width: 90vw;
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #ffffff 0%, #f3f0ff 40%, #5d39ff 100%);
+  border-style: groove;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+
+@media (max-width: 768px) {
+  #textMenu {
+    width: 50vw;
+    border-radius: 0;
+  }
+
+  #canvasWrapper {
+    margin-left: 0;
+  }
+}
+
+
+#textMenu h4 {
+  font-family: 'Caveat', cursive;
+  font-size: 45px;
+  font-weight: bold;
+  color: #000000;
+  margin-top: 30px;
+  text-decoration: underline;
+  margin-bottom: 8px;
+}
+
+/* text menu close button */
+.manual-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #5d39ff;
+  color: rgb(255, 255, 255);
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.manual-close-btn:hover {
+  background-color: black;
+  transform: scale(1.1);
+}
+
+    
+    #fontSizeInput{
+      border-radius: 4px;
+      justify-content: center;
+      border: none;
+      border-bottom: 2px solid black;
+      align-items: center;
+      padding-left: 8px;
+      background-color: transparent;
+    }
+    #fontWeightInput{
+      border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      padding: 1px;
+
+    }
+
+    #fontStyleInput{
+            border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      padding: 1px;
+    }
+
+    #listFormatInput{
+            border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      padding: 1px;
+    }
+
+    #deleteText{
+      border-radius: 4px;
+      padding: 3px;
+      background-color: transparent;
+    }
+
+    #textAlignInput{
+            border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+        padding-left: 8px;
+    }
+
+
+    #letterSpacingInput{
+            border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+         padding-left: 8px;
+
+    }
+
+    #lineHeightInput{
+                  border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      padding-left: 8px;
+    }
+
+    #shadowXInput{
+                  border-radius: 2px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+        padding-left: 8px;
+    }
+
+    #shadowYInput{
+                  border-radius: 2px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+          padding-left: 8px;
+    }
+
+    #shadowBlurInput{
+                  border-radius: 2px;
+            border: none;
+      border-bottom: 2px solid black;
+      background-color: transparent;
+      padding-left: 8px;
+    }
+
+
+    #colorPicker{
+      border-radius: 4px;
+      margin-bottom: 0;
+      justify-content: center;
+      align-items: center;
+    }
+    #fontFamilyInput{
+      border-radius: 4px;
+            border: none;
+      border-bottom: 2px solid black;
+       background-color: transparent;
+      color: black;
+    }
+
+
+/* Menu Styling */
+#graphicMenu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hidden initially */
+  width: 300px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  transition: left 0.3s ease; /* Smooth slide effect */
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar (Chrome, Edge, Safari) */
+#graphicMenu::-webkit-scrollbar {
+  width: 8px;
+}
+
+#graphicMenu::-webkit-scrollbar-track {
+  background: #ffffff; /* white track */
+}
+
+#graphicMenu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffffff, #5d39ff); /* smooth gradient */
+  border-radius: 10px;
+}
+
+#graphicMenu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5d39ff, #ffffff);
+}
+
+/* Firefox support */
+#graphicMenu {
+  scrollbar-color: #5d39ff #ffffff; /* thumb | track */
+  scrollbar-width: thin;
+}
+
+
+#graphicMenu h3 {
+  font-size: 25px;
+  font-family: 'Caveat', sans-serif;
+  margin-bottom: 20px;
+  text-align: center;
+  color: black;
+  margin-left: 20px;
+  position: relative;
+  display: inline-block; /* shrink-wraps the underline */
+  animation: fadeInUp 4s ease forwards;
+}
+
+/* Underline */
+#graphicMenu h3::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2.5px;
+  background-color: #5d39ff; /* Brand accent color */
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Animate underline in when the page loads */
+#graphicMenu h3.animate::after {
+  width: 100px;
+}
+
+/* Menu Items */
+#graphicMenu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* From Uiverse.io by niat786 */ 
+.men {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  margin: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: white;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 0.7rem;
+  font-weight: 100;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+background: linear-gradient(90deg, #000000, #2a1b6f, #5d39ff);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.men:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+ transform: scale(1.07); /* slightly bigger */
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: #5d39ff;
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: rgb(0, 0, 0);
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
+
+.left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Custom scrollbar styling (Chrome, Edge, Safari) */
+.left-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-menu::-webkit-scrollbar-track {
+  background: #000; /* black base */
+}
+
+.left-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffffff, #5d39ff);
+  border-radius: 10px;
+}
+
+.left-menu::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5d39ff, #ffffff);
+}
+
+/* For Firefox */
+.left-menu {
+  scrollbar-color: #5d39ff #000000; /* thumb, track */
+  scrollbar-width: thin;
+}
+
+
+.hidden-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 1100;
+  padding: 20px;
+  display: none;
+}
+
+.hidden-menu h3 {
+  margin-top: 0;
+  text-decoration: none;
+}
+
+.graphic-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+}
+
+.graphic-item img {
+  display: flex;
+  max-width: 100%;
+  width: 100px;
+  border: 1px solid transparent;
+}
+.graphic-item p{
+  align-items: baseline;
+  justify-content: baseline;
+
+}
+
+button {
+  margin-top: 10px;
+}
+
+.div2{
+  height: 50px;
+  display: flex;
+}
+    
+    
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  font-family: 'Raleway', sans-serif;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: linear-gradient(to right, #5d39ff, rgb(182, 182, 182), #5d39ff);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#canvasPreview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#canvasPreview img {
+  margin: 10px;
+  max-width: 200px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 600px) {
+  #canvasPreview img {
+    flex: 0 0 45%; /* Two images per row with space */
+    max-width: 45%;
+  }
+}
+
+
+#closeModalBtn {
+  border-radius: 8px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 3px solid black;
+  padding: 5px 20px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  margin: 10px;
+  cursor: pointer;
+  font-family: "Caveat", sans-serif;
+}
+
+#downloadImageBtn{
+  border-radius: 10px;
+  border: none;
+  border-bottom: 3px solid black;
+  padding: 5px 20px;
+  background: transparent;
+  margin: 10px;
+  font-family: "Caveat", sans-serif;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 20px;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+#closeModalBtn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+#downloadImageBtn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+#saveDesign {
+  border-radius: 10px;
+  border: none;
+  border-bottom: 3px solid black;
+  padding: 10px 24px;
+  background: transparent;
+  margin: 10px;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 25px;
+  transition: all 0.35s ease-in-out;
+  cursor: pointer;
+  width: 70%;
+  font-family: "Caveat", sans-serif;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Optional: subtle background and shadow on hover */
+#saveDesign:hover {
+  background: transparent; /* Branded gradient */
+  color: rgb(0, 0, 0);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional shine effect */
+#saveDesign::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+#saveDesign:hover::before {
+  left: 100%;
+}
+
+#sellBtn{
+  background: transparent;
+  border-radius: 10px; 
+  font-family: "Caveat", cursive;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 3px solid black;
+  padding: 0px 10px 0px 10px;
+}
+
+
+@media(max-width: 768px){
+  .modal-content{
+    justify-content: center;
+    align-items: center;
+    
+  }
+  #saveDesign{
+    width: 70%;
+  }
+}
+
+/* Modal Styles */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal2-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #000000;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-btn {
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.design-item {
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.design-thumbnail {
+  width: 100%;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
+}
+
+.design-name {
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+}
+
+
+#shapeMenu button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  
+}
+
+#outlineColorPicker{
+  border-radius: 4px;
+  margin-top: 8px;
+}
+#shadowColorPicker{
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+#outlineColor{
+  border-radius: 4px;
+  margin-top: 8px;
+}
+#graphicFillColor{
+  border-radius: 4px;
+  margin-top: 5px;
+  bottom: 20px;
+}
+
+.menu-actions i{
+  margin-left: 3px;
+}
+
+.ld {
+  border: none;
+  background: linear-gradient(to bottom, white, #5d39ff);
+  padding: 10px 24px;
+  color: #000;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Caveat', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.ld::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.ld:hover::before {
+  left: 125%;
+}
+
+
+/* Professional & smooth hover effect */
+.ld:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: linear-gradient(to bottom, #f5f5f5, #5d39ff);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+
+
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  flex-wrap: wrap; /* Ensures responsiveness on small screens */
+  padding: 5px;
+  margin-top: 0px;
+}
+
+/* Ensuring buttons align properly on mobile */
+@media screen and (max-width: 600px) {
+  .button-container {
+      flex-direction: column; /* Stack buttons on small screens */
+      align-items: center; /* Center buttons */
+      gap: 10px;
+  }
+  
+  .ld {
+      width: 90%; /* Make buttons take up most of the screen */
+      text-align: center;
+      height: 30%;
+  }
+
+}
+
+
+/* ===== Load Design Modal (Overlay) ===== */
+.load-design-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 35, 0.75);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  font-family: 'Raleway', sans-serif;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ===== Modal Box ===== */
+.load-design-modal-content {
+  background: linear-gradient(145deg, #ffffff 0%, #f7f6ff 40%, #5d39ff 120%);
+  color: #1c1c1c;
+  padding: 30px;
+  border-radius: 0px;
+  text-align: center;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 15px 40px rgba(93, 57, 255, 0.25);
+  border: 1px solid rgba(93, 57, 255, 0.15);
+  animation: slideUp 0.4s ease;
+  position: relative;
+}
+
+/* ===== Close Button ===== */
+.load-design-close-modal {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #5d39ff;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.load-design-close-modal:hover {
+  color: #2a1a80;
+  transform: scale(1.1);
+}
+
+/* ===== Design List ===== */
+.load-design-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  padding-right: 8px;
+}
+
+/* Custom scrollbar */
+.load-design-list::-webkit-scrollbar {
+  width: 6px;
+}
+.load-design-list::-webkit-scrollbar-thumb {
+  background-color: #5d39ff;
+}
+
+/* ===== Individual Design Item ===== */
+.load-design-item {
+  display: flex;
+  align-items: center;
+  background: #5d39ff;
+  gap: 15px;
+  border: 1px solid black;
+  margin-top: 5px;
+  padding: 10px 14px;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(93, 57, 255, 0.1);
+  cursor: pointer;
+}
+
+.load-design-item:hover {
+   background: linear-gradient(145deg, #ffffff 0%, #f7f6ff 40%, #5d39ff 120%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(93, 57, 255, 0.3);
+}
+
+/* ===== Design Thumbnail ===== */
+.design-preview {
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.load-design-item:hover .design-preview {
+  border-color: #fff;
+}
+
+/* ===== Delete Button ===== */
+.delete-design-btn {
+  background: transparent;
+  color: #5d39ff;
+  border: none;
+  padding: 5px 10px;
+  margin-left: auto;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-design-btn:hover {
+  color: #ff4b4b;
+  transform: scale(1.2);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+
+
+
+#page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Glassmorphism style */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* Start off-screen above */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+#page-transition.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#page-transition.fade-up {
+  /* Slide up to hide */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.logo-wrapper img {
+  width: 340px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+.layer-control-container {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Button Styling */
+#layerControlBtn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 4px;
+  margin: 0px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+
+
+/* Dropdown Menu Styling */
+.layer-options {
+  display: none;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: linear-gradient(to bottom, white, #5d39ff);
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  padding: 12px;
+  z-index: 999;
+  min-width: 200px;
+  animation: fadeSlideDown 0.3s ease;
+}
+
+/* Show Menu */
+.layer-options.visible {
+  display: block;
+}
+
+/* Buttons Inside Menu */
+.layer-options button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000000;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.layer-options button i {
+  font-size: 15px;
+  color: black;
+}
+
+.layer-options button:hover {
+  background-color: #f7f5f4;
+  transform: translateX(2px);
+}
+
+/* Range Slider */
+.layer-options input[type="range"] {
+  width: 100%;
+  margin-top: 8px;
+  cursor: pointer;
+  accent-color: #ae866a;
+}
+
+/* Fade Slide Animation */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.guides-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* guides don’t block mouse */
+}
+
+.guide-line {
+  position: absolute;
+  background: rgba(255, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+.guide-line.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+.guide-line.horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+.guide-label {
+  position: absolute;
+  background: #5d39ff;
+  color: rgb(0, 0, 0);
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 1px;
+  white-space: nowrap;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+}
+
+.login-required-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-required-modal.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.login-modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
+  color: #5d39ff;
+  margin-bottom: 0.5rem;
+}
+
+.modal-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.modal-btn.primary {
+  background: #5d39ff;
+  color: #fff;
+}
+
+.modal-btn.secondary {
+  background: transparent;
+  border: 2px solid #5d39ff;
+  color: #5d39ff;
+}
+
+.modal-btn:hover {
+  transform: scale(1.05);
+}

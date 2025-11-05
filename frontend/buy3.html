@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Neat</title>
+  <meta name="description" content="Secure checkout for your Neatgarms order. Review your cart, enter shipping details, and complete your purchase." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#8a9381" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="stylesheet" href="css/buy.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Web Manifest -->
+  <link rel="manifest" href="/site.webmanifest?v=1" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <style>
+    /* Custom alert styling */
+    .custom-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #5d39ff;
+      color: whitesmoke;
+      padding: 15px 25px;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      z-index: 1000;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16px;
+    }
+  </style>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BNKKRW0J0N');
+</script>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "s843wgkqd0");
+</script>
+
+</head>
+<body>
+
+  <!-- Transition overlay -->
+<div id="page-transition">
+  <div class="logo-wrapper">
+    <img src="./images/logo.png" alt="Logo">
+  </div>
+</div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <!-- Left: Home Button -->
+    <div class="nav-left">
+      <button class="home-btn" id="back" onclick="goBack()" >Back</button>
+    </div>
+  
+    <!-- Center: Logo -->
+    <div class="nav-center">
+     <a href="index.html"> <img src="./images/logo.png" alt="Company Logo" class="logo"></a>
+    </div>
+  
+    <!-- Right: Cart Icon -->
+    <div class="nav-right">
+      <a href="cart.html" class="cart-btn">
+        <i class="fas fa-shopping-cart cart-icon"></i> 
+<!-- Add the cart badge with an empty span initially -->
+
+      </a>
+    </div>
+  </nav>
+  
+
+  <div class="order-summary-container">
+    <h2 style="font-family: 'Dream Avenue', sans-serif; font-weight: 100;">Order Summary</h2>
+  
+    <!-- Section to display images -->
+    <div id="item-section" class="item-container"></div>
+  
+    <!-- Section to display item name and price -->
+    <div class="item-details">
+      <h3 id="display-name" style="font-family: 'Dream Avenue', sans-serif;"></h3>
+      <p id="display-price"></p>
+    </div>
+          <!-- Discount Code Section -->
+          <div class="discount-section">
+            <label for="discount-code">Discount Code:</label>
+            <input type="text" id="discount-code" placeholder="Enter code">
+            <button id="apply-discount-btn">Apply</button>
+          </div>
+
+  </div>
+  
+
+  
+  
+
+  <!-- Multi-Section Form -->
+<div class="multi-section-form">
+
+<div class="form-section">
+  <h3 data-aos="fade-up" data-aos-delay="400">Select Your Sizes</h3>
+  <p class="pp" data-aos="fade-up" data-aos-delay="400">
+    Choose quantities for each size below.<br>
+    Happy shopping and stay stylish 😊
+  </p>
+
+  <div class="size-selection">
+    <div class="size-row" data-aos="fade-up" data-aos-delay="450">
+      <label for="size-s">S</label>
+      <input type="number" id="size-s" name="size-s" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="500">
+      <label for="size-m">M</label>
+      <input type="number" id="size-m" name="size-m" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="550">
+      <label for="size-l">L</label>
+      <input type="number" id="size-l" name="size-l" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="600">
+      <label for="size-xl">XL</label>
+      <input type="number" id="size-xl" name="size-xl" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="650">
+      <label for="size-2xl">2XL</label>
+      <input type="number" id="size-2xl" name="size-2xl" min="0" placeholder="0">
+    </div>
+
+  </div>
+
+  <div id="total-items" style="margin-top: 20px; font-weight: bold; font-size: 18px;" data-aos="fade-up" data-aos-delay="700">
+  Total Items: <span id="itemCount">0</span>
+</div>
+
+</div>
+
+
+  
+    <!-- Contact Section -->
+    <div class="form-section" data-aos="fade-up" data-aos-delay="400">
+      <h3 data-aos="fade-up" data-aos-delay="400">Contact Information</h3>
+      <label for="email" data-aos="fade-up" data-aos-delay="400">Email</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <label for="phone-number" data-aos="fade-up" data-aos-delay="400">Phone Number</label>
+      <input type="tel" id="phone-number" placeholder="Enter your phone number">
+      <div class="checkbox-container">
+        <input type="checkbox" id="news-offers">
+        <label for="news-offers" data-aos="fade-up" data-aos-delay="400">Email me with news and offers</label>
+      </div>
+    </div>
+  
+<!-- Delivery Section -->
+<div class="form-section" data-aos="fade-up" data-aos-delay="400">
+    <h3 data-aos="fade-up" data-aos-delay="400">Delivery Information</h3>
+    
+    <!-- Country/Region -->
+    <label for="country-region" data-aos="fade-up" data-aos-delay="400">Country/Region</label>
+    <select id="country-region">
+      <option value="">Select your country/region</option>
+      <option value="kenya">Kenya</option>
+      <option value="usa">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="india">India</option>
+      <option value="canada">Canada</option>
+      <!-- Add more countries as needed -->
+    </select>
+  
+    <!-- First Name -->
+    <label for="first-name" data-aos="fade-up" data-aos-delay="400">First Name</label>
+    <input type="text" id="first-name" placeholder="Enter your first name">
+    
+    <!-- Last Name -->
+    <label for="last-name" data-aos="fade-up" data-aos-delay="400">Last Name</label>
+    <input type="text" id="last-name" placeholder="Enter your last name">
+    
+    <!-- Address -->
+    <label for="address" data-aos="fade-up" data-aos-delay="400">Address</label>
+    <input type="text" id="address" placeholder="Enter your address">
+    
+    <!-- Apartment/Suite (Optional) -->
+    <label for="apartment-suite" data-aos="fade-up" data-aos-delay="400">Apartment, Suite, Building etc</label>
+    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details" required>
+    
+    <!-- City -->
+    <label for="delivery-city" data-aos="fade-up" data-aos-delay="400">City</label>
+    <input type="text" id="delivery-city" placeholder="Enter your city" required>
+    
+    <!-- Postal Code (Optional) -->
+    <label for="postal-code" data-aos="fade-up" data-aos-delay="400">Postal Code (Optional)</label>
+    <input type="text" id="postal-code" placeholder="Enter your postal code">
+    
+    <!-- Phone (Optional) -->
+    <label for="phone" data-aos="fade-up" data-aos-delay="400">Phone </label>
+    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+  </div>
+  
+  
+  
+<!-- Nairobi Sub-areas (hidden by default) -->
+<div id="nairobi-areas" style="display: none; margin-top: 10px;">
+  <label for="nairobi-subarea">Select Area in Nairobi:</label>
+  <select id="nairobi-subarea">
+    <option value="">-- Select Area --</option>
+    <option value="Lang'ata">Lang'ata (KSh 250)</option>
+    <option value="Karen">Karen (KSh 600)</option>
+    <option value="Westlands">Westlands (KSh 320)</option>
+    <option value="Kilimani">Kilimani (KSh 280)</option>
+    <option value="Nairobi CBD">Nairobi CBD (KSh 250)</option>
+    <option value="Kileleshwa">Kileleshwa (KSh 340)</option>
+    <option value="South B">South B (KSh 250)</option>
+    <option value="South C">South C (KSh 250)</option>
+    <option value="Upper Hill">Upper Hill (KSh 250)</option>
+    <option value="Rongai Tuskeys">Rongai Tuskeys(KSh 760)</option>
+    <option value="JKIA">JKIA (KSh 660)</option>
+    <option value="Syokimau">Syokimau (KSh 720)</option>
+    <option value="Ruaka (reference)">Ruaka (reference) (KSh 700)</option>
+
+  </select>
+</div>
+
+<!-- Shipping Info Message -->
+<div class="form-section">
+  <div style="margin-top: 15px;">
+    <strong style="font-family: 'Dream Avenue', sans-serif;">Shipping Notice:</strong>
+    <p style="margin: 5px 0; color: #444;">
+      After placing your order, our team will get in touch to arrange delivery. Please note that delivery fees apply and may vary based on your location.
+    </p>
+  </div>
+</div>
+
+ 
+
+  
+<!-- Billing Address -->
+<div class="form-section" data-aos="fade-up" data-aos-delay="400">
+    <h3 data-aos="fade-up" data-aos-delay="400">Billing Address</h3>
+    
+    <!-- Billing Address Options -->
+    <div class="billing-address-options">
+      <input type="radio" id="same-as-shipping" name="billing-option" value="same" checked>
+      <label for="same-as-shipping" data-aos="fade-up" data-aos-delay="400">Use same as shipping address</label>
+  
+      <input type="radio" id="different-billing" name="billing-option" value="different">
+      <label for="different-billing">Use different billing address</label>
+    </div>
+  
+    <!-- Form for Same Address (hidden by default) -->
+    <div id="same-address-container">
+      <p>Your billing address will be the same as your shipping address.</p>
+    </div>
+  
+    <!-- Form for Different Billing Address (hidden by default) -->
+    <div id="different-address-container" style="display: none;">
+      <label for="billing-country">Country/Region</label>
+      <select id="billing-country">
+        <option value="">Select your country/region</option>
+        <option value="kenya">Kenya</option>
+        <option value="usa">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="india">India</option>
+        <option value="canada">Canada</option>
+        <!-- Add more countries as needed -->
+      </select>
+    
+  
+      <label for="billing-first-name">First Name</label>
+      <input type="text" id="billing-first-name" placeholder="Enter your first name">
+  
+      <label for="billing-last-name">Last Name</label>
+      <input type="text" id="billing-last-name" placeholder="Enter your last name">
+  
+      <label for="billing-address">Address</label>
+      <input type="text" id="billing-address" placeholder="Enter your billing address">
+  
+      <label for="billing-apartment">Apartment, Suite, etc. (optional)</label>
+      <input type="text" id="billing-apartment" placeholder="Enter apartment, suite, etc.">
+  
+      <label for="billing-postal">Postal Code (optional)</label>
+      <input type="text" id="billing-postal" placeholder="Enter your postal code">
+  
+      <label for="billing-phone">Phone (optional)</label>
+      <input type="text" id="billing-phone" placeholder="Enter your phone number">
+    </div>
+  </div>
+
+
+  
+  <!-- Payment Details Modal (hidden by default) -->
+<div id="payment-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2>Enter Payment Details</h2>
+    <label for="phone">Phone Number (e.g., 2547XXXXXXXX):</label>
+    <input type="text" id="phoneNo" name="phone" placeholder="2547XXXXXXXX">
+    <br>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" placeholder="Amount">
+    <br>
+    <button id="submit-payment">Submit Payment</button>
+    <button id="cancel-payment">Cancel</button>
+
+    <p>*After Submitting your Payment Details, You will Receive a prompt on your device to complete</p>
+  </div>
+</div>
+
+
+
+
+<!--Mpesa Button
+<div class="pay-now-container">
+  <button class="pay-now-btn" id="mpesa-btn">Pay Via Mpesa ?</button>
+</div>
+-->
+
+
+<div class="pay-now-container">
+    <button class="pay-now-btnn" id="pay-now-btn" type="button">Send Request ?</button>
+  </div>
+
+<div class="pay-now-container">
+  <button class="pay-now-btn" id="paystack-btn">Pay</button>
+</div>
+
+  
+     <!-- Payment Section -->
+    <div class="form-section" data-aos="fade-up" data-aos-delay="400">
+        <h3 data-aos="fade-up" data-aos-delay="400">Payment</h3>
+        <p class="p" data-aos="fade-up" data-aos-delay="400">Available Payment Methods.</p>
+  <div class="payment-methods" data-aos="fade-up" data-aos-delay="400">
+    <label class="payment-method" data-method="mpesa">
+      <img src="images/minified/Mpesa Withdrawal Charges 2022 Latest Update.webp" alt="Mpesa" class="payment-img">
+      <span>Mpesa</span>
+    </label>
+    <label class="payment-method" data-method="credit-card">
+      <img src="images/minified/Ruby Red.webp" alt="Credit Card" class="payment-img">
+      <span>Credit Card</span>
+    </label>
+    <label class="payment-method" data-method="paypal">
+        <img src="images/minified/Mastercard Logo Redesign.webp" alt="PayPal" class="payment-img">
+        <span>Master Card</span>
+      </label>
+    <label class="payment-method" data-method="other">
+      <img src="images/minified/Free Payment Method & Credit Card Icon Set.webp" alt="Other" class="payment-img">
+      <span>Other</span>
+    </label>
+  </div>
+
+    <!-- Disclaimer -->
+    <div class="payment-disclaimer">
+      <p> <strong>
+        Thank you For Choosing Neatgarms. Happy Shopping!
+      </p>
+    </div>
+  </div>
+
+  <script src="js/buy.js" defer></script>
+  
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration
+      once: false,    // Animation will run every time you scroll
+    });
+  </script>
+
+
+  <script>
+    document.getElementById("pay-now-btn").addEventListener("click", async () => {
+
+                 // Create a custom alert element
+     const customAlert = document.createElement('div');
+     customAlert.className = 'custom-alert';
+     customAlert.innerText = 'Please Wait While We Retrieve Your Information';
+ 
+     // Append the alert to the body
+     document.body.appendChild(customAlert);
+ 
+     // Remove the alert after 5 seconds (5000 milliseconds)
+     setTimeout(() => {
+       customAlert.remove();
+     }, 5000);
+
+      // Collect Contact Info
+      const userEmail = document.getElementById("email").value;
+      const userPhone = document.getElementById("phone-number").value;
+      const newsOffers = document.getElementById("news-offers").checked ? "Yes" : "No";
+      if (!userEmail || !userPhone) {
+        alert("Please fill in your email and phone number.");
+        return;
+      }
+    
+const selectedCity = document.getElementById("delivery-city").value.trim();
+if (!selectedCity) {
+  alert("Enter the city you live in");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+
+const deliveryInfo = {
+  country: document.getElementById("country-region").value || "N/A",
+  firstName: document.getElementById("first-name").value || "N/A",
+  lastName: document.getElementById("last-name").value || "N/A",
+  address: document.getElementById("address").value || "N/A",
+  apartment: document.getElementById("apartment-suite").value || "N/A",
+  city: selectedCity || "N/A",
+  postalCode: document.getElementById("postal-code").value || "N/A",
+  phone: document.getElementById("phone").value || "N/A",
+};
+
+    
+      // Collect Billing Info
+      let billingInfo = {};
+      const sameAsShipping = document.getElementById("same-as-shipping").checked;
+      if (sameAsShipping) {
+        billingInfo = { ...deliveryInfo, note: "Same as shipping address" };
+      } else {
+        billingInfo = {
+          country: document.getElementById("billing-country").value || "N/A",
+          firstName: document.getElementById("billing-first-name").value || "N/A",
+          lastName: document.getElementById("billing-last-name").value || "N/A",
+          address: document.getElementById("billing-address").value || "N/A",
+          apartment: document.getElementById("billing-apartment").value || "N/A",
+          postalCode: document.getElementById("billing-postal").value || "N/A",
+          phone: document.getElementById("billing-phone").value || "N/A",
+        };
+      }
+  
+    
+      // Prepare data object
+      const data = { 
+        sizes: [],
+        contact: { email: userEmail, phone: userPhone, newsOffers },
+        delivery: deliveryInfo,
+        billing: billingInfo,
+      };
+    
+// Collect sizes
+const sizeInputs = [
+  { id: 'size-s', label: 'S' },
+  { id: 'size-m', label: 'M' },
+  { id: 'size-l', label: 'L' },
+  { id: 'size-xl', label: 'XL' },
+  { id: 'size-2xl', label: '2XL' }
+];
+
+sizeInputs.forEach(({ id, label }) => {
+  const input = document.getElementById(id);
+  const quantity = parseInt(input.value);
+  if (!isNaN(quantity) && quantity > 0) {
+    data.sizes.push({ size: label, quantity });
+  }
+});
+    
+      // --- Collect Order Summary Dropdown Information ---
+      // Here, we assume that checkoutImages is an array of Base64 image strings.
+      const checkoutImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+      const itemName = localStorage.getItem("nameID") || "Unknown Item";
+      const displayPrice = document.getElementById("display-price").innerText || "0";
+      const discountCode = document.getElementById("discount-code").value || "";
+
+    
+      data.orderSummary = {
+        images: checkoutImages, // Base64 strings
+        itemName,
+        itemPrice: displayPrice, // Use the actual displayed price
+        discountCode,
+      };
+    
+      // Send data to /pay3-now endpoint
+      try {
+        const response = await fetch("https://neat.onrender.com/pay3-now", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert("Order confirmed. An email with the details is on its way to your inbox.");
+        } else {
+          alert("We’re sorry, something went wrong. Please try again or reach out to our support team for assistance.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+    </script>
+
+
+
+<script>
+document.getElementById('paystack-btn').addEventListener('click', function () {
+
+  const val = id => (document.getElementById(id)?.value || '').trim();
+
+  /* --------- 0. Validate Contact & Delivery Fields --------- */
+  const required = [
+    ['email',         'Email'],
+    ['phone-number',  'Phone Number'],
+    ['country-region','Country/Region'],
+    ['first-name',    'First Name'],
+    ['last-name',     'Last Name'],
+    ['address',       'Address'],
+    ['delivery-city', 'City'],
+    ['phone',         'Phone']
+  ];
+  for (const [id, label] of required) {
+    if (!val(id)) {
+      alert(`Please enter your ${label}.`);
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+
+
+
+  /* --------- 3. Read Amount --------- */
+  const displayPrice = document.getElementById('display-price').textContent;
+  const amount       = parseFloat(displayPrice.replace('Price: Kshs. ', '').trim());
+  if (!amount || amount <= 0) { alert('Invalid amount to pay'); return; }
+  const amountInKobo = amount * 100;
+
+  /* --------- 4. Launch Paystack --------- */
+  const handler = PaystackPop.setup({
+    key     : 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
+    email   : val('email'),
+    amount  : amountInKobo,
+    currency: 'KES',
+    ref     : '' + Math.floor(Math.random() * 1_000_000_000 + 1),
+
+    callback: function (response) {
+      alert('✅ Payment complete! Reference: ' + response.reference);
+
+      fetch('https://neat.onrender.com/api/paystack/verify', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify({ reference: response.reference })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status) {
+          alert(data.message);
+          const hiddenBtn = document.getElementById('pay-now-btn');
+          if (hiddenBtn) hiddenBtn.click();
+          else console.warn('Submit button not found.');
+        } else {
+          alert('❌ Payment verification failed.');
+        }
+      })
+      .catch(err => {
+        console.error('Error verifying payment:', err);
+        alert('🚫 Error verifying payment.');
+      });
+    },
+
+    onClose: function () { alert('⛔ Payment cancelled'); }
+  });
+
+  handler.openIframe();
+});
+</script>
+
+    
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          sessionStorage.setItem("transitioning", "true");
+          transition.classList.add("active");
+
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match your CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
+
+
+
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
+
+</script>
+
+
+<script>
+  const inputs = document.querySelectorAll('.size-selection input[type="number"]');
+  const itemCount = document.getElementById('itemCount');
+
+  function updateTotal() {
+    let total = 0;
+    inputs.forEach(input => {
+      const value = parseInt(input.value) || 0;
+      total += value;
+    });
+    itemCount.textContent = total;
+  }
+
+  // Update total on any input change
+  inputs.forEach(input => {
+    input.addEventListener('input', updateTotal);
+  });
+</script>
+
+
+</body>
+</html>

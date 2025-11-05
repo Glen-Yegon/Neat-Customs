@@ -1,0 +1,754 @@
+/* Chrome, Safari, Edge */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;   /* hides scrollbar */
+  -ms-overflow-style: none; /* IE & Edge legacy */
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  body{
+    background: white;
+  }
+
+  html{
+    scroll-behavior: auto !important;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff, #5d39ff); /* Unique gradient background */
+    padding: 15px 30px;
+    color: white;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Left section: Home Button */
+  .nav-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .home-btn {
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    font-family: "Caveat", cursive;
+    font-size: 20px;
+    border: 1px solid white;
+    padding: 12px 24px;
+    background-color: #5d39ff; /* Tomato red */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .home-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(98, 0, 0, 0.6);
+  }
+  
+  /* Center section: Logo */
+  .nav-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+.logo {
+  max-width: 50px;
+  height: auto;
+  /* keep your scale and add rotation animation */
+  transform: scale(2);
+  transform-origin: center center;
+  animation: logo-spin 6s linear infinite;
+  /* keep small transition for non-rotation transforms (optional) */
+  transition: transform 0.5s ease;
+}
+
+/* Keyframes rotate while preserving scale */
+@keyframes logo-spin {
+  from { transform: scale(2) rotate(0deg); }
+  to   { transform: scale(2) rotate(360deg); }
+}
+
+/* Pause on hover for better UX */
+.logo:hover {
+  animation-play-state: paused;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    animation: none;
+    transition: transform 0.2s ease;
+  }
+}
+  
+  /* Right section: Cart Icon */
+  .nav-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-btn {
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    position: relative;
+    padding: 12px 18px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .cart-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cart-icon {
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  .cart-btn:hover .cart-icon {
+    color: white; /* Change icon color on hover */
+  }
+
+  
+  /* Optional: Add subtle animation to the navbar */
+  @keyframes navbarEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .navbar {
+    animation: navbarEntrance 0.5s ease-in-out;
+  }
+  
+  
+.order-image{
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 10px;
+}
+
+/* Order Summary Dropdown */
+.order-summary-container {
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0rem auto;
+    max-width: 1800px;
+    text-align: center;
+  }
+  
+  /* Discount Section Styling */
+.discount-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+
+  }
+  
+  .discount-section label {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 5px;
+  }
+  
+  .discount-section input {
+    width: 100%;
+    background-color: transparent;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    width: 250px;
+    max-width: 250px;
+    color: black;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+.discount-section button {
+  background-color: #5d39ff;
+  color: #ffffff;
+  padding: 8px 12px;
+  font-family: "Caveat", cursive;
+  font-weight: 500;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px; /* optional: makes it smoother */
+}
+
+.discount-section button:hover {
+  background-color: #7c5dff; /* slightly lighter shade */
+  transform: scale(1.05); /* subtle grow */
+  box-shadow: 0 4px 15px rgba(93, 57, 255, 0.4); /* glowing shadow effect */
+}
+
+
+  /* Adjust Estimated Total Position */
+  .estimated-total {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    color: #000000;
+  }
+  
+
+.multi-section-form {
+  background: #ffffff; /* pure white for minimalism */
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* subtle soft shadow */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #e0e0e0; /* thin light border for structure */
+}
+
+  
+.form-section {
+  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #ffffff; /* clean white */
+  border-left: 4px solid #5d39ff; /* subtle accent line for uniqueness */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* soft shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-section:hover {
+  transform: translateY(-3px); /* subtle lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* slightly stronger shadow */
+}
+
+  .form-section h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-family: 'Caveat', sans-serif;
+    color: black;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 5px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #0000005a;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #000000;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus {
+    outline: none;
+    border-color: #5d39ff;
+    box-shadow: 0 0 5px rgba(35, 36, 129, 0.5);
+  }
+  
+  .radio-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .radio-container input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .checkbox-container label {
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  /* Dropdown Style */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    border: 1px solid #0000007d;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #000000;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #5d39ff;
+    box-shadow: 0 0 5px rgba(56, 15, 202, 0.5);
+  }
+  
+  /* Optional Fields Styling */
+  input[placeholder*="Optional"] {
+    font-style: italic;
+    color: #a6a6a6;
+  }
+  
+  /* Payment Methods Styling */
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  
+  .payment-method {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .payment-method:hover {
+    transform: scale(1.1);
+  }
+  
+  .payment-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .payment-method.selected .payment-img {
+    border: 3px solid #c9d6ff;
+    box-shadow: 0 0 10px rgba(30, 0, 255, 0.5);
+  }
+  
+  .payment-method span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #000000;
+  }
+
+  @media(max-width: 768px){
+    .payment-method{
+      gap: 10px;
+
+    }
+  }
+  @media(max-width: 468px){
+    .payment-img{
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  /* Card Details Styling */
+  .card-details label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .card-details input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #000000;
+  }
+  
+  .card-details input[type="text"]:focus {
+    border-color: #c9d6ff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(55, 0, 255, 0.5);
+  }
+  
+  /* Disclaimer Text */
+  .payment-disclaimer {
+    margin-top: 20px;
+    background-color: #77777767;
+    padding: 15px;
+    border-left: 4px solid #5d39ff;
+    font-size: 14px;
+    color: black;
+  }
+  
+  .payment-disclaimer strong {
+    color: black;
+  }
+
+
+  /* Billing Address Section Styling */
+.billing-address-options {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .billing-address-options input {
+    margin-right: 10px;
+  }
+  
+  .billing-address-options label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  #different-address-container {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #same-address-container {
+    font-style: italic;
+    color: #777;
+    padding: 10px;
+  }
+  
+  /* Container for the Pay Now button to maintain spacing */
+.pay-now-container {
+    margin-top: 20px; /* Space between the last form field and button */
+    text-align: center;
+  }
+  
+  /* Style for Pay Now button */
+  .pay-now-btn {
+    background-color: #5d39ff; /* A fresh green color for the button */
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 12px 30px;
+    font-family: "Caveat", cursive;
+    font-weight: 100;
+    font-size: 20px;
+    border: 1px solid black;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+  }
+  
+  /* Hover effect for interactivity */
+  .pay-now-btn:hover {
+    background-color: black;
+    color: white; /* Darker green when hovered */
+    transform: scale(1.05); /* Slightly enlarge the button */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+  }
+  
+  /* Focus effect for accessibility */
+  .pay-now-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); /* Focus outline */
+  }
+  
+  /* Disabled state for the button */
+  .pay-now-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+
+
+  #item-count{
+    padding: 5px;
+    width: 200px;
+
+  }
+
+  .pp{
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+
+
+  /* Modal container covers the full viewport and centers its content */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75); /* Semi-transparent dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 10px; /* Ensures some spacing on mobile devices */
+}
+
+/* Modal content styled with a futuristic glass effect */
+.modal-content {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Inputs and labels inside modal */
+.modal-content label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.modal-content input:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Button styling */
+.modal-content button {
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#submit-payment {
+  background: linear-gradient(45deg, #8a9381, #000000);
+  color: white;
+}
+
+#submit-payment:hover {
+  background: linear-gradient(45deg, #000, #6b4e31);
+  transform: scale(1.05);
+}
+
+#cancel-payment {
+  background: #6b4e31;
+  color: #fff;
+}
+
+#cancel-payment:hover {
+  background: rgba(255, 0, 0, 1);
+  transform: scale(1.05);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+}
+
+
+
+  /* Style for Pay Now button */
+  .pay-now-btnn {
+    background-color: #ae866a; /* A fresh green color for the button */
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(0, 0, 0);
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+  }
+  
+  /* Hover effect for interactivity */
+  .pay-now-btnn:hover {
+    background-color: #8a9381; /* Darker green when hovered */
+    transform: scale(1.05); /* Slightly enlarge the button */
+    color: #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+  }
+  
+  /* Focus effect for accessibility */
+  .pay-now-btnn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5); /* Focus outline */
+  }
+  
+  /* Disabled state for the button */
+  .pay-now-btnn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  
+
+#page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Glassmorphism style */
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* Start off-screen above */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+#page-transition.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#page-transition.fade-up {
+  /* Slide up to hide */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.logo-wrapper img {
+  width: 340px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.pay-now-btnn { display:none; } 
+
+
+
+.size-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.size-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.size-row label {
+  font-weight: 100;
+  font-size: 1.1rem;
+  color: #333;
+  flex: 0 0 50px;
+}
+
+.size-row input {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.size-row input:focus {
+  border-color: #222;
+}

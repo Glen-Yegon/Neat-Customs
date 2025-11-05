@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neat Customs</title>
+  <meta name="description" content="Design your own streetwear with Neatgarms. Customize colors, prints, text, and more — create outfits that reflect your unique identity." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#8a9381" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+   <!-- Canonical URL -->
+  <link rel="canonical" href="https://neatgarms.com/customization.html" />
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  
+<script src="./firebase/saveDes.js" type="module"></script>
+
+</head>
+<body>
+
+  <!-- Transition overlay -->
+<div id="page-transition">
+  <div class="logo-wrapper">
+    <img src="mains/logo2.png" alt="Logo">
+  </div>
+</div>
+
+
+  <header class="navbar">
+    
+        <a href="sign.html" class="user-icon" title="Sign In">
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M4 21v-2a4 4 0 0 1 3-3.87"/>
+    <circle cx="12" cy="7" r="4"/>
+  </svg>
+</a>
+
+<div class="company-name">
+  <a href="item.html" class="logo-link">
+    <img src="images/logo.png" alt="Neat Customs Logo" class="rotating-logo" />
+  </a>
+</div>
+
+
+    <a href="item.html" class="back-button">← Back</a>
+  </header>
+
+
+<div id="menu">
+  <i id="addText" class="fas fa-font" title="Add Text" ></i>
+  <i id="addGraphic" class="fas fa-image" title="Add Graphic"></i>
+    <!-- Layer Control Button -->
+<div class="layer-control-container">
+  <button id="layerControlBtn" title="Arrange Layers">
+    <i class="fas fa-layer-group"></i>
+  </button>
+
+<div id="layerOptions" class="layer-options">
+  <button onclick="bringToFront()">
+    <i class="fas fa-level-up-alt"></i> Bring to Front
+  </button>
+  <button onclick="sendToBack()">
+    <i class="fas fa-level-down-alt"></i> Send to Back
+  </button>
+  <button onclick="sendToMiddle()">
+    <i class="fas fa-arrows-alt-v"></i> Send to Middle
+  </button>
+</div>
+</div>
+  <!-- Undo and Redo Icons -->
+  <i id="undoButton" class="fas fa-undo" title="Undo"></i>
+  <i id="redoButton" class="fas fa-redo" title="Redo"></i> 
+  <i id="clearCanvasBtn" class="fas fa-trash" title="Clear Canvas"></i>
+  <i id="saveButton" class="fas fa-save" title="Save Design"></i>
+
+
+</div>
+
+
+<section class="button-container">
+  <button id="loadDesignButton" class="ld">Load Saved Designs</button>
+  
+</section>
+
+
+    <!-- Modal for Design Selection -->
+    <div id="designModal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <h2>Select a Design</h2>
+            <div id="designList"></div> <!-- Dynamic list of saved designs -->
+        </div>
+    </div>
+    
+
+
+
+<!-- Modal for Save Confirmation -->
+<div id="saveModal" class="modal">
+  <div class="modal-content">
+    <h2>Save Your Design</h2>
+    
+    <!-- Preview Section for Canvas Images -->
+    <div id="canvasPreview" class="canvas-preview">
+      <!-- Canvas previews will be dynamically inserted here -->
+    </div>
+
+     <!-- Save As Button -->
+    <button id="saveDesign">Save Progress</button>
+
+    <!--other buttons-->
+    <button id="downloadImageBtn">Buy</button>
+    <button id="sellBtn">Sell</button>
+    <button id="closeModalBtn">Close</button>
+  </div>
+</div>
+
+
+    <!-- Graphic Categories Menu -->
+    <div id="graphicMenu">
+      <h3>Graphic Categories</h3>
+    
+      <ul>
+
+
+    <div style="text-align: center; margin-top: 10px; margin-bottom: 20px; ">
+  <!-- Upload Button Container -->
+  <div
+    onclick="triggerImageUpload()"
+    style="
+      display: inline-block;
+      padding: 15px 30px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, slategray, black, slategray);
+      color: white;
+      font-family: 'Cinzel', Times, serif; 
+      font-size: 16px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    "
+    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
+  >
+
+  
+    <!-- Icon and Label -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      style="width: 24px; height: 24px; margin-bottom: 5px;"
+    >
+      <path d="M12 16v-8m-4 4l4-4 4 4" stroke="white"></path>
+      <circle cx="12" cy="12" r="10" stroke="white"></circle>
+    </svg>
+    <div>Upload a Graphic</div>
+  </div>
+</div>
+
+
+        <button class="men" onclick="openGraphicsMenu('illustrationsMenu')">Illustrations</button>
+        <button class="men" onclick="openGraphicsMenu('logosMenu')">Logos</button>
+        <button class="men" onclick="openGraphicsMenu('iconsMenu')">Icons</button>
+        <button class="men" onclick="openGraphicsMenu('postersMenu')">Emojis</button>
+        <button class="men" onclick="openGraphicsMenu('neatMenu')">Neat</button>
+        <button class="men" onclick="openGraphicsMenu('sportsMenu')">Sports/Games</button>
+        <button class="men" onclick="openGraphicsMenu('carsMenu')">Cars/Bikes</button>
+        <button class="men" onclick="openGraphicsMenu('foodMenu')">Food/Drinks</button>
+        <button class="men" onclick="openGraphicsMenu('uiuxMenu')">Letters/Numbers</button>
+        <button class="men" onclick="openGraphicsMenu('stoicMenu')">Stoic Aesthetic</button>
+        <button class="men" onclick="openGraphicsMenu('musicMenu')">Sound Studio</button>
+        <button class="men" onclick="openGraphicsMenu('quotesMenu')">Bold Synatax</button>
+
+
+<!-- Use an icon for the upload button -->
+
+
+
+
+<!-- Hidden file input -->
+<input type="file" id="imageUpload" style="display: none;" onchange="handleImageUpload(event)">
+
+      </ul>
+    
+    
+      <button class="Btn" id="closeGraphicMenus" >
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+        <div class="text" id="closeGraphicMenus">Close</div>
+      </button>
+    </div>
+    
+    <!-- Illustrations Menu -->
+    <div id="illustrationsMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose an Illustration</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu1.png')">
+        <img src="graphics/illu1.png" alt="Illustration 1" />
+        <p> Bulb</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat.png')">
+        <img src="graphics/illustrat.png" alt="Illustration 1" />
+        <p> HighLife</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat (1).png')">
+        <img src="graphics/illustrat (1).png" alt="Illustration 1" />
+        <p> ...</p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat (2).png')">
+        <img src="graphics/illustrat (2).png" alt="Illustration 1" />
+        <p> ...</p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat (1).png')">
+        <img src="graphics/illustrat (1).png" alt="Illustration 1" />
+        <p> Bulb</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (1).png')">
+        <img src="graphics/illu2 (1).png" alt="Illustration 1" />
+        <p> Butterfly</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (1).png')">
+        <img src="graphics/g1 (1).png" alt="Illustration 1" />
+        <p> Stars</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (3).png')">
+        <img src="graphics/g1 (3).png" alt="Illustration 1" />
+        <p> Mashmellow</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (4).png')">
+        <img src="graphics/g1 (4).png" alt="Illustration 1" />
+        <p> Just Do It</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (5).png')">
+        <img src="graphics/g1 (5).png" alt="Illustration 1" />
+        <p> ...</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (6).png')">
+        <img src="graphics/g1 (6).png" alt="Illustration 1" />
+        <p> High As Fuck</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (7).png')">
+        <img src="graphics/g1 (7).png" alt="Illustration 1" />
+        <p> Bitch...</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1 (2).png')">
+        <img src="graphics/g1 (2).png" alt="Illustration 1" />
+        <p> Lips</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2.png')">
+        <img src="graphics/illu2.png" alt="Illustration 1" />
+        <p> Monalisa</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (2).png')">
+        <img src="graphics/illu2 (2).png" alt="Illustration 1" />
+        <p>Like A Boss</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (3).png')">
+        <img src="graphics/illu2 (3).png" alt="Illustration 1" />
+        <p>Cat</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu (1).png')">
+        <img src="graphics/illu (1).png" alt="Illustration 1" />
+        <p>Skull </p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat (3).png')">
+        <img src="graphics/illustrat (3).png" alt="Illustration 1" />
+        <p> Cross</p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/illustrat (4).png')">
+        <img src="graphics/illustrat (4).png" alt="Illustration 1" />
+        <p> Bat</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu.png')">
+        <img src="graphics/illu.png" alt="Illustration 1" />
+        <p>Skull Face</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (4).png')">
+        <img src="graphics/illu2 (4).png" alt="Illustration 1" />
+        <p>Paws</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (5).png')">
+        <img src="graphics/illu2 (5).png" alt="Illustration 1" />
+        <p>Dots</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (6).png')">
+        <img src="graphics/illu2 (6).png" alt="Illustration 1" />
+        <p>Ghost</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (7).png')">
+        <img src="graphics/illu2 (7).png" alt="Illustration 1" />
+        <p>Ghost</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/g1.png')">
+        <img src="graphics/g1.png" alt="Illustration 1" />
+        <p>Ghost</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (8).png')">
+        <img src="graphics/illu2 (8).png" alt="Illustration 1" />
+        <p>Couple's Hand</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (9).png')">
+        <img src="graphics/illu2 (9).png" alt="Illustration 1" />
+        <p>Music</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (10).png')">
+        <img src="graphics/illu2 (10).png" alt="Illustration 1" />
+        <p>Stature</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (11).png')">
+        <img src="graphics/illu2 (11).png" alt="Illustration 1" />
+        <p>Music 2</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (12).png')">
+        <img src="graphics/illu2 (12).png" alt="Illustration 1" />
+        <p>Compass</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (13).png')">
+        <img src="graphics/illu2 (13).png" alt="Illustration 1" />
+        <p>Glasses</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (14).png')">
+        <img src="graphics/illu2 (14).png" alt="Illustration 1" />
+        <p>Glasses</p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (15).png')">
+        <img src="graphics/illu2 (15).png" alt="Illustration 1" />
+        <p>Cuffs</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (16).png')">
+        <img src="graphics/illu2 (16).png" alt="Illustration 1" />
+        <p>Waves</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (17).png')">
+        <img src="graphics/illu2 (17).png" alt="Illustration 1" />
+        <p>Person</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (18).png')">
+        <img src="graphics/illu2 (18).png" alt="Illustration 1" />
+        <p>Anchor</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (19).png')">
+        <img src="graphics/illu2 (19).png" alt="Illustration 1" />
+        <p>Flower</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (20).png')">
+        <img src="graphics/illu2 (20).png" alt="Illustration 1" />
+        <p>Jordan</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (21).png')">
+        <img src="graphics/illu2 (21).png" alt="Illustration 1" />
+        <p>Football</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (22).png')">
+        <img src="graphics/illu2 (22).png" alt="Illustration 1" />
+        <p>Caution</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (23).png')">
+        <img src="graphics/illu2 (23).png" alt="Illustration 1" />
+        <p>?</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (24).png')">
+        <img src="graphics/illu2 (24).png" alt="Illustration 1" />
+        <p>Like</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/illu2 (25).png')">
+        <img src="graphics/illu2 (25).png" alt="Illustration 1" />
+        <p>Dislike</p>
+      </div>
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+    
+    <!--logo menu-->
+    <div id="logosMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose a Logo</h3>
+      <div class="graphic-item" onclick="selectGraphic('items/logo.jpg')">
+        <img src="items/logo.jpg" alt="Graphic 1" />
+        <p>NeatGarms</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('mains/logo2.png')">
+        <img src="mains/logo2.png" alt="Graphic 2" />
+        <p>NeatGarms</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo.png')">
+        <img src="graphics/logo.png" alt="Graphic 1" />
+        <p>Twitter</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo (2).png')">
+        <img src="graphics/logo (2).png" alt="Graphic 2" />
+        <p>Youtube 1</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo (3).png')">
+        <img src="graphics/logo (3).png" alt="Graphic 1" />
+        <p>Youtube 2</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo (4).png')">
+        <img src="graphics/logo (4).png" alt="Graphic 2" />
+        <p>Pinterest</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (1).png')">
+        <img src="graphics/logo1 (1).png" alt="Graphic 2" />
+        <p>Dove</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (2).png')">
+        <img src="graphics/logo1 (2).png" alt="Graphic 2" />
+        <p>...</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (3).png')">
+        <img src="graphics/logo1 (3).png" alt="Graphic 2" />
+        <p>Android</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (4).png')">
+        <img src="graphics/logo1 (4).png" alt="Graphic 2" />
+        <p>Bitcoin</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (5).png')">
+        <img src="graphics/logo1 (5).png" alt="Graphic 2" />
+        <p>Bluetooth</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (6).png')">
+        <img src="graphics/logo1 (6).png" alt="Graphic 2" />
+        <p>Bluetooth 2</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (7).png')">
+        <img src="graphics/logo1 (7).png" alt="Graphic 2" />
+        <p>Batman</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (8).png')">
+        <img src="graphics/logo1 (8).png" alt="Graphic 2" />
+        <p>Knight</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (9).png')">
+        <img src="graphics/logo1 (9).png" alt="Graphic 2" />
+        <p>Dollar</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (10).png')">
+        <img src="graphics/logo1 (10).png" alt="Graphic 2" />
+        <p>Watsapp</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (11).png')">
+        <img src="graphics/logo1 (11).png" alt="Graphic 2" />
+        <p>Instagram</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (12).png')">
+        <img src="graphics/logo1 (12).png" alt="Graphic 2" />
+        <p>Instagram 2</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (13).png')">
+        <img src="graphics/logo1 (13).png" alt="Graphic 2" />
+        <p>Facebook</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (14).png')">
+        <img src="graphics/logo1 (14).png" alt="Graphic 2" />
+        <p>4K</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/logo1 (15).png')">
+        <img src="graphics/logo1 (15).png" alt="Graphic 2" />
+        <p>Wifi</p>
+      </div>
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+    
+    
+    
+    <!-- Icons Menu -->
+    <div id="iconsMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose an Icon</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon.png')">
+        <img src="graphics/icon.png" alt="Graphic 1" />
+        <p>Phone</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (30).png')">
+        <img src="graphics/icon1 (30).png" alt="Graphic 2" />
+        <p>Hazard</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (29).png')">
+        <img src="graphics/icon1 (29).png" alt="Graphic 1" />
+        <p>WheelChair</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (28).png')">
+        <img src="graphics/icon1 (28).png" alt="Graphic 1" />
+        <p>Bull</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (27).png')">
+        <img src="graphics/icon1 (27).png" alt="Graphic 1" />
+        <p>Law</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (31).png')">
+        <img src="graphics/icon1 (31).png" alt="Graphic 1" />
+        <p>Skull</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (19).png')">
+        <img src="graphics/icon1 (19).png" alt="Graphic 1" />
+        <p>Person</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (20).png')">
+        <img src="graphics/icon1 (20).png" alt="Graphic 1" />
+        <p>Wifi</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (21).png')">
+        <img src="graphics/icon1 (21).png" alt="Graphic 1" />
+        <p>Battery</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (22).png')">
+        <img src="graphics/icon1 (22).png" alt="Graphic 1" />
+        <p>Heart</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (23).png')">
+        <img src="graphics/icon1 (23).png" alt="Graphic 1" />
+        <p>Eye</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (24).png')">
+        <img src="graphics/icon1 (24).png" alt="Graphic 1" />
+        <p>Dots</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (25).png')">
+        <img src="graphics/icon1 (25).png" alt="Graphic 1" />
+        <p>Cart</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (11).png')">
+        <img src="graphics/icon1 (11).png" alt="Graphic 1" />
+        <p>Like</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (12).png')">
+        <img src="graphics/icon1 (12).png" alt="Graphic 1" />
+        <p>Star</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (13).png')">
+        <img src="graphics/icon1 (13).png" alt="Graphic 1" />
+        <p>Dollar</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (14).png')">
+        <img src="graphics/icon1 (14).png" alt="Graphic 1" />
+        <p>Icon</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (15).png')">
+        <img src="graphics/icon1 (15).png" alt="Graphic 1" />
+        <p>Piggy Bank</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (1).png')">
+        <img src="graphics/icon1 (1).png" alt="Graphic 1" />
+        <p>Message</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (2).png')">
+        <img src="graphics/icon1 (2).png" alt="Graphic 1" />
+        <p>Web</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (3).png')">
+        <img src="graphics/icon1 (3).png" alt="Graphic 1" />
+        <p>Alert</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (4).png')">
+        <img src="graphics/icon1 (4).png" alt="Graphic 1" />
+        <p>People</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (5).png')">
+        <img src="graphics/icon1 (5).png" alt="Graphic 1" />
+        <p>Messages Icon</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (6).png')">
+        <img src="graphics/icon1 (6).png" alt="Graphic 1" />
+        <p>Puzzle</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (7).png')">
+        <img src="graphics/icon1 (7).png" alt="Graphic 1" />
+        <p>Search</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (8).png')">
+        <img src="graphics/icon1 (8).png" alt="Graphic 1" />
+        <p>Lines</p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/icon1 (9).png')">
+        <img src="graphics/icon1 (9).png" alt="Graphic 1" />
+        <p>Tick</p>
+      </div>
+     <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+    
+    
+    <!-- Posters Menu -->
+    <div id="postersMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose an Emoji</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emojii.png')">
+        <img src="graphics/emojii.png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (1).png')">
+        <img src="graphics/emoji (1).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (2).png')">
+        <img src="graphics/emoji (2).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (3).png')">
+        <img src="graphics/emoji (3).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (4).png')">
+        <img src="graphics/emoji (4).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (5).png')">
+        <img src="graphics/emoji (5).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (6).png')">
+        <img src="graphics/emoji (6).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (7).png')">
+        <img src="graphics/emoji (7).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (8).png')">
+        <img src="graphics/emoji (8).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (9).png')">
+        <img src="graphics/emoji (9).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (10).png')">
+        <img src="graphics/emoji (10).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (11).png')">
+        <img src="graphics/emoji (11).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (12).png')">
+        <img src="graphics/emoji (12).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (13).png')">
+        <img src="graphics/emoji (13).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (14).png')">
+        <img src="graphics/emoji (14).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (15).png')">
+        <img src="graphics/emoji (15).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (16).png')">
+        <img src="graphics/emoji (16).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (17).png')">
+        <img src="graphics/emoji (17).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (18).png')">
+        <img src="graphics/emoji (18).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (19).png')">
+        <img src="graphics/emoji (19).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (20).png')">
+        <img src="graphics/emoji (20).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (21).png')">
+        <img src="graphics/emoji (21).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (22).png')">
+        <img src="graphics/emoji (22).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/emoji (23).png')">
+        <img src="graphics/emoji (23).png" alt="Poster 1" />
+        <p></p>
+      </div>
+ 
+
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+
+  <div id="neatMenu" class="hidden-menu left-menu" style="display: none;">
+          <h3>Choose a Neat Graphic</h3>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/Smoking.webp')">
+            <img src="graphics/Smoking.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/Old School.webp')">
+            <img src="graphics/Old School.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/Aug 196 F.webp')">
+            <img src="graphics/Aug 196 F.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/Jul 71 F.webp')">
+            <img src="graphics/Jul 71 F.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/g.webp')">
+            <img src="graphics/g.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/Break The Rules.webp')">
+            <img src="graphics/Break The Rules.webp" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+          
+          <div class="graphic-item" onclick="selectGraphic('graphics/KEEP IT NEAT.png')">
+            <img src="graphics/KEEP IT NEAT.png" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/KEEP IT NEAT (2).png')">
+            <img src="graphics/KEEP IT NEAT (2).png" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/KEEP IT NEAT (3).png')">
+            <img src="graphics/KEEP IT NEAT (3).png" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/KEEP IT NEAT (4).png')">
+            <img src="graphics/KEEP IT NEAT (4).png" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/KEEP IT NEAT (1).png')">
+            <img src="graphics/KEEP IT NEAT (1).png" alt="Poster 1" />
+            <p>Poster 1</p>
+          </div>
+
+          <button class="men" onclick="closeGraphicsMenu()">Close</button>
+        </div>
+
+
+
+            <!-- Posters Menu -->
+    <div id="sportsMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose a Sport/Game Graphic</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports.png')">
+        <img src="graphics/sports.png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (6).png')">
+        <img src="graphics/sports (6).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/sp.png')">
+        <img src="graphics/sp.png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/sp (1).png')">
+        <img src="graphics/sp (1).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/sp (2).png')">
+        <img src="graphics/sp (2).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (7).png')">
+        <img src="graphics/sports (7).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (8).png')">
+        <img src="graphics/sports (8).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (9).png')">
+        <img src="graphics/sports (9).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (10).png')">
+        <img src="graphics/sports (10).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (15).png')">
+        <img src="graphics/sports (15).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (16).png')">
+        <img src="graphics/sports (16).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (17).png')">
+        <img src="graphics/sports (17).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (18).png')">
+        <img src="graphics/sports (18).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (19).png')">
+        <img src="graphics/sports (19).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (1).png')">
+        <img src="graphics/sports (1).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (2).png')">
+        <img src="graphics/sports (2).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (3).png')">
+        <img src="graphics/sports (3).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (4).png')">
+        <img src="graphics/sports (4).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (5).png')">
+        <img src="graphics/sports (5).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (11).png')">
+        <img src="graphics/sports (11).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (12).png')">
+        <img src="graphics/sports (12).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (13).png')">
+        <img src="graphics/sports (13).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/sports (14).png')">
+        <img src="graphics/sports (14).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+
+        <!-- Posters Menu -->
+        <div id="carsMenu" class="hidden-menu left-menu" style="display: none;">
+          <h3>Choose a Car/Bike Graphic</h3>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars.png')">
+            <img src="graphics/cars.png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/car1.png')">
+            <img src="graphics/car1.png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/car1 (1).png')">
+            <img src="graphics/car1 (1).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/car1 (2).png')">
+            <img src="graphics/car1 (2).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/car1 (3).png')">
+            <img src="graphics/car1 (3).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          
+          <div class="graphic-item" onclick="selectGraphic('graphics/car1 (4).png')">
+            <img src="graphics/car1 (4).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+
+
+
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (1).png')">
+            <img src="graphics/cars (1).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (2).png')">
+            <img src="graphics/cars (2).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (3).png')">
+            <img src="graphics/cars (3).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (4).png')">
+            <img src="graphics/cars (4).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (5).png')">
+            <img src="graphics/cars (5).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (6).png')">
+            <img src="graphics/cars (6).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (7).png')">
+            <img src="graphics/cars (7).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (8).png')">
+            <img src="graphics/cars (8).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (9).png')">
+            <img src="graphics/cars (9).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (10).png')">
+            <img src="graphics/cars (10).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (11).png')">
+            <img src="graphics/cars (11).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (12).png')">
+            <img src="graphics/cars (12).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (13).png')">
+            <img src="graphics/cars (13).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (14).png')">
+            <img src="graphics/cars (14).png" alt="Poster 1" />
+            <p></p>
+          </div>
+            <div class="graphic-item" onclick="selectGraphic('graphics/cars (15).png')">
+              <img src="graphics/cars (15).png" alt="Poster 1" />
+              <p></p>
+            </div>
+            <div class="graphic-item" onclick="selectGraphic('graphics/cars (16).png')">
+              <img src="graphics/cars (16).png" alt="Poster 1" />
+              <p></p>
+            </div>
+            <div class="graphic-item" onclick="selectGraphic('graphics/cars (17).png')">
+              <img src="graphics/cars (17).png" alt="Poster 1" />
+              <p></p>
+            </div>
+            <div class="graphic-item" onclick="selectGraphic('graphics/cars (18).png')">
+              <img src="graphics/cars (18).png" alt="Poster 1" />
+              <p></p>
+            </div>
+
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (19).png')">
+            <img src="graphics/cars (19).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (20).png')">
+            <img src="graphics/cars (20).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (21).png')">
+            <img src="graphics/cars (21).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (22).png')">
+            <img src="graphics/cars (22).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (23).png')">
+            <img src="graphics/cars (23).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (24).png')">
+            <img src="graphics/cars (24).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (25).png')">
+            <img src="graphics/cars (25).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (26).png')">
+            <img src="graphics/cars (26).png" alt="Poster 1" />
+            <p></p>
+          </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/cars (27).png')">
+            <img src="graphics/cars (27).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+          <button class="men" onclick="closeGraphicsMenu()">Close</button>
+        </div>
+
+            <!-- Posters Menu -->
+    <div id="foodMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose a Food/Drink Graphic</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/food.png')">
+        <img src="graphics/food.png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (1).png')">
+        <img src="graphics/food (1).png" alt="Poster 1" />
+        <p></p>
+      </div>
+
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (2).png')">
+        <img src="graphics/food (2).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (3).png')">
+        <img src="graphics/food (3).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (4).png')">
+        <img src="graphics/food (4).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (5).png')">
+        <img src="graphics/food (5).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (6).png')">
+        <img src="graphics/food (6).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+      <div class="graphic-item" onclick="selectGraphic('graphics/food (7).png')">
+        <img src="graphics/food (7).png" alt="Poster 1" />
+        <p></p>
+      </div>
+      
+
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (8).png')">
+          <img src="graphics/food (8).png" alt="Poster 1" />
+          <p></p>
+        </div>
+
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (9).png')">
+          <img src="graphics/food (9).png" alt="Poster 1" />
+          <p></p>
+        </div>
+
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (10).png')">
+          <img src="graphics/food (10).png" alt="Poster 1" />
+          <p></p>
+        </div>
+
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (11).png')">
+          <img src="graphics/food (11).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (1).png')">
+          <img src="graphics/food (12).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (13).png')">
+          <img src="graphics/food (13).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (14).png')">
+          <img src="graphics/food (14).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (15).png')">
+          <img src="graphics/food (15).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (16).png')">
+          <img src="graphics/food (16).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (17).png')">
+          <img src="graphics/food (17).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (18).png')">
+          <img src="graphics/food (18).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (19).png')">
+          <img src="graphics/food (19).png" alt="Poster 1" />
+          <p></p>
+        </div>
+        <div class="graphic-item" onclick="selectGraphic('graphics/food (20).png')">
+          <img src="graphics/food (20).png" alt="Poster 1" />
+          <p></p>
+        </div>
+
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+    
+    <!-- UI/UX Elements Menu -->
+    <div id="uiuxMenu" class="hidden-menu left-menu" style="display: none;">
+      <h3>Choose a Letter/Number</h3>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (28).png')">
+        <img src="graphics/numbers (28).png" alt="UI/UX Element 1" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (27).png')">
+        <img src="graphics/numbers (27).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (26).png')">
+        <img src="graphics/numbers (26).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (25).png')">
+        <img src="graphics/numbers (25).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (24).png')">
+        <img src="graphics/numbers (24).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (23).png')">
+        <img src="graphics/numbers (23).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (22).png')">
+        <img src="graphics/numbers (22).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (21).png')">
+        <img src="graphics/numbers (21).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (20).png')">
+        <img src="graphics/numbers (20).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (19).png')">
+        <img src="graphics/numbers (19).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (18).png')">
+        <img src="graphics/numbers (18).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (17).png')">
+        <img src="graphics/numbers (17).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (16).png')">
+        <img src="graphics/numbers (16).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (15).png')">
+        <img src="graphics/numbers (15).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (14).png')">
+        <img src="graphics/numbers (14).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (13).png')">
+        <img src="graphics/numbers (13).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (12).png')">
+        <img src="graphics/numbers (12).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (11).png')">
+        <img src="graphics/numbers (11).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (10).png')">
+        <img src="graphics/numbers (10).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (9).png')">
+        <img src="graphics/numbers (9).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (8).png')">
+        <img src="graphics/numbers (8).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (7).png')">
+        <img src="graphics/numbers (7).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (6).png')">
+        <img src="graphics/numbers (6).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (5).png')">
+        <img src="graphics/numbers (5).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (4).png')">
+        <img src="graphics/numbers (4).png" alt="Graphic 2" />
+        <p></p>
+      </div>      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (3).png')">
+        <img src="graphics/numbers (3).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers (2).png')">
+        <img src="graphics/numbers (2).png" alt="Graphic 2" />
+        <p></p>
+      </div>
+          <div class="graphic-item" onclick="selectGraphic('graphics/numbers (1).png')">
+        <img src="graphics/numbers (1).png" alt="Graphic 2" />
+        <p></p>
+      </div>    
+      <div class="graphic-item" onclick="selectGraphic('graphics/numbers.png')">
+        <img src="graphics/numbers.png" alt="Graphic 2" />
+        <p></p>
+      </div>
+      <button class="men" onclick="closeGraphicsMenu()">Close</button>
+    </div>
+
+
+
+                <!-- Posters Menu -->
+        <div id="stoicMenu" class="hidden-menu left-menu" style="display: none;">
+          <h3>Stoic Aesthetic Menu</h3>
+          <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (1).png')">
+            <img src="graphics/stoicA (1).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (2).png')">
+            <img src="graphics/stoicA (2).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA.png')">
+            <img src="graphics/stoicA.png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (4).png')">
+            <img src="graphics/stoicA (4).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (5).png')">
+            <img src="graphics/stoicA (5).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (6).png')">
+            <img src="graphics/stoicA (6).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (7).png')">
+            <img src="graphics/stoicA (7).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                    <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (8).png')">
+            <img src="graphics/stoicA (8).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                              <div class="graphic-item" onclick="selectGraphic('graphics/stoicA (9).png')">
+            <img src="graphics/stoicA (9).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                              <div class="graphic-item" onclick="selectGraphic('graphics/7a52b063-dcf2-4992-8a32-7826d1ac48f2.jpeg')">
+            <img src="graphics/7a52b063-dcf2-4992-8a32-7826d1ac48f2.jpeg" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/download (45).jpeg')">
+            <img src="graphics/download (45).jpeg" alt="Poster 1" />
+            <p></p>
+          </div>
+
+
+          <button class="men" onclick="closeGraphicsMenu()">Close</button>
+        </div>
+
+
+
+                <!-- Posters Menu -->
+        <div id="musicMenu" class="hidden-menu left-menu" style="display: none;">
+          <h3>Glory Tracks</h3>
+          <div class="graphic-item" onclick="selectGraphic('graphics/music.png')">
+            <img src="graphics/music.png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/music (1).png')">
+            <img src="graphics/music (1).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (2).png')">
+            <img src="graphics/music (2).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (3).png')">
+            <img src="graphics/music (3).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (4).png')">
+            <img src="graphics/music (4).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (5).png')">
+            <img src="graphics/music (5).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (6).png')">
+            <img src="graphics/music (6).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (7).png')">
+            <img src="graphics/music (7).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (8).png')">
+            <img src="graphics/music (8).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (9).png')">
+            <img src="graphics/music (9).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/music (10).png')">
+            <img src="graphics/music (10).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/music (11).png')">
+            <img src="graphics/music (11).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/music (12).png')">
+            <img src="graphics/music (12).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/music (13).png')">
+            <img src="graphics/music (13).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/music (14).png')">
+            <img src="graphics/music (14).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/music (15).png')">
+            <img src="graphics/music (15).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+
+          <button class="men" onclick="closeGraphicsMenu()">Close</button>
+        </div>
+
+
+                        <!-- Posters Menu -->
+        <div id="quotesMenu" class="hidden-menu left-menu" style="display: none;">
+          <h3>Bold Synatx</h3>
+          <div class="graphic-item" onclick="selectGraphic('graphics/words.png')">
+            <img src="graphics/words.png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                    <div class="graphic-item" onclick="selectGraphic('graphics/words (1).png')">
+            <img src="graphics/words (1).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/words (2).png')">
+            <img src="graphics/words (2).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/words (3).png')">
+            <img src="graphics/words (3).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/words (4).png')">
+            <img src="graphics/words (4).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/words (5).png')">
+            <img src="graphics/words (5).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                              <div class="graphic-item" onclick="selectGraphic('graphics/words (7).png')">
+            <img src="graphics/words (7).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (8).png')">
+            <img src="graphics/words (8).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (9).png')">
+            <img src="graphics/words (9).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (10).png')">
+            <img src="graphics/words (10).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (11).png')">
+            <img src="graphics/words (11).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (12).png')">
+            <img src="graphics/words (12).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                        <div class="graphic-item" onclick="selectGraphic('graphics/words (13).png')">
+            <img src="graphics/words (13).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+                                                  <div class="graphic-item" onclick="selectGraphic('graphics/words (14).png')">
+            <img src="graphics/words (14).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                                  <div class="graphic-item" onclick="selectGraphic('graphics/words (15).png')">
+            <img src="graphics/words (15).png" alt="Poster 1" />
+            <p></p>
+          </div>
+                                                  <div class="graphic-item" onclick="selectGraphic('graphics/words (16).png')">
+            <img src="graphics/words (16).png" alt="Poster 1" />
+            <p></p>
+          </div>
+
+
+          
+          <button class="men" onclick="closeGraphicsMenu()">Close</button>
+        </div>
+
+
+    
+<!-- Template for the graphic options menu (will be duplicated for each graphic) -->
+<div id="graphicOptionsMenuTemplate" style="display: none; position: absolute; background-color: white; border: 1px solid #000000; padding: 15px; border-radius: 2px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: transform 0.2s ease-in-out;">
+  <div class="menu-actions">
+      <i class="fas fa-copy" id="duplicateBtn" title="Duplicate"></i>
+      <i class="fas fa-trash-alt" id="deleteBtn" title="Delete"></i>
+      <i class="fas fa-border-all" id="outlineBtn" title="Add Outline"></i>
+      <input type="color" id="outlineColor" title="Outline Color"> <br>
+      <!-- New Fill Color Picker -->
+      <label>
+        Fill Color:
+        <input type="color" id="graphicFillColor" title="Graphic Fill Color">
+      </label> <br>
+
+            <!-- New Corner Radius Slider -->
+            <label>
+              Corner Radius:
+              <input type="range" id="cornerRadius" min="0" max="200" value="0" title="Corner Radius">
+            </label>
+
+  </div>
+</div>
+
+
+    <!-- Text Input Form (Initially Hidden) -->
+<div id="textFormContainer" class="text-form-container">
+
+  <input type="text" id="textInput" placeholder="Enter your text here" />
+  <button id="addTextButton">Add Text</button>
+      <button class="close-text-form-btn" onclick="closeTextForm()">Close</button>
+
+ 
+</div>
+
+<!--text menu options-->
+<div id="textMenu" style="display: none; position: absolute; padding: 10px; z-index: 1000;">
+
+    <button class="manual-close-btn" onclick="closeTextMenuManually()">&times;</button>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 10px; color: #0a0202;">
+  Font Styling
+</h4>
+
+  <label>
+    Font Family:
+    <select id="fontFamilyInput">
+      <option value="Arial" style="font-family: Arial;">Neat</option>
+      <option value="Georgia" style="font-family: Georgia;">Neat</option>
+      <option value="Times New Roman" style="font-family: 'Times New Roman';">Neat</option>
+      <option value="Verdana" style="font-family: Verdana;">Neat</option>
+      <option value="Tahoma" style="font-family: Tahoma;">Neat</option>
+      <option value="Courier New" style="font-family: 'Courier New';">Neat</option>
+      <option value="Comic Sans MS" style="font-family: 'Comic Sans MS';">Neat</option>
+      <option value="Arial Black" style="font-family: 'Arial Black';">Neat</option>
+      <option value="Impact" style="font-family: Impact;">Neat</option>
+      <option value="Lucida Console" style="font-family: 'Lucida Console';">Neat</option>
+      <option value="Lucida Sans Unicode" style="font-family: 'Lucida Sans Unicode';">Neat</option>
+      <option value="Trebuchet MS" style="font-family: 'Trebuchet MS';">Neat</option>
+      <option value="Palatino" style="font-family: Palatino;">Neat</option>
+      <option value="Book Antiqua" style="font-family: 'Book Antiqua';">Neat</option>
+      <option value="MS Sans Serif" style="font-family: 'MS Sans Serif';">Neat</option>
+      <option value="MS Serif" style="font-family: 'MS Serif';">Neat</option>
+      <option value="Consolas" style="font-family: Consolas;">Neat</option>
+      <option value="Candara" style="font-family: Candara;">Neat</option>
+      <option value="Segoe UI" style="font-family: 'Segoe UI';">Neat</option>
+      <option value="Garamond" style="font-family: Garamond;">Neat</option>
+      <option value="Andalus" style="font-family: Andalus;">Neat</option>
+      <option value="Algerian" style="font-family: Algerian;">Neat</option>
+      <option value="Brush Script MT" style="font-family: 'Brush Script MT';">Neat</option>
+      <option value="Baskerville" style="font-family: Baskerville;">Neat</option>
+      <option value="Calisto MT" style="font-family: 'Calisto MT';">Neat</option>
+      <option value="Century" style="font-family: Century;">Neat</option>
+      <option value="Century Gothic" style="font-family: 'Century Gothic';">Neat</option>
+      <option value="Frank Ruhl Libre" style="font-family: 'Frank Ruhl Libre';">Neat</option>
+      <option value="Futura" style="font-family: Futura;">Neat</option>
+      <option value="Georgia" style="font-family: Georgia;">Neat</option>
+      <option value="Harrington" style="font-family: Harrington;">Neat</option>
+      <option value="Helvetica" style="font-family: Helvetica;">Neat</option>
+      <option value="Rockwell" style="font-family: Rockwell;">Neat</option>
+      <option value="Ravie" style="font-family: Ravie;">Neat</option>
+      <option value="Comic Sans" style="font-family: Comic Sans;">Neat</option>
+      <option value="Roboto" style="font-family: 'Roboto';">Neat</option>
+      <option value="Lobster" style="font-family: Lobster;">Neat</option>
+      <option value="Open Sans" style="font-family: 'Open Sans';">Neat</option>
+      <option value="Source Sans Pro" style="font-family: 'Source Sans Pro';">Neat</option>
+      <option value="Montserrat" style="font-family: 'Montserrat';">Neat</option>
+      <option value="Playfair Display" style="font-family: 'Playfair Display';">Neat</option>
+      <option value="Oswald" style="font-family: Oswald;">Neat</option>
+      <option value="Lora" style="font-family: Lora;">Neat</option>
+      <option value="Raleway" style="font-family: Raleway;">Neat</option>
+      <option value="Poppins" style="font-family: Poppins;">Neat</option>
+      <option value="Merriweather" style="font-family: Merriweather;">Neat</option>
+      <option value="Cabin" style="font-family: Cabin;">Neat</option>
+      <option value="Indie Flower" style="font-family: 'Indie Flower';">Neat</option>
+      <option value="Quicksand" style="font-family: Quicksand;">Neat</option>
+      <option value="Droid Serif" style="font-family: 'Droid Serif';">Neat</option>
+      <option value="Droid Sans" style="font-family: 'Droid Sans';">Neat</option>
+      <option value="Play" style="font-family: Play;">Neat</option>
+      <option value="Ubuntu" style="font-family: Ubuntu;">Neat</option>
+      <option value="Sacramento" style="font-family: Sacramento;">Neat</option>
+      <option value="Bitter" style="font-family: Bitter;">Neat</option>
+      <option value="Varela Round" style="font-family: 'Varela Round';">Neat</option>
+      <option value="Zilla Slab" style="font-family: 'Zilla Slab';">Neat</option>
+      <option value="Bree Serif" style="font-family: 'Bree Serif';">Neat</option>
+      <option value="Cinzel" style="font-family: Cinzel;">Neat</option>
+      <option value="Chivo" style="font-family: Chivo;">Neat</option>
+      <option value="Anton" style="font-family: Anton;">Neat</option>
+      <option value="Fjalla One" style="font-family: 'Fjalla One';">Neat</option>
+      <option value="Abril Fatface" style="font-family: 'Abril Fatface';">Neat</option>
+      <option value="Amatic SC" style="font-family: 'Amatic SC';">Neat</option>
+      <option value="Pacifico" style="font-family: Pacifico;">Neat</option>
+      
+    </select>
+  </label>
+
+  <label>
+    Font Size:
+    <input type="number" id="fontSizeInput" style="width: 50px;" />
+  </label>
+  <label>
+    Font Weight:
+    <select id="fontWeightInput">
+      <option value="normal">Normal</option>
+      <option value="bold">Bold</option>
+      <option value="lighter">Light</option>
+    </select>
+  </label>
+  <br>
+  
+<!--text color option-->
+  <label>
+    Text Color:
+    <input type="color" id="colorPicker" />
+  </label>
+
+    <!-- NEW: Outline Color Option -->
+    <label>
+      Outline Color:
+      <input type="color" id="outlineColorPicker" />
+    </label>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">
+  Text Layout
+</h4>
+
+<label>
+  Text Align:
+  <select id="textAlignInput">
+    <option value="left">Left</option>
+    <option value="center">Center</option>
+    <option value="right">Right</option>
+    <option value="justify">Justify</option>
+  </select>
+</label>
+
+<!-- Letter Spacing Option -->
+<label>
+  Letter Spacing:
+  <input type="number" id="letterSpacingInput" style="width: 50px;" value="0" />
+</label>
+
+<!-- Line Height Option -->
+<label>
+  Line Height:
+  <input type="number" id="lineHeightInput" style="width: 50px;" step="0.1" value="1.2" />
+</label>
+
+<!-- 📁 TEXT STYLING SECTION -->
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">Text Styling</h4>
+
+<label>
+  Font Style:
+  <select id="fontStyleInput">
+    <option value="normal">Normal</option>
+    <option value="italic">Italic</option>
+  </select>
+</label>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #090202;">
+  Text Effects
+</h4>
+
+
+
+  <label>
+    Shadow X:
+    <input type="number" id="shadowXInput" value="2" style="width: 50px; border-radius: 10px;">
+  </label>
+  <label>
+    Shadow Y:
+    <input type="number" id="shadowYInput" value="2" style="width: 50px;  border-radius: 10px;">
+  </label>
+  <label>
+    Blur:
+    <input type="number" id="shadowBlurInput" value="3" style="width: 50px;  border-radius: 10px;">
+  </label>
+  <label>
+    Shadow Color:
+    <input type="color" id="shadowColorPicker" value="#000000">
+  </label>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">
+  Text Decoration
+</h4>
+
+<label>
+  Underline:
+  <input type="checkbox" id="underlineInput">
+</label>
+<label>
+  Linethrough:
+  <input type="checkbox" id="linethroughInput">
+</label>
+<label>
+  Overline:
+  <input type="checkbox" id="overlineInput">
+</label>
+
+  
+<!--  TEXT LAYOUT SECTION -->
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">Text Listing</h4>
+
+<label>
+  List Format:
+  <select id="listFormatInput">
+    <option value="none">None</option>
+    <option value="bullet">Bullet List</option>
+    <option value="numbered">Numbered List</option>
+  </select>
+</label>
+
+
+
+  
+ <h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #020000;">
+  Actions
+</h4>
+    <i class="fas fa-copy" id="duplicateText" title="Duplicate" style="font-size: 20px; color: black; border:transparent; margin-left: 5px; margin-right:5px;"></i>
+
+<button id="deleteText" style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background-color: #000000; color: rgb(128, 128, 128); border: none; border-radius: 6px; cursor: pointer;">
+  <i class="fas fa-trash"></i>
+
+</button>
+
+</div>
+
+
+
+  <div class="container">
+    <div class="canvas-container">
+        <canvas id="canvas-0" class="canvas"></canvas>
+        <canvas id="canvas-1" class="canvas"></canvas>
+        <canvas id="canvas-2" class="canvas"></canvas>
+        <canvas id="canvas-3" class="canvas"></canvas>
+    </div>
+    <div class="guides-overlay"></div>
+
+</div>
+
+<div class="div1">
+  <button id="prevBtn" class="prev-btn">← Previous</button>
+  <button id="nextBtn" class="next-btn">Next →</button>
+</div>
+
+
+<!-- Load Design Modal -->
+<div id="loadDesignModal" class="load-design-modal">
+  <div class="load-design-modal-content">
+    <span class="load-design-close-modal">&times;</span>
+    <h2 style="font-family: 'Dream Avenue', sans-serif;">Select a Design to Load</h2>
+    <div id="designListContainer" class="load-design-list"></div>
+  </div>
+</div>
+
+<div id="authMessage" style="display:none; color: red; text-align:center; margin: 20px; font-weight: bold;"></div>
+
+
+
+
+
+  <script src="js/custom.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+
+  <script>
+    document.getElementById("loadDesignButton").addEventListener("click", async (e) =>{
+      alert("Please Wait While We retrieve Your Saved Designs");
+    })
+  </script>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@gradio/tfjs-u2net"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+
+  
+<script>
+
+
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          sessionStorage.setItem("transitioning", "true");
+          transition.classList.add("active");
+
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match your CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+
+
+
+
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
+
+</script>
+
+
+<script>
+  function closeTextForm() {
+  document.getElementById("textFormContainer").style.display = "none";
+
+  function closeTextMenuManually() {
+  textMenu.style.display = "none";
+}
+
+}
+</script>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#graphicMenu h3').classList.add('animate');
+  });
+</script>
+
+
+</body>
+</html>
