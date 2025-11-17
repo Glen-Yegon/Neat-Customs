@@ -105,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     revealCard(card, delay);
   });
 });
-
 window.addEventListener("load", () => {
   const slides = document.querySelectorAll(".slideshow img");
   const navbar = document.getElementById("navbar");
@@ -113,10 +112,43 @@ window.addEventListener("load", () => {
   const leftS = document.querySelector(".r-left");
   const rightS = document.querySelector(".r-right");
   const bottomS = document.querySelector(".r-bottom");
-  const heroVideo = document.getElementById("hero-video"); // select your hero video
-  let current = 0;
-  const delay = 200;
+  const heroVideo = document.getElementById("hero-video");
+  const preloader = document.getElementById("preloader");
+  const mainContent = document.getElementById("main-content");
 
+  const delay = 200;
+  let current = 0;
+
+  // -------------------------------
+  // SESSION STORAGE LOGIC
+  // -------------------------------
+  const seenPreloader = sessionStorage.getItem("seenPreloader") === "true";
+
+  if (seenPreloader) {
+    // Skip preloader but set all final states
+    preloader.style.display = "none";
+    mainContent.style.display = "block";
+    document.body.style.overflow = "auto";
+
+    // Ensure letters are in their final positions
+    leftS.classList.add("move-left");
+    rightS.classList.add("move-right");
+    bottomS.classList.add("move-bottom");
+
+    // Fade out brand
+    brand.style.opacity = "0";
+
+    // Play hero video if available
+    if (heroVideo) {
+      heroVideo.play().catch(err => console.log("Video autoplay failed:", err));
+    }
+
+    return; // exit, no slideshow
+  }
+
+  // -------------------------------
+  // PRELOADER LOGIC (runs once)
+  // -------------------------------
   function showSlide(index) {
     slides[index].classList.add("active");
   }
@@ -129,20 +161,17 @@ window.addEventListener("load", () => {
       } else {
         clearInterval(interval);
 
-        // Fade out brand first
+        // Fade out brand
         brand.style.opacity = "0";
 
-        // Delay movement of letters by 1 second
+        // Move letters after 1s
         setTimeout(() => {
           leftS.classList.add("move-left");
           rightS.classList.add("move-right");
           bottomS.classList.add("move-bottom");
         }, 1000);
 
-        // Transition background
-        const preloader = document.getElementById("preloader");
-        const mainContent = document.getElementById("main-content");
-
+        // Show main content and fade preloader
         mainContent.style.display = "block";
         preloader.style.transition = "opacity 1s ease";
         preloader.style.opacity = "0";
@@ -151,13 +180,13 @@ window.addEventListener("load", () => {
           preloader.style.display = "none";
           document.body.style.overflow = "auto";
 
-          // ✅ Start hero video after preloader
+          // Play hero video
           if (heroVideo) {
-            heroVideo.play().catch(err => {
-              console.log("Video autoplay failed:", err);
-            });
+            heroVideo.play().catch(err => console.log("Video autoplay failed:", err));
           }
 
+          // Save session flag
+          sessionStorage.setItem("seenPreloader", "true");
         }, 1000);
       }
     }, delay);

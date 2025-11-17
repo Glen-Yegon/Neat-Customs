@@ -70,13 +70,7 @@
   </div></a>
 </div>
  <!-- Navbar -->
-
-<main id="main-content">
-<section class="hero" role="banner">
-  <video autoplay muted loop playsinline class="hero-video" id="hero-video">
-    <source src="videos/weekendvid.mp4" type="video/mp4" />
-  </video>
-
+  
  <nav class="navbar">
   <div class="logo">
     <img src="images/minified/logo.webp" alt="Neat Customs Logo">
@@ -98,6 +92,13 @@
 </div>
 
 </nav>
+
+
+<main id="main-content">
+<section class="hero" role="banner">
+  <video autoplay muted loop playsinline class="hero-video" id="hero-video">
+    <source src="videos/weekendvid.mp4" type="video/mp4" />
+  </video>
 
 
 <!-- DESKTOP SIDE MENUS -->
@@ -161,10 +162,12 @@
 <h1 class="hero-title">Neat Customs</h1>
 
     <p data-aos="fade-down" data-aos-delay="700">Design your own fashion | tailored to your taste.</p>
-    <div class="hero-buttons">
-      <button class="scroll-btn" data-target="#cli">Customize Now →</button>
-      <a href="request.html"><button>Request A Design →</button></a>
-    </div>
+<div class="hero-buttons">
+  <button class="scroll-btn" data-target="#featured-products">Customize Now →</button>
+
+  <button class="scroll-btn" data-target="#shop-section">Sell Merch →</button>
+</div>
+
   </div>
 </section>
 
@@ -314,7 +317,7 @@
         </div>
         <div class="shop-content">
           <h3 class="shop-title">Become a Seller</h3>
-          <p class="shop-text">Design your own merchandise, upload it to our shop, and earn 50% profit on every sale. We handle delivery, so you focus on creativity!</p>
+          <p class="shop-text">Design your own merchandise, upload it to our shop, and earn 75% profit on every sale. We handle delivery, so you focus on creativity!</p>
           <a href="dashboard.html" class="btn btn-primary">Start Selling</a>
         </div>
       </div>
@@ -549,26 +552,27 @@ requestAnimationFrame(() => {
   window.addEventListener('resize', setHeroHeight);
 </script>
 
-<script>
-document.querySelectorAll('.scroll-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.querySelector(btn.dataset.target)
-    if (target) {
-      lenis.scrollTo(target, {
-        offset: -50,   // adjust if you have sticky nav
-        duration: 1.2, // seconds
-        easing: (t) => 1 - Math.pow(1 - t, 3) // cubic easing
-      })
-    }
-  })
-})
 
+
+
+
+<script>
+  // Smooth Scroll Buttons
+document.querySelectorAll('.scroll-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const targetId = this.getAttribute('data-target');
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: "smooth"
+      });
+    }
+  });
+});
 
 </script>
-
-
-
-
 
 </body>
 </html>
