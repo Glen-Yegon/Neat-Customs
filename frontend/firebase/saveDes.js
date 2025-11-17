@@ -302,3 +302,76 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sellButton = document.getElementById("sellBtn");
+
+  sellButton.addEventListener("click", async function () {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Please sign in to sell your design.");
+      showLoginModal();
+      return;
+    }
+
+    const userId = user.uid;
+    localStorage.setItem("loggedInUserId", userId);
+
+    const lastSavedDesignId = localStorage.getItem("lastSavedDesignId");
+    if (!lastSavedDesignId) {
+      alert("No design found in localStorage!");
+      return;
+    }
+
+    const savedDesignData = localStorage.getItem(lastSavedDesignId);
+    if (!savedDesignData) {
+      alert("No design data found in localStorage!");
+      return;
+    }
+
+    const designData = JSON.parse(savedDesignData);
+
+    try {
+      // ✅ Take only first 2 Fabric canvases
+      const canvasImages = window.canvases.slice(0, 2).map((canvas, index) => {
+        const dataURL = canvas.toDataURL({ format: 'png' });
+        return {
+          id: index,
+          data: dataURL,
+        };
+      }).filter(img => !isBlankBase64(img.data));
+
+      if (!canvasImages.length) {
+        alert("No valid canvas images to sell!");
+        return;
+      }
+
+      // ✅ Save to localStorage
+      const tempSellData = {
+        userId: userId,
+        timestamp: new Date().toISOString(),
+        design: designData,
+        images: canvasImages, // only first 2 canvases
+      };
+
+      localStorage.setItem("pendingSellDesign", JSON.stringify(tempSellData));
+
+      console.log("✅ Design temporarily saved for selling.");
+      alert("Preparing your design for sale...");
+      window.location.href = "seller.html";
+    } catch (error) {
+      console.error("Error preparing design for sale:", error);
+      alert("Something went wrong while preparing your design for sale.");
+    }
+  });
+});
+
+// Helper to filter out blank canvases
+function isBlankBase64(base64Data) {
+  if (!base64Data) return true;
+  const blankPatterns = [
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB",
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD",
+  ];
+  return blankPatterns.some(pattern => base64Data.startsWith(pattern));
+}

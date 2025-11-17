@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Neat Customs</title>
+  <link rel="stylesheet" href="css/dash.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 🌟 Navbar -->
+  <nav class="seller-navbar">
+    <div class="nav-left">
+      <button class="back-btn" type="button" id="backBtn" aria-label="Go back">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-arrow-left">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-center">
+      <img src="images/logo.png" alt="Neat Customs Logo" class="nav-logo" />
+    </div>
+
+    <div class="nav-right">
+  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
+    <img src="images/default-profile.png" alt="Profile" class="user-icon" id="userProfilePic" />
+  </a>
+    </div>
+  </nav>
+
+  <!-- 🌟 Welcome Message -->
+<div class="welcome-message">
+  <h2>Welcome, <span id="userName">there</span>!</h2>
+</div>
+
+
+<main class="seller-main">
+  <h1>Your Dashboard</h1>
+
+  <div class="dashboard-cards">
+    <div class="dashboard-card">
+      <div class="card-icon">📦</div>
+      <h2>My Products</h2>
+      <button class="card-btn">View</button>
+    </div>
+    <div class="dashboard-card">
+      <div class="card-icon">➕</div>
+      <h2>Create Product</h2>
+      <button class="card-btn">Add</button>
+    </div>
+    <div class="dashboard-card">
+      <div class="card-icon">🛒</div>
+      <h2>Orders</h2>
+      <button class="card-btn">View</button>
+    </div>
+  </div>
+</main>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <!-- Quote -->
+    <div class="footer-quote">
+      <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
+    </div>
+
+    <!-- Logo -->
+    <div class="footer-logo">
+      <img src="images/logo.png" alt="Neat Customs Logo">
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+    </div>
+  </div>
+
+  <!-- Separator -->
+  <hr class="footer-separator">
+
+  <!-- Legal -->
+  <div class="footer-legal">
+    <p>&copy; 2025 Neat Customs. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+  </div>
+</footer>
+  
+
+<!-- 🌟 Create Product Modal -->
+<div id="createProductModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2>Create Product</h2>
+    <p>Choose one of the options below:</p>
+    <div class="modal-buttons">
+      <button id="uploadExistingBtn" class="modal-action-btn">Upload & Sell Existing Design</button>
+      <button id="newDesignBtn" class="modal-action-btn">Start Designing From Scratch</button>
+    </div>
+  </div>
+</div>
+
+
+  <script type="module" src="js/dash.js"></script>
+
+  <script type="module">
+    import { auth, db } from "./firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+const userNameEl = document.getElementById("userName");
+const userProfilePicEl = document.getElementById("userProfilePic");
+const logoutBtn = document.querySelector(".logout-btn");
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    userNameEl.textContent = "there";
+    userProfilePicEl.src = "images/default-profile.png";
+    return;
+  }
+
+  try {
+    const userDocRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userDocRef);
+    let userName = "there";
+    let photoURL = "images/default-profile.png"; // fallback
+
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      userName = userData.name || userData.fullName || "there";
+      if (userData.photoURL) photoURL = userData.photoURL;
+    } else if (user.displayName) {
+      userName = user.displayName;
+      if (user.photoURL) photoURL = user.photoURL;
+    }
+
+    // Set the name and profile picture
+    userNameEl.textContent = userName;
+    userProfilePicEl.src = photoURL;
+
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    userNameEl.textContent = "there";
+    userProfilePicEl.src = "images/default-profile.png";
+  }
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/* ================ GLOBAL STYLES ================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #0d0d0d;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ================ NAVBAR STYLING ================ */
+.seller-navbar {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(90deg, #000, #111, #5d39ff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  box-shadow: 0 4px 20px rgba(93, 57, 255, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.nav-left, .nav-center, .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-logo {
+  height: 45px;
+  width: auto;
+  transform: scale(2);
+  filter: drop-shadow(0 0 6px rgba(93, 57, 255, 0.8));
+  transition: transform 0.3s ease;
+
+  /* ✅ Add rotation animation */
+  animation: rotateLogo 20s linear infinite;
+}
+
+/* ✅ Keyframes for continuous rotation */
+@keyframes rotateLogo {
+  from {
+    transform: scale(2) rotate(0deg);
+  }
+  to {
+    transform: scale(2) rotate(360deg);
+  }
+}
+
+
+.nav-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Back Button */
+.back-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.back-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.back-btn:hover {
+  color: #5d39ff;
+  transform: translateX(-3px);
+}
+
+/* User Icon */
+.user-link {
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.user-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.user-link:hover {
+  color: #5d39ff;
+  transform: scale(1.1);
+}
+
+/* ================ MAIN SECTION ================ */
+.seller-main {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.seller-main h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 2.5rem;
+  color: #5d39ff;
+  margin-bottom: 10px;
+}
+
+/* ================ RESPONSIVENESS ================ */
+@media (max-width: 768px) {
+  .seller-navbar {
+    padding: 0 15px;
+  }
+
+  .nav-logo {
+    height: 38px;
+  }
+
+  .back-btn svg, .user-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+.upload-section {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Raleway", sans-serif;
+}
+
+.image-preview-area {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.image-gallery img {
+  width: 180px;
+  height: 180px;
+  gap: 1px;
+  object-fit: cover;
+  border: 1px solid #5d39ff;
+  box-shadow: 0 0 15px rgba(93, 57, 255, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+}
+
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 180px;
+  border: 2px dashed #5d39ff;
+  border-radius: 20px;
+  color: #5d39ff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.upload-box:hover {
+  background-color: rgba(93, 57, 255, 0.1);
+}
+
+.product-form {
+  background: #0b0b0b;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(93, 57, 255, 0.4);
+  color: white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: "Caveat", cursive;
+  font-size: 1.2rem;
+  color: #5d39ff;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #1a1a1a;
+  color: white;
+  font-family: "Raleway", sans-serif;
+}
+
+button#submitProduct {
+  background: #5d39ff;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  font-family: "Caveat", cursive;
+  font-size: 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button#submitProduct:hover {
+  background: white;
+  color: #5d39ff;
+  transform: scale(1.05);
+}

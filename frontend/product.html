@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Neat Customs</title>
+  <link rel="stylesheet" href="css/product.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 🌟 Navbar -->
+  <nav class="seller-navbar">
+    <div class="nav-left">
+      <button class="back-btn" type="button" id="backBtn" aria-label="Go back">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-arrow-left">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-center">
+      <img src="images/logo.png" alt="Neat Customs Logo" class="nav-logo" />
+    </div>
+
+    <div class="nav-right">
+  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
+    <img src="images/default-profile.png" alt="Profile" class="user-icon" id="userProfilePic" />
+  </a>
+    </div>
+  </nav>
+
+
+<main class="product-main">
+  <h1>My Products</h1>
+  <div id="userProducts" class="product-grid">
+    <!-- Products will be dynamically injected here -->
+  </div>
+</main>
+
+
+
+<!-- Product Details Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close">&times;</span>
+
+    <div class="modal-images" id="modalImages">
+      <!-- Product images injected dynamically, 2 per row -->
+    </div>
+
+    <div class="modal-info">
+      <h2 id="modalProductName">Product Name</h2>
+      <p id="modalProductPrice">Price</p>
+      <p id="modalProductDesc">Description</p>
+      <p id="modalProductTags">Tags</p>
+    </div>
+
+    <div class="modal-actions">
+      <button id="editProductBtn" class="modal-btn edit-btn">Edit</button>
+      <button id="deleteProductBtn" class="modal-btn delete-btn">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <!-- Quote -->
+    <div class="footer-quote">
+      <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
+    </div>
+
+    <!-- Logo -->
+    <div class="footer-logo">
+      <img src="images/logo.png" alt="Neat Customs Logo">
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+    </div>
+  </div>
+
+  <!-- Separator -->
+  <hr class="footer-separator">
+
+  <!-- Legal -->
+  <div class="footer-legal">
+    <p>&copy; 2025 Neat Customs. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+  </div>
+</footer>
+  
+
+
+  <script type="module" src="js/product.js"></script>
+  <script type="module" src="firebase/product-firebase.js"></script>
+
+  <script type="module">
+    import { auth, db } from "./firebase/firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+const userProfilePicEl = document.getElementById("userProfilePic");
+const logoutBtn = document.querySelector(".logout-btn");
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    userProfilePicEl.src = "images/default-profile.png";
+    return;
+  }
+
+  try {
+    const userDocRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userDocRef);
+    let userName = "there";
+    let photoURL = "images/default-profile.png"; // fallback
+
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      userName = userData.name || userData.fullName || "there";
+      if (userData.photoURL) photoURL = userData.photoURL;
+    } else if (user.displayName) {
+      userName = user.displayName;
+      if (user.photoURL) photoURL = user.photoURL;
+    }
+
+
+    userProfilePicEl.src = photoURL;
+
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    userNameEl.textContent = "there";
+    userProfilePicEl.src = "images/default-profile.png";
+  }
+});
+
+  </script>
+
+  <script type="module">
+    import { auth, db } from "./firebase/firebase.js";
+import { doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+// Modal elements
+const productModal = document.getElementById("productModal");
+const modalClose = document.querySelector(".modal-close");
+const modalImages = document.getElementById("modalImages");
+const modalProductName = document.getElementById("modalProductName");
+const modalProductPrice = document.getElementById("modalProductPrice");
+const modalProductDesc = document.getElementById("modalProductDesc");
+const modalProductTags = document.getElementById("modalProductTags");
+const editProductBtn = document.getElementById("editProductBtn");
+const deleteProductBtn = document.getElementById("deleteProductBtn");
+
+let currentProductId = null;
+let currentProductData = null;
+
+// Open modal function
+export function openProductModal(product) {
+  currentProductId = product.id;
+  currentProductData = product;
+
+  // Populate images
+  modalImages.innerHTML = "";
+  product.images.forEach(img => {
+    const imgEl = document.createElement("img");
+    imgEl.src = img;
+    modalImages.appendChild(imgEl);
+  });
+
+  // Populate info
+  modalProductName.textContent = product.name;
+  modalProductPrice.textContent = `${product.currency} ${product.price.toLocaleString()}`;
+  modalProductDesc.textContent = product.description;
+  modalProductTags.textContent = product.tags.join(", ");
+
+  productModal.style.display = "block";
+}
+
+// Close modal
+modalClose.addEventListener("click", () => productModal.style.display = "none");
+
+// Edit product
+editProductBtn.addEventListener("click", async () => {
+  const newName = prompt("Enter new product name:", currentProductData.name);
+  const newPrice = prompt("Enter new product price:", currentProductData.price);
+  const newDesc = prompt("Enter new product description:", currentProductData.description);
+
+  if (newName && newPrice && newDesc) {
+    try {
+      await updateDoc(doc(db, "user_merch", currentProductId), {
+        name: newName,
+        price: parseFloat(newPrice),
+        description: newDesc
+      });
+      alert("✅ Product updated successfully!");
+      // Refresh modal
+      currentProductData.name = newName;
+      currentProductData.price = parseFloat(newPrice);
+      currentProductData.description = newDesc;
+      openProductModal(currentProductData);
+    } catch (err) {
+      console.error("Error updating product:", err);
+      alert("❌ Failed to update product.");
+    }
+  }
+});
+
+// Delete product
+deleteProductBtn.addEventListener("click", async () => {
+  const confirmName = prompt(`Type the product name (${currentProductData.name}) to confirm deletion:`);
+  if (confirmName === currentProductData.name) {
+    try {
+      await deleteDoc(doc(db, "user_merch", currentProductId));
+      alert("✅ Product deleted successfully!");
+      productModal.style.display = "none";
+      window.location.reload(); // refresh to remove product from UI
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      alert("❌ Failed to delete product.");
+    }
+  } else {
+    alert("❌ Product name does not match. Deletion cancelled.");
+  }
+});
+
+// Close modal when clicking outside content
+window.addEventListener("click", e => {
+  if (e.target === productModal) productModal.style.display = "none";
+});
+
+  </script>
+  
+</body>
+</html>

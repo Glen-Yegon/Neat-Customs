@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Dashboard | Neat Customs</title>
+    <link rel="stylesheet" href="css/seller.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- 🌟 Navbar -->
+    <nav class="seller-navbar">
+      <div class="nav-left">
+        <button class="back-btn" id="backBtn" aria-label="Go back">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="feather feather-arrow-left">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="nav-center">
+        <img src="images/logo.png" alt="Neat Customs Logo" class="nav-logo" />
+      </div>
+
+      <div class="nav-right">
+        <a href="sign.html" class="user-link" aria-label="User Account">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"
+               class="user-icon">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 0115 0"/>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+<main class="seller-main">
+  <h1 id="welcomeMessage">Welcome to the Seller Dashboard</h1>
+
+  <section class="upload-section">
+    <!-- Product Preview Images -->
+    <div class="image-preview-area">
+      <div id="imageGallery" class="image-gallery"></div>
+      <label class="upload-box">
+        <input type="file" id="imageUploader" accept="image/*" multiple hidden />
+        <span>+ Add More Images</span>
+      </label>
+    </div>
+
+    <!-- Product Info Form -->
+    <form id="productForm" class="product-form">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" id="productName" placeholder="Enter product name" required />
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" id="productPrice" placeholder="Enter price" required />
+      </div>
+
+      <div class="form-group">
+        <label>Currency</label>
+        <select id="currency" required>
+          <option value="KES">KES (Ksh)</option>
+          <option value="USD">USD ($)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="productDesc" placeholder="Describe your design..." rows="4" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Tags / Category</label>
+        <input type="text" id="productTags" placeholder="e.g. streetwear, logo tee, minimal" />
+      </div>
+
+      <button type="submit" id="submitProduct">Submit Product</button>
+    </form>
+  </section>
+</main>
+
+    <script type="module" src="js/seller.js"></script>
+<script type="module" src="firebase/seller-firebase.js"></script>
+  </body>
+</html>

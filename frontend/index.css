@@ -8,7 +8,181 @@ html {
 }
 
 
-/* Hide scrollbar but keep scrolling */
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+  flex-direction: column;
+}
+.slideshow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  filter: brightness(70%); /* darkens image by 30% */
+}
+
+.slideshow img.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Centerpiece */
+#centerpiece {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1100;
+  color: #5d39ff;
+  font-weight: 400;
+  font-family: 'Caveat', sans-serif;
+}
+#centerpiece .brand {
+  font-size: 4.5rem;
+  font-weight: 100;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #5d39ff;
+  margin: 0;
+  transition: opacity 1s ease;
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  #centerpiece .brand {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  #centerpiece .brand {
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Wrapper to hold position with smooth movement */
+.rattle-wrapper {
+  position: fixed;
+  z-index: 1200;
+  transition: all 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* smooth easing */
+}
+
+.rattle {
+  font-size: 2rem;
+  display: inline-block;
+
+  /* Stroke */
+  -webkit-text-stroke: 2px #5d39ff;
+
+  /* Translucent fill */
+  color: rgba(0, 0, 0, 0.25);
+}
+
+
+/* Position variations (initial off-screen) */
+.r-left {
+  left: 30%;
+  top: 50%;
+  transform: translate(-150%, -50%);
+}
+.r-right {
+  right: 30%;
+  top: 50%;
+  transform: translate(150%, -50%);
+}
+.r-bottom {
+  left: 50%;
+  bottom: 30%;
+  transform: translate(-50%, 50%);
+}
+
+/* Final positions with smooth transition */
+.move-left {
+  left: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+.move-right {
+  right: 10px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+.move-bottom {
+  bottom: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Optional rattle effect (small subtle movement) */
+@keyframes rattle {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-2px, 1px) rotate(-2deg); }
+  50% { transform: translate(2px, -1px) rotate(2deg); }
+  75% { transform: translate(-1px, 2px) rotate(-1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  .r-left {
+    left: 15%;
+    top: 45%;
+    transform: translate(-120%, -50%);
+  }
+  .r-right {
+    right: 15%;
+    top: 45%;
+    transform: translate(120%, -50%);
+  }
+  .r-bottom {
+    left: 50%;
+    bottom: 20%;
+    transform: translate(-50%, 40%);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .r-left {
+    left: 10%;
+    top: 40%;
+    transform: translate(-100%, -50%);
+  }
+  .r-right {
+    right: 10%;
+    top: 40%;
+    transform: translate(100%, -50%);
+  }
+  .r-bottom {
+    left: 50%;
+    bottom: 15%;
+    transform: translate(-50%, 30%);
+  }
+
+  /* Make the letters slightly smaller on phones */
+  .rattle {
+    font-size: 1.8rem;
+  }
+}
+
 
 /* Chrome, Safari, Edge */
 html::-webkit-scrollbar {

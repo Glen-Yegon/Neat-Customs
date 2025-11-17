@@ -23,9 +23,46 @@
   }
 </style>
 
+
+
 </head>
 <body>
+
+
+
+    <!-- Loading Screen -->
+  <div id="preloader">
+    <div class="slideshow">
+      <img src="images/minified/playboy2.webp" alt="Slide 1" loading="eager" fetchpriority="high">
+      <img src="images/minified/load (1).webp" alt="Slide 2" loading="eager" fetchpriority="high">
+      <img src="images/minified/dwayne-joe-h5olKa4rdEw-unsplash.webp" alt="Slide 3" loading="eager" fetchpriority="high">
+      <img src="images/minified/keagan-henman-XYtuOYfIg_M-unsplash.webp" alt="Slide 4" loading="eager" fetchpriority="high">
+      <img src="images/keagan-henman-XYtuOYfIg_M-unsplash.jpg" alt="Slide 5" loading="eager" fetchpriority="high">
+      <img src="images/minified/p1 (3).webp" alt="Slide 6" loading="eager" fetchpriority="high">
+      <img src="images/minified/f1 (2).webp" alt="Slide 7" loading="eager" fetchpriority="high">
+      <img src="images/minified/p1 (2).webp" alt="Slide 8">
+      <img src="images/minified/f1 (3).webp" alt="Slide 9">
+      <img src="images/minified/gunna2.webp" alt="Slide 10">
+    </div>
+    <!-- Preloader Centerpiece (only brand) -->
+    <div id="centerpiece">
+      <h1 class="brand">Neat Customs</h1>
+    </div>
+  </div>
   
+  
+<div class="rattle-wrapper r-left">
+  <span class="rattle">&#10022;</span>
+</div>
+
+<div class="rattle-wrapper r-right">
+  <span class="rattle">&#10022;</span>
+</div>
+
+<div class="rattle-wrapper r-bottom">
+  <span class="rattle">&#10022;</span>
+</div>
+
 <!-- Transition overlay -->
 <div id="page-transition">
 <div class="logo-wrapper">
@@ -34,9 +71,9 @@
 </div>
  <!-- Navbar -->
 
-
+<main id="main-content">
 <section class="hero" role="banner">
-  <video autoplay muted loop playsinline class="hero-video">
+  <video autoplay muted loop playsinline class="hero-video" id="hero-video">
     <source src="videos/weekendvid.mp4" type="video/mp4" />
   </video>
 
@@ -278,7 +315,7 @@
         <div class="shop-content">
           <h3 class="shop-title">Become a Seller</h3>
           <p class="shop-text">Design your own merchandise, upload it to our shop, and earn 50% profit on every sale. We handle delivery, so you focus on creativity!</p>
-          <a href="/sell" class="btn btn-primary">Start Selling</a>
+          <a href="dashboard.html" class="btn btn-primary">Start Selling</a>
         </div>
       </div>
 
@@ -416,6 +453,7 @@
   </div>
 </footer>
   
+</main>
 
   <script src="index.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

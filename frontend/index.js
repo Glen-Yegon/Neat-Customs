@@ -105,3 +105,63 @@ document.addEventListener("DOMContentLoaded", () => {
     revealCard(card, delay);
   });
 });
+
+window.addEventListener("load", () => {
+  const slides = document.querySelectorAll(".slideshow img");
+  const navbar = document.getElementById("navbar");
+  const brand = document.querySelector(".brand");
+  const leftS = document.querySelector(".r-left");
+  const rightS = document.querySelector(".r-right");
+  const bottomS = document.querySelector(".r-bottom");
+  const heroVideo = document.getElementById("hero-video"); // select your hero video
+  let current = 0;
+  const delay = 200;
+
+  function showSlide(index) {
+    slides[index].classList.add("active");
+  }
+
+  function startSlideshow() {
+    const interval = setInterval(() => {
+      if (current < slides.length) {
+        showSlide(current);
+        current++;
+      } else {
+        clearInterval(interval);
+
+        // Fade out brand first
+        brand.style.opacity = "0";
+
+        // Delay movement of letters by 1 second
+        setTimeout(() => {
+          leftS.classList.add("move-left");
+          rightS.classList.add("move-right");
+          bottomS.classList.add("move-bottom");
+        }, 1000);
+
+        // Transition background
+        const preloader = document.getElementById("preloader");
+        const mainContent = document.getElementById("main-content");
+
+        mainContent.style.display = "block";
+        preloader.style.transition = "opacity 1s ease";
+        preloader.style.opacity = "0";
+
+        setTimeout(() => {
+          preloader.style.display = "none";
+          document.body.style.overflow = "auto";
+
+          // ✅ Start hero video after preloader
+          if (heroVideo) {
+            heroVideo.play().catch(err => {
+              console.log("Video autoplay failed:", err);
+            });
+          }
+
+        }, 1000);
+      }
+    }, delay);
+  }
+
+  startSlideshow();
+});
