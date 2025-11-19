@@ -1,6 +1,5 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
+
   // Load selected images from localStorage
   let selectedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
   
@@ -9,16 +8,24 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
   }
 
-// Initialize canvases using Fabric.js
-window.canvases = [
-  new fabric.Canvas('canvas-0'),
-  new fabric.Canvas('canvas-1'),
-  new fabric.Canvas('canvas-2'),
-  new fabric.Canvas('canvas-3')
-];
+  // Hide unused canvases
+  for (let i = 0; i < 4; i++) {
+      const canvasEl = document.getElementById(`canvas-${i}`);
+      if (i < selectedImages.length) {
+          canvasEl.style.display = "block";   // show required canvases
+      } else {
+          canvasEl.style.display = "none";    // hide extra canvases
+      }
+  }
 
-// Now attach guides
-attachOverlayGuides();
+  // Initialize only needed Fabric.js canvases
+  window.canvases = [];
+  for (let i = 0; i < selectedImages.length; i++) {
+      window.canvases.push(new fabric.Canvas(`canvas-${i}`));
+  }
+
+  // Attach guides only after canvases exist
+  attachOverlayGuides();
 
 
 // Attach the canvases array to the window so it's globally available
@@ -130,56 +137,7 @@ document.getElementById('closeModalBtn').addEventListener('click', function () {
   document.getElementById('saveModal').style.display = 'none';
 });
 
-// Detect when a canvas becomes active
-canvases.forEach((canvas, index) => {
-  if (index === 2 && !isButtonAdded) { // Only for Canvas 3
-    isButtonAdded = true;
 
-    const canvasWidth = canvases[2].width; // Get Canvas 3 width
-
-    // Create a large sage green button
-    let button = new fabric.Rect({
-      left: canvasWidth / 2 - -55, // Centered horizontally
-      top: 130, // Positioned at the top
-      fill: '#5d39ff', // Sage green background
-      width: 330,
-      height: 80,
-      rx: 5, // Rounded corners
-      ry: 5,
-      stroke: 'black',
-      strokeWidth: 1,
-      selectable: false, // Prevent dragging
-      hoverCursor: 'pointer'
-    });
-
-    // Add text on the button
-    let buttonText = new fabric.Text('Proceed To Checkout ?', {
-      left: canvasWidth / 2 - -80, // Adjusted for centering
-      top: 150,
-      fontSize: 30, // Bigger text
-      fill: 'black',
-      fontWeight: 'normal',
-      selectable: false
-    });
-
-    // Group button and text together
-    let buttonGroup = new fabric.Group([button, buttonText], {
-      selectable: false,
-      evented: true // Allow click events
-    });
-
-    // Add button to Canvas 3
-    canvases[2].add(buttonGroup);
-    canvases[2].renderAll();
-
-    // Make the button open the modal on click
-    canvases[2].on('mouse:down', function (event) {
-      if (event.target === buttonGroup) {
-        showSaveModal();
-      }
-    });
-  }
-});
 
 
 
@@ -621,29 +579,33 @@ function loadImageToCanvas(canvas, imageUrl) {
 
 
 
-  // Navigation button handlers
-  document.getElementById("nextBtn").addEventListener("click", function() {
-    // Reference the current canvas using currentSlide index
-    const currentCanvas = canvases[currentSlide];
-    if (currentCanvas.getActiveObject()) {
-        currentCanvas.discardActiveObject();
-        currentCanvas.requestRenderAll();
-    }
-      currentSlide = (currentSlide + 1) % 4;
-      showCanvas(currentSlide);
-  });
+// Navigation button handlers
+document.getElementById("nextBtn").addEventListener("click", function() {
 
-  document.getElementById("prevBtn").addEventListener("click", function() {
-    // Reference the current canvas using currentSlide index
     const currentCanvas = canvases[currentSlide];
     if (currentCanvas.getActiveObject()) {
         currentCanvas.discardActiveObject();
         currentCanvas.requestRenderAll();
     }
 
-      currentSlide = (currentSlide - 1 + 4) % 4;
-      showCanvas(currentSlide);
-  });
+    // Move to next canvas based on number of actual canvases
+    currentSlide = (currentSlide + 1) % canvases.length;
+    showCanvas(currentSlide);
+});
+
+document.getElementById("prevBtn").addEventListener("click", function() {
+
+    const currentCanvas = canvases[currentSlide];
+    if (currentCanvas.getActiveObject()) {
+        currentCanvas.discardActiveObject();
+        currentCanvas.requestRenderAll();
+    }
+
+    // Move to previous canvas based on number of actual canvases
+    currentSlide = (currentSlide - 1 + canvases.length) % canvases.length;
+    showCanvas(currentSlide);
+});
+
 
   // Initially show the first slide
   showCanvas(currentSlide);
