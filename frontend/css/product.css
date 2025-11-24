@@ -149,7 +149,7 @@ body {
 /* Product image */
 .product-image img {
   width: 100%;
-  height: 300px; /* bigger image */
+  height: 320px; /* bigger image */
   object-fit: cover;
   display: block;
 }

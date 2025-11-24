@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neat Customs Shop</title>
+  <link rel="stylesheet" href="css/shop.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 🌟 Navbar -->
+  <nav class="seller-navbar">
+    <div class="nav-left">
+      <button class="back-btn" type="button" id="backBtn" aria-label="Go back">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="feather feather-arrow-left">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="nav-center">
+      <img src="images/logo.png" alt="Neat Customs Logo" class="nav-logo" />
+    </div>
+
+    <div class="nav-right">
+  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
+    <img src="images/default.jpeg" alt="Profile" class="user-icon" id="userProfilePic" />
+  </a>
+    </div>
+  </nav>
+
+  <main class="shop-container">
+    <div id="productContainer" class="product-grid"></div>
+  </main>
+
+  <script type="module" src="firebase/shop-firebase.js"></script>
+  <script type="module" src="js/shop.js"></script>
+  <script type="module" src="js/product.js"></script>
+  <script type="module" src="firebase/product-firebase.js"></script>
+
+</body>
+</html>

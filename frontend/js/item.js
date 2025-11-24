@@ -1,23 +1,30 @@
 // SELECT NAV ITEMS AND SIDE MENUS
 const navItems = document.querySelectorAll('.nav-item');
-const toteMenu = document.getElementById('tote-menu');
-const phoneMenu = document.getElementById('phone-menu');
-const closeBtns = document.querySelectorAll('.close-btn');
 
-// HELPER FUNCTION TO CLOSE ALL DESKTOP SIDE MENUS
+const menus = {
+  tote: document.getElementById('tote-menu'),
+  tees: document.getElementById('tees-menu'),
+  phone: document.getElementById('phone-menu')
+};
+
+// Close only menus that actually exist
 function closeMenus() {
-  toteMenu.classList.remove('active');
-  phoneMenu.classList.remove('active');
+  Object.values(menus).forEach(menu => {
+    menu?.classList.remove('active');
+  });
 }
 
-// CLICK EVENT FOR NAV ITEMS TO OPEN DESKTOP SIDE MENU
+// Open the menu that exists and matches the type
 navItems.forEach(item => {
   item.addEventListener('click', (e) => {
     e.stopPropagation();
-    const menuType = item.getAttribute('data-menu');
+
+    const type = item.getAttribute('data-menu');
+
     closeMenus();
-    if (menuType === 'tote') toteMenu.classList.add('active');
-    if (menuType === 'phone') phoneMenu.classList.add('active');
+
+    // Only open if the menu exists
+    menus[type]?.classList.add('active');
   });
 });
 
@@ -31,6 +38,8 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
   }
 });
+
+const closeBtns = document.querySelectorAll('.close-btn');
 
 
 // CLOSE BUTTONS (both desktop and mobile)

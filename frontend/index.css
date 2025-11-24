@@ -427,6 +427,7 @@ font-family: var(--font-heading);
   border-bottom: 2px solid white;
   border-radius: 8px;
   font-weight: 600;
+  color: white;
   cursor: pointer;
   transition: transform 0.3s, background 0.3s;
 }
@@ -456,6 +457,7 @@ font-family: var(--font-heading);
 .side-menu .close-btn:hover {
   color: var(--brand-purple);
 }
+
 /* FANCY HAMBURGER */
 .fancy-hamburger {
   display: none;
@@ -693,7 +695,7 @@ font-family: var(--font-heading);
   position: relative;
   z-index: 1;
   max-width: 900px;
-    font-family: "Raleway", sans-serif;
+  font-family: "Raleway", sans-serif;
   margin: auto;
   padding: 4rem 1rem 0;
 }
@@ -709,8 +711,6 @@ font-family: var(--font-heading);
   z-index: 9999;
 }
 
-
-
 /* Shrink into navbar */
 .hero-title.shrink {
   font-size: 2rem;
@@ -721,8 +721,6 @@ font-family: var(--font-heading);
   z-index: 10000;
   pointer-events: auto;
 }
-
-
 
 .hero-content p {
   font-size: 1.5rem;
@@ -751,8 +749,6 @@ font-family: var(--font-heading);
   border-color: black;
   font-size: 1.3rem;
 }
-
-
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -802,7 +798,7 @@ font-family: var(--font-heading);
 .intro-text {
   font-family: 'Raleway', sans-serif;
   font-size: 1.1rem;
-  color: #000;
+  color: #000000;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
@@ -863,12 +859,12 @@ font-family: var(--font-heading);
 .offer-section {
   background: #ffffff;
   color: #000000;
-  padding: 2rem 0rem;
+  padding: 1.5rem 0rem;
   font-family: 'Raleway', sans-serif;
 }
 
 .offer-section .container {
-  max-width: 1700px;
+  max-width: 2000px;
   margin: 0 auto;
 }
 
@@ -894,7 +890,7 @@ font-family: var(--font-heading);
 .offer-section .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 0.2rem;
+  gap: 1px;
 }
 
 /* Card Styling */
@@ -982,20 +978,20 @@ font-family: var(--font-heading);
 @media (max-width: 768px) {
   .offer-section .cards {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px; /* small gap */
+    gap: 1px; /* small gap */
   }
 
   .offer-section .card {
-    height: 250px;
+    height: 280px;
   }
 
   .offer-section .container {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .offer-section .card-content {
-    bottom: 10px;
+    bottom: 7.5px;
     left: 10px;
     max-width: 90%;
   }
@@ -1013,12 +1009,12 @@ font-family: var(--font-heading);
 .featured-section {
   background: #ffffff;
   color: #000000;
-  padding: 6rem 1rem;
+  padding: 2rem 0rem;
   font-family: 'Raleway', sans-serif;
 }
 
 .featured-section .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -1044,7 +1040,7 @@ font-family: var(--font-heading);
 .featured-section .product-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 0.5rem;
 }
 
 /* Individual Card */
@@ -1093,7 +1089,7 @@ font-family: var(--font-heading);
 
 .featured-section .product-text {
   font-size: 1rem;
-  color: #333;
+  color: #000000;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -1105,6 +1101,7 @@ font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  border-radius: 0px;
   border: none;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
@@ -1140,7 +1137,7 @@ font-family: var(--font-heading);
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .featured-section .product-image img {
-    height: 250px;
+    height: 300px;
   }
   .featured-section .product-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -1154,7 +1151,7 @@ font-family: var(--font-heading);
     gap: 1rem;
   }
   .featured-section .product-image img {
-    height: 200px;
+    height: 275px;
   }
 }
 
@@ -1163,7 +1160,7 @@ font-family: var(--font-heading);
 .shop-section {
   background: #ffffff;
   color: #000000;
-  padding: 6rem 1rem;
+  padding: 2rem 1rem;
   font-family: 'Raleway', sans-serif;
 }
 
@@ -1299,7 +1296,7 @@ font-family: var(--font-heading);
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .shop-section {
-    padding: 4rem 1rem;
+    padding: 1rem 0rem;
   }
   .shop-section .headline {
     font-size: 2.5rem;
@@ -1308,14 +1305,14 @@ font-family: var(--font-heading);
     font-size: 1.1rem;
   }
   .shop-section .shop-image img {
-    height: 200px;
+    height: 240px;
   }
   .shop-section .shop-cards {
     grid-template-columns: 1fr;
   }
   .shop-section .shop-steps {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.5rem;
   }
 }
 

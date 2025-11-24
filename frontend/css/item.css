@@ -49,7 +49,14 @@ a {
 
 .navbar .logo img {
   width: 100px;
+  animation: spin 15s linear infinite;
 }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 
 .navbar .nav-links {
   display: flex;
