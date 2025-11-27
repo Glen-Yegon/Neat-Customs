@@ -356,6 +356,7 @@ const graphicFillColor = menu.querySelector("#graphicFillColor");
 const cornerRadiusInput = menu.querySelector("#cornerRadius");
 
 
+
 duplicateBtn.addEventListener("click", function () {
   duplicateImage(img, canvas);
 });

@@ -4,7 +4,15 @@ const productContainer = document.getElementById("productContainer");
 
 // Load products from Firebase
 async function initShop() {
+  // Show loader
+  const loader = document.getElementById("loaderWrapper");
+  loader.style.display = "flex";
+
   const products = await loadShopProducts();
+
+  // Hide loader
+  loader.style.opacity = "0";
+  setTimeout(() => loader.style.display = "none", 400);
 
   if (!products.length) {
     productContainer.innerHTML = "<p>No products available.</p>";
@@ -30,10 +38,10 @@ async function initShop() {
     `;
     productContainer.appendChild(card);
 
-    // Navigate to shop-details.html on click
-    card.querySelector(".product-btn").addEventListener("click", () => {
-      window.location.href = `shop-details.html?productId=${product.id}`;
-    });
+card.querySelector(".product-btn").addEventListener("click", () => {
+  window.location.href = `product-des.html?productId=${product.id}`;
+});
+
   });
 }
 

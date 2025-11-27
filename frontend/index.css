@@ -3,10 +3,6 @@
   --font-body: 'Caveat', cursive;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 
 /* Preloader */
 #preloader {
@@ -521,7 +517,7 @@ font-family: var(--font-heading);
   gap: 30px;
   padding: 60px 20px 40px 20px;
   transition: right 0.3s ease;
-  z-index: 9999;
+  z-index: 999999 !important;
 }
 
 .mobile-menu.active {
@@ -1758,26 +1754,22 @@ footer::after {
 }
 
 
-
-
 #page-transition {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* Glassmorphism style */
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.85); /* Darker overlay */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
   z-index: 9999;
+  text-align: center;
 
-  /* Start off-screen above */
   transform: translateY(-100%);
   opacity: 0;
   transition: transform 0.8s ease, opacity 0.8s ease;
@@ -1789,22 +1781,71 @@ footer::after {
 }
 
 #page-transition.fade-up {
-  /* Slide up to hide */
   transform: translateY(-100%);
   opacity: 0;
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
-.logo-wrapper img {
-  width: 340px;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-  animation-delay: 0.3s;
+/* Uiverse.io Squares inside overlay */
+.container {
+  position: relative;
+  top: 0;
+  left: 0;
+
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+.square {
+  width: 20px;
+  height: 100px;
+  background: #5d39ff; /* branding color */
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 1px 15px #5d39ff;
+  animation: turn 2.5s ease infinite;
+}
+
+.top {
+  position: absolute;
+  left: 40%;
+  top: 60%;
+  transform: rotate(90deg);
+}
+
+.bottom {
+  position: absolute;
+  left: 40%;
+  top: 60%;
+  transform: rotate(-90deg);
+}
+
+.left {
+  position: absolute;
+  left: 40%;
+  top: 60%;
+}
+
+.right {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  transform: rotate(-180deg);
+}
+
+@keyframes turn {
+  0% { transform: translateX(0) translateY(0) rotate(0); }
+  70% { transform: translateX(400%) translateY(100%) rotate(90deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0); }
+}
+
+
+@media (max-width: 768px){
+  .container{
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .square{
+    width: 8px;
+    height: 40px;
   }
 }
-

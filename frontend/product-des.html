@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/product-des.css">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- ========================= NAVBAR ========================= -->
+  <nav class="pd-navbar">
+    <button class="nav-btn back-btn" onclick="history.back()">
+      <i class="ri-arrow-left-line"></i>
+    </button>
+
+    <div class="nav-logo">
+      <img src="images/logo.png" alt="Logo">
+    </div>
+
+    <button class="nav-btn cart-btn" onclick="window.location.href='cart.html'">
+      <i class="ri-shopping-cart-2-line"></i>
+    </button>
+  </nav>
+
+  <!-- ========================= MAIN CONTENT ========================= -->
+  <main id="productContent">
+    <div class="loading-wrapper">
+      <div class="ultra-loader"></div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="firebase/product-des-firebase.js" type="module"></script>
+  <script src="js/product-det.js" type="module"></script>
+
+</body>
+</html>

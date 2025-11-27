@@ -1,0 +1,433 @@
+/* General */
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ================= NAVBAR ================= */
+.pd-navbar {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(to bottom, white, #5d39ff);
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+
+/* Logo */
+.pd-navbar .nav-logo img {
+  height: 45px;
+  transform: scale(1.6);
+  transform-origin: center;
+  animation: spinLogo 20s linear infinite; /* slow continuous spin */
+}
+
+.nav-logo{
+    transform: scale(2);
+}
+
+
+/* Nav buttons */
+.nav-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Spin animation */
+@keyframes spinLogo {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .pd-navbar {
+    height: 60px;
+    padding: 0 0px;
+  }
+
+  .pd-navbar .nav-logo img {
+    height: 40px;
+  }
+
+  .nav-btn {
+    font-size: 22px;
+    padding: 6px;
+  }
+}
+
+/* ================= LOADER ================= */
+.loading-wrapper {
+  width: 100%;
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+}
+
+.ultra-loader {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255,255,255,0.1);
+  border-top: 4px solid #5d39ff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite, glow 1.3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 8px #5d39ff; }
+  50% { box-shadow: 0 0 20px #5d39ff; }
+  100% { box-shadow: 0 0 8px #5d39ff; }
+}
+
+
+
+/* ===== PRODUCT PAGE MASTER WRAPPER ===== */
+.product-des-wrapper {
+  width: 100%;
+  max-width: 1800px;
+  margin: 100px auto 40px auto;
+  display: grid;
+  grid-template-columns: 120px 1fr 40px 1fr;
+  gap: 30px;
+  padding: 0 0px;
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* LEFT THUMBNAILS */
+.thumbs-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.thumbs-column img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.7;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  border-radius: 0px;
+}
+
+.thumbs-column img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.active-thumb {
+  opacity: 1 !important;
+  border-color: #5d39ff !important;
+}
+
+/* MAIN IMAGE */
+.main-image-wrapper {
+  width: 100%;
+  border: none;
+  padding: 10px;
+}
+
+.main-image {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 0px;
+}
+
+/* FUTURISTIC DIVIDER */
+.neo-divider {
+  width: 4px;
+  background: linear-gradient(to bottom, transparent, #000000, transparent);
+  border-radius: 0px;
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+/* RIGHT DETAILS */
+.info-column {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: left;
+  justify-content: left;
+  gap: 0px;
+}
+
+.pd-brand {
+  font-family: 'Raleway', cursive;
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: -15px;
+  font-weight: 100;
+  position: relative;
+  display: inline-block;
+}
+
+.pd-brand::after {
+  content: "";
+  position: absolute;
+  bottom: -6px; /* distance below text */
+  left: 0;
+  width: 100%; /* full text width */
+  height: 3px; /* thickness */
+  background: linear-gradient(to right, #000000, transparent 50%, #000000);
+  border-radius: 2px;
+}
+
+
+
+.pd-name {
+  font-size: 3rem;
+  font-weight: 100;
+  margin-bottom: -20px;
+  color: #5d39ff;
+  font-family: 'Caveat', cursive;
+}
+
+.pd-price {
+  font-size: 1.6rem;
+  font-weight: 100;
+  font-family: "Raleway", sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+.pd-currency {
+  color: #5d39ff;
+}
+
+.pd-description-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #5d39ff;
+  margin-top: 0px;
+  margin-bottom: 10px; /* adjust for spacing with underline */
+  font-family: 'Caveat', cursive;
+  position: relative;
+  display: inline-block;
+}
+
+.pd-description-title::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* distance below text */
+  left: 50%; /* center */
+  transform: translateX(-50%);
+  width: 40%; /* shorter than text width for “incomplete” effect */
+  height: 3px; /* thickness of the underline */
+  background: linear-gradient(to right, transparent, #5d39ff, transparent);
+  border-radius: 2px;
+}
+
+.pd-description {
+  margin-top: 0px;
+  line-height: 1.7;
+  color: #000000;
+}
+
+.info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* compact spacing */
+  align-items: flex-start;
+  text-align: left;
+}
+
+.pd-size-selector {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  align-items: left;
+  margin-left: -42px;
+  justify-content: left;
+  gap: 8px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.size-box {
+  padding: 6px 12px;
+  border: 2px solid #5d39ff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #000;
+  transition: all 0.2s ease;
+}
+
+.size-box.selected-size {
+  background-color: #5d39ff;
+  color: #fff;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quantity-controls button {
+  background: #5d39ff;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.quantity-controls button:hover {
+  transform: scale(1.1);
+}
+
+.quantity-controls input {
+  width: 50px;
+  text-align: center;
+  padding: 4px;
+  font-size: 1rem;
+  border: 1px solid #5d39ff;
+  border-radius: 4px;
+}
+
+.pd-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+}
+
+.pd-tag svg {
+  width: 18px;
+  height: 18px;
+  fill: #000000;
+}
+
+
+/* PRODUCT BUTTONS: vertical, long, minimalistic */
+.product-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* center horizontally */
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.product-buttons button {
+  width: 100%; /* full width of info column */
+  max-width: 520px; /* optional, so they don’t stretch too much on wide screens */
+  padding: 14px 0;
+  font-size: 1.2rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  border: 2px solid #5d39ff;
+  border-radius: 0px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #5d39ff;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.product-buttons button:hover {
+  background-color: #5d39ff;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(93, 57, 255, 0.25);
+}
+
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .product-des-wrapper {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 80px;
+  }
+
+  .thumbs-column {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .thumbs-column img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .main-image-wrapper {
+    display: flex;
+    justify-content: center; /* center the image */
+    padding: 0; /* remove extra padding if needed */
+  }
+
+  .main-image {
+    width: 98vw;       /* 90% of viewport width */
+    height: auto;      /* keep aspect ratio */
+    max-width: 100%;   /* prevent overflow */
+    object-fit: cover;
+    border-radius: 0px;
+  }
+  .neo-divider {
+    display: none;
+  }
+
+  .info-column {
+    text-align: left;
+    padding: 0 10px;
+  }
+
+  .pd-name {
+    font-size: 2rem;
+  }
+
+  .pd-price {
+    font-size: 1.3rem;
+  }
+
+  .product-buttons {
+    width: 100%;
+    align-items: center;
+  }
+
+  .product-buttons button {
+    max-width: 100%;
+    font-size: 1.1rem;
+  }
+}
+

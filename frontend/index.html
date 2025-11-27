@@ -63,12 +63,58 @@
   <span class="rattle">&#10022;</span>
 </div>
 
-<!-- Transition overlay -->
+<!-- Page Transition Overlay -->
 <div id="page-transition">
-<div class="logo-wrapper">
-    <img src="images/minified/logo.webp" alt="Logo">
-  </div></a>
+  <div class="container">
+    <div class="top">
+      <div class="square">
+        <div class="square">
+          <div class="square">
+            <div class="square">
+              <div class="square"><div class="square"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="square">
+        <div class="square">
+          <div class="square">
+            <div class="square">
+              <div class="square"><div class="square"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="left">
+      <div class="square">
+        <div class="square">
+          <div class="square">
+            <div class="square">
+              <div class="square"><div class="square"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="square">
+        <div class="square">
+          <div class="square">
+            <div class="square">
+              <div class="square"><div class="square"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
  <!-- Navbar -->
   
  <nav class="navbar">
@@ -93,6 +139,36 @@
 
 </nav>
 
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <!-- CLOSE BUTTON -->
+  <span class="close-btn">&times;</span>
+
+  <!-- LOGO -->
+  <div class="mobile-logo">
+    <img src="images/logo.png" alt="Neat Customs Logo">
+  </div>
+
+  <!-- SEPARATOR -->
+  <hr class="separator">
+
+  <!-- LINKS -->
+  <div class="menu-links">
+    <a href="item.html" class="menu-item" data-menu="tees">T-Shirts</a>
+    <a href="tote.html" class="menu-item" data-menu="tote">Tote Bags</a>
+    <a href="#" class="menu-item" data-menu="phone">Phone Cases</a>
+    <button class="cta-btn">Bulk Orders</button>
+  </div>
+
+  <!-- SEPARATOR -->
+  <hr class="separator">
+
+  <!-- QUOTE -->
+  <div class="mobile-quote">
+    <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
+  </div>
+</div>
 
 <main id="main-content">
 <section class="hero" role="banner">
@@ -127,35 +203,7 @@
  <a href=""> <button class="side-btn">Shop Phone Cases</button> </a>
 </div>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <!-- CLOSE BUTTON -->
-  <span class="close-btn">&times;</span>
 
-  <!-- LOGO -->
-  <div class="mobile-logo">
-    <img src="images/logo.png" alt="Neat Customs Logo">
-  </div>
-
-  <!-- SEPARATOR -->
-  <hr class="separator">
-
-  <!-- LINKS -->
-  <div class="menu-links">
-    <a href="#" class="menu-item" data-menu="tees">T-Shirts</a>
-    <a href="#" class="menu-item" data-menu="tote">Tote Bags</a>
-    <a href="#" class="menu-item" data-menu="phone">Phone Cases</a>
-    <button class="cta-btn">Bulk Orders</button>
-  </div>
-
-  <!-- SEPARATOR -->
-  <hr class="separator">
-
-  <!-- QUOTE -->
-  <div class="mobile-quote">
-    <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
-  </div>
-</div>
 
 
   <div class="hero-content" data-aos="fade-down" data-aos-delay="700">
@@ -468,45 +516,41 @@
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const links = document.querySelectorAll("a");
-    const transition = document.getElementById("page-transition");
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("a");
+  const transition = document.getElementById("page-transition");
 
-    // Function to disable transition when user uses back/forward
-    window.addEventListener("pageshow", (event) => {
-      const comingFromHistory =
-        event.persisted ||
-        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+  // Ensure transition is hidden on initial load
+  transition.classList.remove("active");
 
-      if (comingFromHistory) {
-        transition.classList.remove("active"); // No transition on back/forward
-        sessionStorage.removeItem("transitioning");
-      } else {
-        // Normal link-based navigation
-        if (sessionStorage.getItem("transitioning") === "true") {
-          sessionStorage.setItem("transitioning", "false");
-          transition.classList.remove("active"); // Fade in after animation
-        } else {
-          transition.classList.remove("active"); // Initial page load
-        }
-      }
-    });
+  // Handle internal link clicks
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (href && !href.startsWith("#") && !href.startsWith("http")) {
+      link.addEventListener("click", e => {
+        e.preventDefault();
 
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href && !href.startsWith("#") && !href.startsWith("http")) {
-        link.addEventListener("click", e => {
-          e.preventDefault();
-          sessionStorage.setItem("transitioning", "true");
-          transition.classList.add("active");
+        // Show overlay
+        transition.classList.add("active");
 
-          setTimeout(() => {
-            window.location.href = href;
-          }, 1500); // Match your CSS animation duration
-        });
-      }
-    });
+        // Navigate after 4 seconds
+        setTimeout(() => {
+          window.location.href = href;
+        }, 4000);
+      });
+    }
   });
+
+  // Hide overlay when coming back via back/forward
+  window.addEventListener("pageshow", (event) => {
+    const fromHistory = event.persisted || 
+                        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+    if (fromHistory) {
+      transition.classList.remove("active");
+    }
+  });
+});
 </script>
 
 
