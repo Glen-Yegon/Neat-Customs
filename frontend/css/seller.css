@@ -1,3 +1,44 @@
+/* ===================== TRANSPARENT SCROLLBAR ===================== */
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;  /* fully transparent track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5d39ff;       /* your branding color */
+  border-radius: 10px;
+  border: 2px solid black; /* optional spacing for a clean look */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7f5aff;       /* slightly lighter glow on hover */
+  box-shadow: 0 0 8px #5d39ff; /* subtle glow for futuristic look */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5d39ff black;
+}
+
+/* Hide scrollbar on mobile (Safari, Chrome Android) */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+
 /* ================ GLOBAL STYLES ================ */
 * {
   margin: 0;

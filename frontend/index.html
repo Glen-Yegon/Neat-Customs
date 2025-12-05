@@ -63,54 +63,12 @@
   <span class="rattle">&#10022;</span>
 </div>
 
+
+
 <!-- Page Transition Overlay -->
 <div id="page-transition">
-  <div class="container">
-    <div class="top">
-      <div class="square">
-        <div class="square">
-          <div class="square">
-            <div class="square">
-              <div class="square"><div class="square"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bottom">
-      <div class="square">
-        <div class="square">
-          <div class="square">
-            <div class="square">
-              <div class="square"><div class="square"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="left">
-      <div class="square">
-        <div class="square">
-          <div class="square">
-            <div class="square">
-              <div class="square"><div class="square"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="right">
-      <div class="square">
-        <div class="square">
-          <div class="square">
-            <div class="square">
-              <div class="square"><div class="square"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <canvas id="smoke-canvas"></canvas>
+  <div class="brand-text" id="brand-text">Neat Customs</div>
 </div>
 
 
@@ -125,10 +83,10 @@
   <div class="nav-links">
     <div class="nav-item" data-menu="tees">T-Shirts</div>
     <div class="nav-item" data-menu="tote">Tote Bags</div>
-    <div class="nav-item" data-menu="phone">Phone Cases</div>
+    <div class="nav-item" data-menu="hoodies">Hoodies</div>
   </div>
 
-  <a href="#" class="ctaa-btn">Bulk Orders</a>
+  <a href="bulk.html" class="ctaa-btn">Bulk Orders</a>
 
 <!-- Hamburger for mobile -->
 <div class="fancy-hamburger" id="fancyHamburger">
@@ -157,7 +115,7 @@
   <div class="menu-links">
     <a href="item.html" class="menu-item" data-menu="tees">T-Shirts</a>
     <a href="tote.html" class="menu-item" data-menu="tote">Tote Bags</a>
-    <a href="#" class="menu-item" data-menu="phone">Phone Cases</a>
+    <a href="hoodies.html" class="menu-item" data-menu="hoodies">Hoodies</a>
     <button class="cta-btn">Bulk Orders</button>
   </div>
 
@@ -175,36 +133,6 @@
   <video autoplay muted loop playsinline class="hero-video" id="hero-video">
     <source src="videos/weekendvid.mp4" type="video/mp4" />
   </video>
-
-
-<!-- DESKTOP SIDE MENUS -->
-<div class="side-menu" id="tees-menu">
-  <span class="close-btn">&times;</span>
-  <h2>T_Shirts</h2>
-  <p>Stylish and eco-friendly tote bags perfect for everyday use.</p>
-  <img src="cloth/blackf.png" alt="Tote Bag Image">
-  <a href="item.html"> <button class="side-btn">Design Your Tee</button></a>
-</div>
-
-<!-- DESKTOP SIDE MENUS -->
-<div class="side-menu" id="tote-menu">
-  <span class="close-btn">&times;</span>
-  <h2>Tote Bags</h2>
-  <p>Stylish and eco-friendly tote bags perfect for everyday use.</p>
-  <img src="cloth/totebag.png" alt="Tote Bag Image">
- <a href="tote.html"><button class="side-btn">Shop Tote Bags</button></a> 
-</div>
-
-<div class="side-menu" id="phone-menu">
-  <span class="close-btn">&times;</span>
-  <h2>Phone Cases</h2>
-  <p>Protect your phone in style with our durable phone cases.</p>
-  <img src="images/phone.jpg" alt="Phone Case Image">
- <a href=""> <button class="side-btn">Shop Phone Cases</button> </a>
-</div>
-
-
-
 
   <div class="hero-content" data-aos="fade-down" data-aos-delay="700">
 <h1 class="hero-title">Neat Customs</h1>
@@ -231,7 +159,7 @@
     </p>
     <div class="intro-buttons">
       <a href="sign.html" class="btnn btnn-primary">Sign Up</a>
-      <a href="guide.html" class="btnn btnn-secondary">View Guide →</a>
+      <a href="sign.html" class="btnn btnn-secondary">Sign in →</a>
     </div>
   </div>
 </section>
@@ -329,13 +257,14 @@
       <!-- Phone Case -->
       <div class="product-card">
         <div class="product-image">
-          <img src="./images/minified/f1 (3).webp" alt="Phone Case">
+          <img src="./images/hoodie.webp" alt="Phone Case">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Custom Phone Cases</h3>
-          <p class="product-text">Protect your phone in style with our durable, eye-catching cases. Fully customizable for a personal or branded look.</p>
-          <a href="/products/phonecase" class="btn btn-secondary">Customize Now</a>
-        </div>
+<div class="product-info">
+  <h3 class="product-title">Cozy Hoodies</h3>
+  <p class="product-text">Stay warm and stylish with our premium hoodies, perfect for everyday wear. Customize with your design for a unique look.</p>
+  <a href="hoodies.html" class="btn btn-secondary">Customize Now</a>
+</div>
+
       </div>
     </div>
 
@@ -506,6 +435,34 @@
   
 </main>
 
+
+<!-- DESKTOP SIDE MENUS -->
+<div class="side-menu" id="tees-menu">
+  <span class="close-btn">&times;</span>
+  <h2>T_Shirts</h2>
+  <p>Stylish and eco-friendly tote bags perfect for everyday use.</p>
+  <img src="cloth/blackf.png" alt="Tote Bag Image">
+  <a href="item.html"> <button class="side-btn">Design Your Tee</button></a>
+</div>
+
+<!-- DESKTOP SIDE MENUS -->
+<div class="side-menu" id="tote-menu">
+  <span class="close-btn">&times;</span>
+  <h2>Tote Bags</h2>
+  <p>Stylish and eco-friendly tote bags perfect for everyday use.</p>
+  <img src="cloth/totebag.png" alt="Tote Bag Image">
+ <a href="tote.html"><button class="side-btn">Shop Tote Bags</button></a> 
+</div>
+
+<div class="side-menu" id="hoodies-menu">
+  <span class="close-btn">&times;</span>
+  <h2>Hoodies</h2>
+  <p>Stay cozy and stylish with our premium hoodies, designed for comfort and fashion.</p>
+
+  <img src="images/phone.jpg" alt="Phone Case Image">
+ <a href="hoodies.html"> <button class="side-btn">Shop Hoodies</button> </a>
+</div>
+
   <script src="index.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
@@ -519,39 +476,112 @@
 document.addEventListener("DOMContentLoaded", () => {
   const links = document.querySelectorAll("a");
   const transition = document.getElementById("page-transition");
+  const brandTextEl = document.getElementById("brand-text");
 
-  // Ensure transition is hidden on initial load
-  transition.classList.remove("active");
+  /* --------------------- SMOKE EFFECT --------------------- */
+  const canvas = document.getElementById("smoke-canvas");
+  const ctx = canvas.getContext("2d");
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
 
-  // Handle internal link clicks
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  class SmokeParticle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + Math.random() * 200;
+      this.size = 40 + Math.random() * 120;
+      this.speed = 0.3 + Math.random() * 0.5;
+      this.alpha = 0.15 + Math.random() * 0.25;
+      this.angle = Math.random() * Math.PI * 2;
+    }
+    update() {
+      this.y -= this.speed;
+      this.x += Math.sin(this.angle) * 0.4;
+      this.alpha -= 0.0005;
+      if (this.alpha <= 0) this.reset();
+    }
+    draw() {
+      const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+      g.addColorStop(0, `rgba(0,0,0,${this.alpha})`);
+      g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  const particles = Array.from({ length: 80 }, () => new SmokeParticle());
+  function animateSmoke() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateSmoke);
+  }
+  animateSmoke();
+
+
+  /* --------------------- SHUFFLE + FORM TEXT (3 sec) --------------------- */
+  const targetText = "Neat Customs";
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let shuffleInterval;
+
+  function startShuffleToWord() {
+    let startTime = Date.now();
+    let duration = 3000; // 3 seconds
+
+    shuffleInterval = setInterval(() => {
+      let elapsed = Date.now() - startTime;
+      let progress = Math.min(elapsed / duration, 1);
+
+      let finalText = targetText
+        .split("")
+        .map((char, i) => {
+          if (char === " ") return " ";
+          // gradually lock correct letters as progress increases
+          const lockChance = progress; 
+          return Math.random() < lockChance ? char : letters[Math.floor(Math.random() * letters.length)];
+        })
+        .join("");
+
+      brandTextEl.textContent = finalText;
+
+      if (progress === 1) clearInterval(shuffleInterval);
+    }, 50);
+  }
+
+
+  /* --------------------- TRANSITION --------------------- */
+  function showTransition() {
+    transition.classList.add("active");
+    startShuffleToWord();
+  }
+
   links.forEach(link => {
     const href = link.getAttribute("href");
     if (href && !href.startsWith("#") && !href.startsWith("http")) {
       link.addEventListener("click", e => {
         e.preventDefault();
-
-        // Show overlay
-        transition.classList.add("active");
-
-        // Navigate after 4 seconds
-        setTimeout(() => {
-          window.location.href = href;
-        }, 4000);
+        showTransition();
+        setTimeout(() => window.location.href = href, 3000); // match shuffle duration
       });
     }
   });
 
-  // Hide overlay when coming back via back/forward
+  // Back navigation fix
   window.addEventListener("pageshow", (event) => {
-    const fromHistory = event.persisted || 
-                        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
-
-    if (fromHistory) {
-      transition.classList.remove("active");
-    }
+    const fromHistory = event.persisted ||
+      performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+    if (fromHistory) transition.classList.remove("active");
   });
 });
 </script>
+
+
 
 
 <!-- Include Lenis (CDN or npm) -->

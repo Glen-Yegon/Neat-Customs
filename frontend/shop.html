@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Neat Customs Shop</title>
   <link rel="stylesheet" href="css/shop.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,24 +27,62 @@
       <img src="images/logo.png" alt="Neat Customs Logo" class="nav-logo" />
     </div>
 
-    <div class="nav-right">
-  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
-    <img src="images/default.jpeg" alt="Profile" class="user-icon" id="userProfilePic" />
-  </a>
-    </div>
-  </nav>
+<div class="nav-right">
+  <button class="nav-btn cart-btn" onclick="window.location.href='cart.html'" aria-label="Cart">
+    <i class="ri-shopping-cart-2-line"></i>
+  </button>
+</div>
 
-  <div id="loaderWrapper">
-  <div class="loader">
-    <div class="loader-ring"></div>
-    <div class="loader-core"></div>
+  </nav>
+<div id="loaderWrapper">
+  <div class="neat-loader-box">
+    <div class="neat-loader">
+      <div class="bar bar1"></div>
+      <div class="bar bar2"></div>
+      <div class="bar bar3"></div>
+    </div>
+
+    <div class="loading-text">Loading...</div>
   </div>
 </div>
 
 
   <main class="shop-container">
     <div id="productContainer" class="product-grid"></div>
+
+
   </main>
+
+      <!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <!-- Quote -->
+    <div class="footer-quote">
+      <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
+    </div>
+
+    <!-- Logo -->
+    <div class="footer-logo">
+      <img src="images/logo.png" alt="Neat Customs Logo">
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+    </div>
+  </div>
+
+  <!-- Separator -->
+  <hr class="footer-separator">
+
+  <!-- Legal -->
+  <div class="footer-legal">
+    <p>&copy; 2025 Neat Customs. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+  </div>
+</footer>
 
   <script type="module" src="firebase/shop-firebase.js"></script>
   <script type="module" src="js/shop.js"></script>

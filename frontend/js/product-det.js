@@ -1,4 +1,6 @@
 import { loadProductDetails } from "../firebase/product-des-firebase.js";
+import { db, auth } from "../firebase/firebase.js"; 
+import { doc, getDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
 const productContent = document.getElementById("productContent");
 
@@ -106,6 +108,25 @@ async function initProduct() {
       </div>
 
     </section>
+
+    <!-- ⭐ FUTURISTIC RATING SECTION ⭐ -->
+<section class="neat-rating-section">
+  <h2 class="rating-title">Rate This Product</h2>
+
+  <div class="star-rating" id="starRating">
+    <span data-value="1">★</span>
+    <span data-value="2">★</span>
+    <span data-value="3">★</span>
+    <span data-value="4">★</span>
+    <span data-value="5">★</span>
+  </div>
+
+  <div class="rating-output" id="ratingOutput">Tap a star to rate</div>
+
+  <h1 class="nc-brand-watermark">Neat Customs</h1>
+</section>
+
+
   `;
 
   // Thumbnail switching
@@ -139,4 +160,90 @@ async function initProduct() {
   document.getElementById("qtyMinus").addEventListener("click", () => {
     if (parseInt(qtyInput.value) > 1) qtyInput.value = parseInt(qtyInput.value) - 1;
   });
+
+
+const stars = document.querySelectorAll("#starRating span");
+const output = document.getElementById("ratingOutput");
+let currentRating = 0;
+
+
+const user = auth.currentUser;
+
+
+// Load existing ratings and calculate average
+async function loadAverageRating() {
+  try {
+    const productRatingDoc = doc(db, "ratings", productId);
+    const userRatingsCol = collection(productRatingDoc, "userRatings");
+    const snapshot = await getDocs(userRatingsCol);
+
+    if (snapshot.empty) {
+      output.textContent = "Tap a star to rate";
+      highlightStars(0);
+      return;
+    }
+
+    let sum = 0;
+    snapshot.forEach(doc => sum += doc.data().rating);
+    const avg = (sum / snapshot.size).toFixed(1);
+
+    currentRating = avg;
+    highlightStars(Math.round(avg));
+    output.textContent = `Average rating: ${avg} / 5`;
+
+    // If user is logged in, show their rating differently
+    if (user) {
+      const userRatingDoc = doc(userRatingsCol, user.uid);
+      const userSnap = await getDoc(userRatingDoc);
+      if (userSnap.exists()) {
+        const userRating = userSnap.data().rating;
+        highlightStars(userRating);
+        output.textContent = `Your rating: ${userRating} / 5 (avg: ${avg})`;
+      }
+    }
+
+  } catch (err) {
+    console.error("Error loading ratings:", err);
+  }
+}
+
+await loadAverageRating();
+
+stars.forEach(star => {
+  star.addEventListener("mouseover", () => {
+    const value = star.dataset.value;
+    highlightStars(value);
+  });
+  star.addEventListener("mouseleave", () => {
+    highlightStars(currentRating);
+  });
+  star.addEventListener("click", async () => {
+    const value = Number(star.dataset.value);
+    if (!user) return alert("You must be logged in to rate");
+
+    try {
+      const productRatingDoc = doc(db, "ratings", productId);
+      const userRatingsCol = collection(productRatingDoc, "userRatings");
+      const userRatingDoc = doc(userRatingsCol, user.uid);
+
+      await setDoc(userRatingDoc, {
+        rating: value,
+        updatedAt: new Date()
+      });
+
+      // reload average rating
+      await loadAverageRating();
+    } catch (err) {
+      console.error("Error saving rating:", err);
+    }
+  });
+});
+
+function highlightStars(level) {
+  stars.forEach(s => {
+    s.classList.toggle("active", s.dataset.value <= level);
+  });
+}
+
+
 }

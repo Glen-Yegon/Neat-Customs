@@ -4,7 +4,7 @@ const navItems = document.querySelectorAll('.nav-item');
 const menus = {
   tote: document.getElementById('tote-menu'),
   tees: document.getElementById('tees-menu'),
-  phone: document.getElementById('phone-menu')
+  hoodies: document.getElementById('hoodies-menu') // updated
 };
 
 // Close only menus that actually exist

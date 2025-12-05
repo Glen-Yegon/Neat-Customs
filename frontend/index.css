@@ -311,7 +311,7 @@ font-family: var(--font-heading);
   color: white;
   justify-content: space-between;
   background: transparent; /* default transparent */
-  z-index: 9999 !important;
+  z-index: 9999;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: background 0.3s ease, padding 0.3s ease;
 }
@@ -347,7 +347,6 @@ font-family: var(--font-heading);
     transform: rotate(360deg);
   }
 }
-
 
 .navbar .nav-links {
   display: flex;
@@ -393,7 +392,7 @@ font-family: var(--font-heading);
   flex-direction: column;
   gap: 20px;
   transition: left var(--transition-speed);
-  z-index: 9999;
+  z-index: 9999999 !important;
   color: #ffffff; /* ensure text is visible */
 }
 
@@ -1058,7 +1057,6 @@ font-family: var(--font-heading);
 }
 
 .featured-section .product-card:hover .product-image img {
-  transform: scale(1.03);
   filter: brightness(0.9);
 }
 
@@ -1753,25 +1751,22 @@ footer::after {
   }
 }
 
-
+/* ------------------------- PAGE TRANSITION ------------------------- */
 #page-transition {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* Darker overlay */
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center !important;
-  justify-content: center !important;
   z-index: 9999;
-  text-align: center;
-
-  transform: translateY(-100%);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background: rgba(0,0,0,0.7); /* denser smoke effect */
   opacity: 0;
+  transform: translateY(-100%);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
@@ -1780,72 +1775,34 @@ footer::after {
   opacity: 1;
 }
 
-#page-transition.fade-up {
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.8s ease, opacity 0.8s ease;
+/* ------------------------- BRAND TEXT ------------------------- */
+.brand-text {
+  position: absolute;
+  z-index: 2;
+  font-family: 'Caveat', cursive;
+  font-size: 15vw;
+  color: #5d39ff;
+  text-align: center;
+  font-weight: 900;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
 }
 
-/* Uiverse.io Squares inside overlay */
-.container {
-  position: relative;
-  top: 0;
+/* Smaller screens */
+@media (max-width: 768px) {
+  .brand-text { font-size: 25vw; }
+}
+@media (max-width: 450px) {
+  .brand-text { font-size: 35vw; }
+}
+
+/* ------------------------- SMOKE CANVAS ------------------------- */
+#smoke-canvas {
+  position: absolute;
+  bottom: 0;
   left: 0;
-
-}
-
-.square {
-  width: 20px;
-  height: 100px;
-  background: #5d39ff; /* branding color */
-  border-radius: 10px;
-  display: block;
-  box-shadow: 0 1px 15px #5d39ff;
-  animation: turn 2.5s ease infinite;
-}
-
-.top {
-  position: absolute;
-  left: 40%;
-  top: 60%;
-  transform: rotate(90deg);
-}
-
-.bottom {
-  position: absolute;
-  left: 40%;
-  top: 60%;
-  transform: rotate(-90deg);
-}
-
-.left {
-  position: absolute;
-  left: 40%;
-  top: 60%;
-}
-
-.right {
-  position: absolute;
-  left: 40%;
-  top: 50%;
-  transform: rotate(-180deg);
-}
-
-@keyframes turn {
-  0% { transform: translateX(0) translateY(0) rotate(0); }
-  70% { transform: translateX(400%) translateY(100%) rotate(90deg); }
-  100% { transform: translateX(0) translateY(0) rotate(0); }
-}
-
-
-@media (max-width: 768px){
-  .container{
-    position: relative;
-    top: 0;
-    left: 0;
-  }
-  .square{
-    width: 8px;
-    height: 40px;
-  }
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }

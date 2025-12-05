@@ -59,6 +59,20 @@
       </div>
 
       <div class="form-group">
+  <label>Product Type</label>
+  <select id="productType" required>
+    <option value="">Select Type</option>
+    <option value="T shirt">T shirt</option>
+    <option value="Tote Bag">Tote Bag</option>
+    <option value="Hoodie">Hoodie</option>
+    <option value="Notebook">Notebook</option>
+    <option value="Mug/Cup">Mug/Cup</option>
+    <option value="Phone Case">Phone Case</option>
+  </select>
+</div>
+
+
+      <div class="form-group">
         <label>Price</label>
         <input type="number" id="productPrice" placeholder="Enter price" required />
       </div>
@@ -80,6 +94,8 @@
         <label>Tags / Category</label>
         <input type="text" id="productTags" placeholder="e.g. streetwear, logo tee, minimal" />
       </div>
+
+
 
       <button type="submit" id="submitProduct">Submit Product</button>
     </form>

@@ -173,6 +173,7 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const productName = document.getElementById("productName").value.trim();
+  const productType = document.getElementById("productType").value;
   const productPrice = parseFloat(document.getElementById("productPrice").value);
   const currency = document.getElementById("currency").value;
   const productDesc = document.getElementById("productDesc").value.trim();
@@ -200,6 +201,7 @@ form.addEventListener("submit", async (e) => {
       tags: productTags
         ? productTags.split(",").map((t) => t.trim())
         : [],
+      type: productType,
       images: imageList,
       createdAt: serverTimestamp(),
       user: {

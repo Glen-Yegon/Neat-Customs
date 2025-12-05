@@ -2,14 +2,14 @@
 const navItems = document.querySelectorAll('.nav-item');
 const toteMenu = document.getElementById('tote-menu');
 const teesMenu = document.getElementById('tees-menu');
-const phoneMenu = document.getElementById('phone-menu');
+const hoodiesMenu = document.getElementById('hoodies-menu'); // updated
 const closeBtns = document.querySelectorAll('.close-btn');
 
 // HELPER FUNCTION TO CLOSE ALL DESKTOP SIDE MENUS
 function closeMenus() {
   toteMenu.classList.remove('active');
   teesMenu.classList.remove('active');
-  phoneMenu.classList.remove('active');
+  hoodiesMenu.classList.remove('active'); // updated
 }
 
 navItems.forEach(item => {
@@ -19,16 +19,15 @@ navItems.forEach(item => {
     
     // Toggle menu
     if (menuType === 'tote') toteMenu.classList.toggle('active');
-    if (menuType === 'phone') phoneMenu.classList.toggle('active');
+    if (menuType === 'hoodies') hoodiesMenu.classList.toggle('active'); // updated
     if (menuType === 'tees') teesMenu.classList.toggle('active');
     
     // Close other menus
     if (menuType !== 'tote') toteMenu.classList.remove('active');
-    if (menuType !== 'phone') phoneMenu.classList.remove('active');
+    if (menuType !== 'hoodies') hoodiesMenu.classList.remove('active'); // updated
     if (menuType !== 'tees') teesMenu.classList.remove('active');
   });
 });
-
 
 
 
