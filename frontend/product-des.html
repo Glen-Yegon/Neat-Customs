@@ -25,9 +25,11 @@
       <img src="images/logo.png" alt="Logo">
     </div>
 
-    <button class="nav-btn cart-btn" onclick="window.location.href='cart.html'">
-      <i class="ri-shopping-cart-2-line"></i>
-    </button>
+<button class="nav-btn cart-btn" onclick="window.location.href='cart.html'">
+  <i class="ri-shopping-cart-2-line"></i>
+  <span class="cart-count">0</span>
+</button>
+
   </nav>
 
   <!-- ========================= MAIN CONTENT ========================= -->
@@ -80,6 +82,7 @@
   <!-- Scripts -->
   <script src="firebase/product-des-firebase.js" type="module"></script>
   <script src="js/product-det.js" type="module"></script>
+<script type="module" src="js/cart-counter.js"></script>
 
 </body>
 </html>

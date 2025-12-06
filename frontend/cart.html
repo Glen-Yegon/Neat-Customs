@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neat Customs - Cart</title>
+  <link rel="stylesheet" href="css/cart.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="cart-header">
+    <button id="backBtn" class="back-btn">← Back</button>
+    <h1>My Cart</h1>
+  </header>
+
+  <main class="cart-main">
+    <div id="cartContainer" class="cart-container">
+      <!-- Product cards will be injected here -->
+    </div>
+
+    <div class="cart-total">
+      <span>Estimated Total:</span>
+      <span id="totalAmount">₦0</span>
+    </div>
+
+      <!-- Proceed to Checkout Button -->
+  <div class="checkout-container">
+    <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+  </div>
+  </main>
+
+  <script type="module" src="js/cart.js"></script>
+</body>
+</html>

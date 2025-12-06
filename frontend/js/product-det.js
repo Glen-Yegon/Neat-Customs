@@ -8,6 +8,37 @@ const productContent = document.getElementById("productContent");
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("productId");
 
+// ---------- IndexedDB helper ----------
+const DB_NAME = "DesignStorageDB";
+const STORE_NAME = "pendingDesigns";
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveToIndexedDB(key, data) {
+  try {
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    await store.put({ id: key, data });
+    console.log("[DB] Saved to IndexedDB:", key, data);
+  } catch (err) {
+    console.error("[DB] Error saving to IndexedDB:", err);
+  }
+}
+
+
 // Show error if no ID
 if (!productId) {
   productContent.innerHTML = `
@@ -244,6 +275,64 @@ function highlightStars(level) {
     s.classList.toggle("active", s.dataset.value <= level);
   });
 }
+
+
+
+// Add this at the end of your initProduct() function, after rendering productContent
+
+const addToCartBtn = document.getElementById("addToCartBtn");
+
+// -----------------------------
+// Handle Add to Cart & Checkout
+// -----------------------------
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+function saveSelection() {
+  const selectedSize = document.querySelector(".size-box.selected-size")?.dataset.size;
+  const quantity = parseInt(document.getElementById("qtyInput").value) || 1;
+
+  if (!selectedSize) {
+    alert("Please select a size before proceeding.");
+    return null;
+  }
+
+  const selectionData = {
+    id: `cart-selection-${productId}-${Date.now()}`, // unique ID per selection
+    productId,
+    size: selectedSize,
+    quantity,
+    timestamp: new Date().toISOString()
+  };
+
+  console.log("[SELECTION] Saved selection:", selectionData);
+
+  // Save to IndexedDB
+  saveToIndexedDB(selectionData.id, selectionData).then(() => {
+    // Update cart badge immediately
+    if (window.refreshCartCount) window.refreshCartCount();
+  });
+
+  return selectionData;
+}
+
+
+
+// Add to Cart
+addToCartBtn.addEventListener("click", () => {
+  const data = saveSelection();
+  if (!data) return; // size not selected
+  // Redirect to cart
+  window.location.href = "cart.html";
+});
+
+// Checkout (can go to checkout page later)
+checkoutBtn.addEventListener("click", () => {
+  const data = saveSelection();
+  if (!data) return;
+  // Redirect to cart for now
+  window.location.href = "cart.html";
+});
+
 
 
 }

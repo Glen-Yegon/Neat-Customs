@@ -303,6 +303,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// ------------------------------
+// IndexedDB Helper
+// ------------------------------
+const DB_NAME = "DesignStorageDB";
+const STORE_NAME = "pendingDesigns";
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveToIndexedDB(id, data) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([STORE_NAME], "readwrite");
+    tx.objectStore(STORE_NAME).put({ id, data });
+
+    tx.oncomplete = resolve;
+    tx.onerror = reject;
+  });
+}
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const sellButton = document.getElementById("sellBtn");
 
@@ -315,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const userId = user.uid;
-    localStorage.setItem("loggedInUserId", userId);
 
     const lastSavedDesignId = localStorage.getItem("lastSavedDesignId");
     if (!lastSavedDesignId) {
@@ -325,53 +359,95 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const savedDesignData = localStorage.getItem(lastSavedDesignId);
     if (!savedDesignData) {
-      alert("No design data found in localStorage!");
+      alert("No design data found!");
       return;
     }
 
     const designData = JSON.parse(savedDesignData);
 
     try {
-      // ✅ Take only first 2 Fabric canvases
-      const canvasImages = window.canvases.slice(0, 2).map((canvas, index) => {
-        const dataURL = canvas.toDataURL({ format: 'png' });
-        return {
-          id: index,
-          data: dataURL,
-        };
-      }).filter(img => !isBlankBase64(img.data));
+      const canvasImages = [];
+
+      for (let i = 0; i < 2; i++) {
+        const canvas = window.canvases[i];
+        if (!canvas) continue;
+
+        const pngData = canvas.toDataURL("image/png");
+        if (isBlankBase64(pngData)) continue;
+
+        // compress strongly
+        const compressed = await compressBase64(pngData, 0.45, 1100, 1100);
+
+        canvasImages.push({ id: i, data: compressed });
+      }
 
       if (!canvasImages.length) {
         alert("No valid canvas images to sell!");
         return;
       }
 
-      // ✅ Save to localStorage
+      const id = "pending-sell-" + Date.now();
+
       const tempSellData = {
-        userId: userId,
-        timestamp: new Date().toISOString(),
+        id,
+        userId,
         design: designData,
-        images: canvasImages, // only first 2 canvases
+        images: canvasImages,
+        timestamp: new Date().toISOString(),
       };
 
-      localStorage.setItem("pendingSellDesign", JSON.stringify(tempSellData));
+      // SAVE BIG DATA → IndexedDB
+      await saveToIndexedDB(id, tempSellData);
 
-      console.log("✅ Design temporarily saved for selling.");
+      // STORE ONLY SMALL ID
+      localStorage.setItem("pendingSellDesignId", id);
+
       alert("Preparing your design for sale...");
       window.location.href = "seller.html";
-    } catch (error) {
-      console.error("Error preparing design for sale:", error);
-      alert("Something went wrong while preparing your design for sale.");
+
+    } catch (err) {
+      console.error("Error preparing design for sale:", err);
+      alert("Error preparing design.");
     }
   });
 });
 
-// Helper to filter out blank canvases
+// blank checker
 function isBlankBase64(base64Data) {
   if (!base64Data) return true;
   const blankPatterns = [
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB",
     "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD",
   ];
-  return blankPatterns.some(pattern => base64Data.startsWith(pattern));
+  return blankPatterns.some(p => base64Data.startsWith(p));
+}
+
+// compression
+function compressBase64(dataURL, quality = 0.5, maxWidth = 1200, maxHeight = 1200) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+
+      if (width > maxWidth) {
+        height = (height * maxWidth) / width;
+        width = maxWidth;
+      }
+      if (height > maxHeight) {
+        width = (width * maxHeight) / height;
+        height = maxHeight;
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = reject;
+    img.src = dataURL;
+  });
 }

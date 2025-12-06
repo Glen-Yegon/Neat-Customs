@@ -56,8 +56,11 @@ logoutBtn.addEventListener("click", async () => {
 // -----------------------------
 const backBtn = document.getElementById("backBtn");
 if (backBtn) {
-  backBtn.addEventListener("click", () => window.history.back());
+  backBtn.addEventListener("click", () => {
+    window.location.href = "index.html"; // always go to index.html
+  });
 }
+
 
 
 // Modal elements

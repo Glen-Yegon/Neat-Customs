@@ -97,6 +97,27 @@ body {
   background: rgba(255,255,255,0.3);
 }
 
+.cart-btn {
+  position: relative; /* Make button relative to place counter */
+}
+
+.cart-count {
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  background: #5d39ff;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  min-height: 16px;
+}
+
 /* Spin animation */
 @keyframes spinLogo {
   0% { transform: rotate(0deg); }

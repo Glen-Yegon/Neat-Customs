@@ -55,46 +55,108 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+// ------------------------------
+// IndexedDB Helper (same as saveDes.js)
+// ------------------------------
+const DB_NAME = "DesignStorageDB";
+const STORE_NAME = "pendingDesigns";
+
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "id" });
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+
+
+async function loadFromIndexedDB(id) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([STORE_NAME], "readonly");
+    const req = tx.objectStore(STORE_NAME).get(id);
+
+    req.onsuccess = () =>
+      resolve(req.result ? req.result.data : null);
+
+    req.onerror = reject;
+  });
+}
+
 /* ================================
    🔹 Load Saved Base64 Images
 ================================ */
-function loadSavedDesign() {
-  const savedData = localStorage.getItem("pendingSellDesign");
-  if (savedData) {
-    try {
-      const design = JSON.parse(savedData);
-      if (design.images && design.images.length > 0) {
-        // ✅ map valid images and take only first 2
-        imageList = design.images
-          .map(img => img.data || img)
-          .filter(imgSrc => !isBlankBase64(imgSrc))
-          .slice(0, 2); // <-- only first 2
-      }
-    } catch (e) {
-      console.error("Error parsing saved design:", e);
-      imageList = [];
-    }
-  } else {
-    imageList = [];
+async function loadSavedDesign() {
+  const id = localStorage.getItem("pendingSellDesignId");
+  console.log("[LOAD] pendingSellDesignId from localStorage:", id);
+
+  if (!id) {
+    console.warn("[LOAD] No pendingSellDesignId in localStorage");
+    return;
   }
 
-  renderImages(); // display first 2
-}
+  try {
+    const design = await loadFromIndexedDB(id);
+    console.log("[LOAD] Loaded design from IndexedDB:", design);
 
+    if (!design || !design.images) {
+      console.warn("[LOAD] No design or images found in IndexedDB");
+      imageList = [];
+      renderImages();
+      return;
+    }
+
+    // Flatten images array safely
+    imageList = design.images
+      .map((imgObj, idx) => {
+        console.log(`[LOAD] Image #${idx}:`, imgObj);
+        return imgObj?.data;
+      })
+      .filter(src => {
+        const valid = src && !isBlankBase64(src);
+        if (!valid) console.warn("[LOAD] Skipping blank or invalid base64 image");
+        return valid;
+      })
+      .slice(0, 4); // max 4 images
+
+    console.log("[LOAD] Final imageList to render:", imageList);
+    renderImages();
+  } catch (err) {
+    console.error("[LOAD] Error loading design from IndexedDB:", err);
+  }
+}
 
 /* ================================
    🔹 Handle New Image Uploads
 ================================ */
 uploader.addEventListener("change", (e) => {
   const files = e.target.files;
+  console.log("[UPLOAD] Files selected:", files);
+
   for (let file of files) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      const imgSrc = event.target.result;
+      console.log("[UPLOAD] File read as base64:", imgSrc?.substring(0, 50), "...");
+
       if (imageList.length < 4) {
-        const imgSrc = event.target.result;
         if (!isBlankBase64(imgSrc)) {
           imageList.push(imgSrc);
+          console.log("[UPLOAD] Added image to imageList. New length:", imageList.length);
           renderImages();
+        } else {
+          console.warn("[UPLOAD] Ignored blank base64 image");
         }
       } else {
         alert("You can only have up to 4 images total.");
@@ -105,62 +167,91 @@ uploader.addEventListener("change", (e) => {
 });
 
 /* ================================
-   🔹 Render Images with Delete Option
+   🔹 Render Images
 ================================ */
 function renderImages() {
+  console.log("[RENDER] Rendering images. Current imageList length:", imageList.length);
   gallery.innerHTML = "";
 
-  if (imageList.length > 0) {
-    imageList.forEach((imgSrc, index) => {
-      const imgWrapper = document.createElement("div");
-      imgWrapper.classList.add("image-wrapper");
-      imgWrapper.style.position = "relative";
-      imgWrapper.style.display = "inline-block";
-      imgWrapper.style.margin = "5px";
-
-      // Image
-      const img = document.createElement("img");
-      img.src = typeof imgSrc === "string" ? imgSrc : imgSrc.data;
-      imgWrapper.appendChild(img);
-
-      // Delete button
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "×"; // X symbol
-      delBtn.style.position = "absolute";
-      delBtn.style.top = "2px";
-      delBtn.style.right = "2px";
-      delBtn.style.background = "red";
-      delBtn.style.color = "white";
-      delBtn.style.border = "none";
-      delBtn.style.borderRadius = "50%";
-      delBtn.style.width = "20px";
-      delBtn.style.height = "20px";
-      delBtn.style.cursor = "pointer";
-      delBtn.style.fontWeight = "bold";
-      delBtn.addEventListener("click", () => {
-        // Remove image from array
-        imageList.splice(index, 1);
-        renderImages(); // re-render gallery
-      });
-
-      imgWrapper.appendChild(delBtn);
-      gallery.appendChild(imgWrapper);
-    });
+  if (!imageList || imageList.length === 0) {
+    console.log("[RENDER] No images to display");
+    return;
   }
 
-  // Show upload box if less than 4 images
-  const uploadBox = document.querySelector(".upload-box");
-  uploadBox.style.display = imageList.length < 4 ? "flex" : "none";
-}
+  imageList.forEach((imgSrc, index) => {
+    if (!imgSrc || typeof imgSrc !== "string") {
+      console.warn(`[RENDER] Skipping invalid image at index ${index}:`, imgSrc);
+      return;
+    }
 
+    console.log(`[RENDER] Rendering image #${index}`, imgSrc?.substring(0, 50), "...");
+
+    const imgWrapper = document.createElement("div");
+    imgWrapper.className = "image-wrapper";
+    Object.assign(imgWrapper.style, {
+      position: "relative",
+      display: "inline-block",
+      margin: "5px",
+      width: "150px",
+      height: "150px",
+      overflow: "hidden",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      verticalAlign: "top",
+    });
+
+    const img = new Image();
+    img.src = imgSrc.trim();
+    Object.assign(img.style, {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    });
+
+    img.onload = () => console.log(`[RENDER] Image #${index} loaded successfully`);
+    img.onerror = () => console.error(`[RENDER] Failed to load image #${index}:`, imgSrc);
+
+    imgWrapper.appendChild(img);
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "×";
+    Object.assign(delBtn.style, {
+      position: "absolute",
+      top: "2px",
+      right: "2px",
+      background: "red",
+      color: "white",
+      border: "none",
+      borderRadius: "50%",
+      width: "20px",
+      height: "20px",
+      cursor: "pointer",
+      fontWeight: "bold",
+    });
+
+    delBtn.addEventListener("click", () => {
+      console.log(`[RENDER] Deleting image #${index}`);
+      imageList.splice(index, 1);
+      renderImages();
+    });
+
+    imgWrapper.appendChild(delBtn);
+    gallery.appendChild(imgWrapper);
+  });
+
+  const uploadBox = document.querySelector(".upload-box");
+  if (uploadBox) uploadBox.style.display = imageList.length < 4 ? "flex" : "none";
+}
 
 /* ================================
    🔹 Check if Base64 is Blank
 ================================ */
 function isBlankBase64(base64Data) {
+  // Only treat very tiny base64 images as blank (like 1x1 px PNG/JPEG)
+  if (!base64Data) return true;
   const blankPatterns = [
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB",
-    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD",
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB", // tiny PNG
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD", // tiny JPEG
   ];
   return blankPatterns.some(pattern => base64Data.startsWith(pattern));
 }

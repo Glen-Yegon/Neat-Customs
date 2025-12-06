@@ -53,12 +53,12 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
 .seller-navbar {
   width: 100%;
   height: 70px;
-  background: linear-gradient(180deg, #000, #111, #5d39ff);
+  background: linear-gradient(to bottom, #5d39ff, rgba(89, 34, 255, 0.086));
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
-  box-shadow: 0 4px 20px rgba(93, 57, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(88, 51, 255, 0.097);
   position: fixed;
   top: 0;
   left: 0;
@@ -95,9 +95,10 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
   background: transparent;
   border: none;
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
+  padding: 5px;
   border-radius: 20px;
-    box-shadow: 0 0 12px rgba(93, 57, 255, 0.5);
+  box-shadow: 0 0 12px rgba(93, 57, 255, 0.5);
   transition: all 0.3s ease;
 }
 
@@ -122,7 +123,8 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
 
 /* Cart Button Styling */
 .nav-right .cart-btn {
-  color: #fff;
+  position: relative; /* required for absolute badge */
+  color: #000000;
   border: none;
   background: transparent;
   padding: 10px 35px;
@@ -149,26 +151,58 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
   pointer-events: none;
 }
 
+/* Cart Counter Badge */
+.nav-right .cart-btn .cart-count {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: #5d39ff; /* branding color */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(93, 57, 255, 0.7);
+  pointer-events: none; /* prevent interaction */
+}
+
 /* MOBILE RESPONSIVE */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .nav-right .cart-btn {
-    padding: 8px 10px;
-    font-size: 1.4rem;
-    margin-right: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(93, 57, 255, 0.4);
+    padding: 8px 20px; /* smaller padding */
+    font-size: 1.4rem; /* smaller icon */
+    margin-right: 5px;
+  }
+
+  .nav-right .cart-btn .cart-count {
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.65rem;
+    bottom: 4px;
+    left: 4px;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
   .nav-right .cart-btn {
-    padding: 6px 8px;
-    margin-right: 30px;
+    padding: 6px 16px;
     font-size: 1.2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 8px rgba(93, 57, 255, 0.3);
+  }
+
+  .nav-right .cart-btn .cart-count {
+    min-width: 4px;
+    height: 14px;
+    font-size: 0.6rem;
+    bottom: 3px;
+    left: 3px;
   }
 }
+
 
 
 /* Shop container */
@@ -283,13 +317,11 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
   margin-top: 12px;
   width: 100%;
   padding: 12px;
-
   background: linear-gradient(135deg, black, #5d39ff, #000000);
   color: white;
   border: none;
-  border-radius: 30px;
-
-  font-weight: 600;
+  border-radius: 5px;
+  font-weight: 100;
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   position: relative;
@@ -312,7 +344,7 @@ h1,h2,h3 { font-family: 'Caveat', cursive; }
 
 .product-btn:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 14px 32px rgba(93, 57, 255, 0.55);
+  box-shadow: 0 14px 32px rgba(93, 57, 255, 0.35);
 }
 
 .product-btn:hover::after {
@@ -593,5 +625,51 @@ footer::before {
 
   .footer-legal {
     font-size: 0.7rem;
+  }
+}
+
+
+/* Shop Controls */
+.shop-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(93, 57, 255, 0.05); /* subtle branding touch */
+  border-radius: 0px;
+}
+
+.shop-controls label {
+  font-weight: 600;
+  margin-right: 8px;
+  color: #5d39ff;
+}
+
+.shop-controls select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #5d39ff;
+  background: #fff;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-controls select:hover {
+  box-shadow: 0 0 10px rgba(93, 57, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .shop-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .shop-controls select {
+    width: 100%;
   }
 }

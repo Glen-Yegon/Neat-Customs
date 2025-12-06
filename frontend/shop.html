@@ -28,9 +28,11 @@
     </div>
 
 <div class="nav-right">
-  <button class="nav-btn cart-btn" onclick="window.location.href='cart.html'" aria-label="Cart">
-    <i class="ri-shopping-cart-2-line"></i>
-  </button>
+<button class="nav-btn cart-btn" onclick="window.location.href='cart.html'" aria-label="Cart">
+  <i class="ri-shopping-cart-2-line"></i>
+  <span class="cart-count">0</span>
+</button>
+
 </div>
 
   </nav>
@@ -48,6 +50,30 @@
 
 
   <main class="shop-container">
+    <!-- Filter & Category Bar -->
+<div class="shop-controls">
+  <!-- Category Dropdown -->
+  <div class="shop-category">
+    <label for="categorySelect">Category:</label>
+    <select id="categorySelect">
+      <option value="all">All</option>
+      <option value="T shirt">T-Shirts</option>
+      <option value="Hoodie">Hoodies</option>
+      <option value="Tote Bag">Tote Bags</option>
+    </select>
+  </div>
+
+  <!-- Filter Dropdown -->
+  <div class="shop-filter">
+    <label for="filterSelect">Sort By:</label>
+    <select id="filterSelect">
+      <option value="default">Default</option>
+      <option value="priceLowHigh">Price: Low to High</option>
+      <option value="priceHighLow">Price: High to Low</option>
+    </select>
+  </div>
+</div>
+
     <div id="productContainer" class="product-grid"></div>
 
 
@@ -88,6 +114,6 @@
   <script type="module" src="js/shop.js"></script>
   <script type="module" src="js/product.js"></script>
   <script type="module" src="firebase/product-firebase.js"></script>
-
+<script type="module" src="js/cart-counter.js"></script>
 </body>
 </html>
