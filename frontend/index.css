@@ -199,11 +199,11 @@ html::-webkit-scrollbar {
   padding: 0;
   box-sizing: border-box;
 }
-body, html {
-  overflow-x: hidden;
-  overflow: hidden;
+/* Allow scrolling */
+html, body {
+  overflow-x: hidden;  /* only hide horizontal overflow */
+  overflow-y: auto;    /* allow vertical scrolling */
 }
-
 html{
   scroll-behavior: auto !important;
 }
