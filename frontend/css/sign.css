@@ -91,10 +91,12 @@ body {
 .auth-visual {
   position: relative;
   overflow: hidden;
-  min-height: 520px;
+  min-height: 420px;
+  max-height: 810px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 45px;
   color: var(--white);
 }
 .visual-img {
@@ -104,7 +106,7 @@ body {
   height: 100%;
   object-fit: cover;
   transform: scale(1.06);
-  filter: brightness(0.5) contrast(1.1) saturate(1.1);
+  filter: brightness(0.8) contrast(1.1) saturate(1.1);
   transition: transform var(--transition), filter var(--transition);
 }
 .auth-visual:hover .visual-img {

@@ -640,7 +640,7 @@ z-index: 1000;
 
 .modal-content {
   position: relative;
-  background-image: url("/frontend/images/dogs.jpg");
+  background-image: url("/frontend/images/sign.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
