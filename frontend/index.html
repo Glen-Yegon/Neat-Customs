@@ -122,13 +122,13 @@
 <main id="main-content">
 <section class="hero" role="banner">
   <video autoplay muted loop playsinline class="hero-video" id="hero-video">
-    <source src="videos/weekendvid.mp4" type="video/mp4" />
+    <source src="videos/heavyvid2.mp4" type="video/mp4" />
   </video>
 
   <div class="hero-content" data-aos="fade-down" data-aos-delay="700">
 <h1 class="hero-title">heavychats</h1>
 
-    <p data-aos="fade-down" data-aos-delay="700">Design your own fashion | tailored to your taste.</p>
+   <!-- <p data-aos="fade-down" data-aos-delay="700">Design your own fashion | tailored to your taste.</p>-->
 <div class="hero-buttons">
   <button class="scroll-btn" data-target="#featured-products">Customize Now →</button>
 
@@ -139,6 +139,31 @@
 </section>
 
 
+<!-- Parallax Gallery -->
+<section id="parallax-gallery" class="parallax-section">
+  <div class="parallax-wrapper" id="parallaxWrapper">
+    <div class="parallax-column" data-speed="2">
+      <div class="parallax-img"><img src="images/carosel/heavy (1).jpg" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (1).webp" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (2).jpg" alt=""></div>
+    </div>
+    <div class="parallax-column" data-speed="3.3">
+      <div class="parallax-img"><img src="images/carosel/heavy (2).webp" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (3).jpg" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (2).webp" alt=""></div>
+    </div>
+    <div class="parallax-column" data-speed="1.25">
+      <div class="parallax-img"><img src="images/carosel/heavy (4).jpg" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (4).webp" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (5).jpg" alt=""></div>
+    </div>
+    <div class="parallax-column" data-speed="3">
+      <div class="parallax-img"><img src="images/carosel/heavy (6).jpg" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (7).jpg" alt=""></div>
+      <div class="parallax-img"><img src="images/carosel/heavy (8).jpg" alt=""></div>
+    </div>
+  </div>
+</section>
 
  <section class="customization-intro">
   
@@ -337,56 +362,65 @@
 </section>
 
 
-
 <!-- HOW IT WORKS SECTION -->
 <section id="how-it-works" class="how-section">
   <div class="container">
-    <!-- Intro -->
-    <div class="intro">
+
+    <div class="intro" data-reveal>
       <h2 class="headline">How It Works</h2>
-      <p class="subheading">
-        Create, customize, and profit! Here's how you can bring your ideas to life.
-      </p>
+      <p class="subheading">Create, customize, and profit! Here's how you can bring your ideas to life.</p>
     </div>
 
-    <!-- Steps Grid -->
-    <div class="steps-grid">
-      <!-- Step 1 -->
-      <div class="step-card">
-        <div class="step-icon">🎨</div>
+    <div class="steps-grid" id="stepsGrid">
+
+      <svg class="steps-connector" id="stepsConnector" viewBox="0 0 1000 2" preserveAspectRatio="none">
+        <line x1="0" y1="1" x2="1000" y2="1" class="connector-track"/>
+        <line x1="0" y1="1" x2="1000" y2="1" class="connector-fill" id="connectorFill"/>
+        <circle cx="0" cy="1" r="5" class="connector-dot" id="connectorDot"/>
+      </svg>
+
+      <div class="step-card" data-reveal data-delay="0">
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path class="draw" d="M8 40 L11 30 L30 11 L37 18 L18 37 Z" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="draw" d="M27 14 L34 21" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3 class="step-title">Design Your Merch</h3>
-        <p class="step-text">
-          Use our intuitive designer to create your perfect T-shirt, tote, or hoodie. Express yourself with style and creativity.
-        </p>
+        <p class="step-text">Use our intuitive designer to create your perfect T-shirt, tote, or hoodie. Express yourself with style and creativity.</p>
+        <span class="step-num">01</span>
       </div>
-      
-      <div class="arrow">→</div>
 
-      <!-- Step 2 -->
-      <div class="step-card">
-        <div class="step-icon">🛒</div>
+      <div class="step-card" data-reveal data-delay="150">
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path class="draw" d="M10 16 H38 L34 36 H14 Z" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="draw" d="M17 16 V12 A7 7 0 0 1 31 12 V16" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3 class="step-title">Choose to Buy or Sell</h3>
-        <p class="step-text">
-          Decide whether to keep your creation for yourself or sell it in our shop. We handle everything: production, delivery, and profit split.
-        </p>
+        <p class="step-text">Decide whether to keep your creation for yourself or sell it in our shop. We handle everything: production, delivery, and profit split.</p>
+        <span class="step-num">02</span>
       </div>
-      
-      <div class="arrow">→</div>
 
-      <!-- Step 3 -->
-      <div class="step-card">
-        <div class="step-icon">🌐</div>
+      <div class="step-card" data-reveal data-delay="300">
+        <div class="step-icon">
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle class="draw" cx="24" cy="24" r="16" stroke-width="2.4"/>
+            <path class="draw" d="M24 8 A16 16 0 0 1 24 40" stroke-width="2.4" stroke-linecap="round"/>
+            <path class="draw" d="M8 24 H40" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3 class="step-title">Explore the Shop</h3>
-        <p class="step-text">
-          Browse creations from other sellers. Buy unique designs or get inspired to create your next hit product.
-        </p>
+        <p class="step-text">Browse creations from other sellers. Buy unique designs or get inspired to create your next hit product.</p>
+        <span class="step-num">03</span>
       </div>
+
     </div>
 
-<!-- CTA -->
-<div class="how-cta">
-  <a href="#featured-products" class="btn btn-primary">Start Designing Now</a>
-</div>
+    <div class="how-cta" data-reveal data-delay="400">
+      <a href="#featured-products" class="btn btn-primary">Start Designing Now</a>
+    </div>
 
   </div>
 </section>
@@ -525,6 +559,384 @@ document.querySelectorAll('.scroll-btn').forEach(btn => {
   });
 });
 
+</script>
+
+<script>
+  (function () {
+    const wrapper = document.getElementById('parallaxWrapper');
+    if (!wrapper) return;
+
+    const columns = wrapper.querySelectorAll('.parallax-column');
+
+    function getProgress() {
+      const rect = wrapper.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      // start: rect.top === viewportH (0) -> end: rect.bottom === 0 (1)
+      const total = rect.height + viewportH;
+      const scrolled = viewportH - rect.top;
+      let progress = scrolled / total;
+      return Math.min(Math.max(progress, 0), 1);
+    }
+
+    let ticking = false;
+
+    function update() {
+      const progress = getProgress();
+      const h = window.innerHeight;
+
+      columns.forEach((col) => {
+        const speed = parseFloat(col.dataset.speed) || 1;
+        const y = progress * h * speed;
+        col.style.transform = `translateY(${y}px)`;
+      });
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+</script>
+
+<script>
+(function () {
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const gooSvg = document.createElementNS(svgNS, 'svg');
+  gooSvg.setAttribute('style', 'position:absolute;width:0;height:0;overflow:hidden;');
+  gooSvg.innerHTML = `
+    <defs>
+      <filter id="gooFilter">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur" />
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9"
+          result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>`;
+  document.body.appendChild(gooSvg);
+
+  const goo = document.createElement('div');
+  goo.id = 'cursorGoo';
+  document.body.appendChild(goo);
+
+  const TRAIL_LEN = 7;
+  const trail = [];
+  for (let i = 0; i < TRAIL_LEN; i++) {
+    const d = document.createElement('div');
+    d.className = 'blob-dot';
+    const size = 20 - i * 2;
+    d.style.width = size + 'px';
+    d.style.height = size + 'px';
+    goo.appendChild(d);
+    trail.push({ el: d, x: 0, y: 0 });
+  }
+
+  /* jagged dagger/shard shape, tip points "up" at rest — rotated by velocity angle */
+  const core = document.createElement('div');
+  core.id = 'cursorCore';
+  core.innerHTML = `
+    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <polygon id="daggerBlade" points="
+        20,1  24,14  33,17  23,19  26,32  20,24
+        14,32 17,19  7,17  16,14
+      " />
+    </svg>`;
+  document.body.appendChild(core);
+
+  const label = document.createElement('div');
+  label.id = 'cursorLabel';
+  document.body.appendChild(label);
+
+  let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
+  let coreX = mouseX, coreY = mouseY;
+  let lastX = mouseX, lastY = mouseY;
+  let vx = 0, vy = 0;
+  let smoothAngle = -90; // pointing "up" at rest, matches blade art's default tip direction
+
+  let magnetEl = null;
+  let hoverEl = null;
+
+  addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  addEventListener('mousedown', (e) => {
+    spawnClickBurst(e.clientX, e.clientY);
+    spawnCrack(e.clientX, e.clientY);
+  });
+
+  function lerp(a, b, n) { return (1 - n) * a + n * b; }
+  function angleLerp(a, b, n) {
+    let diff = ((b - a + 540) % 360) - 180;
+    return a + diff * n;
+  }
+
+  function tick() {
+    vx = lerp(vx, mouseX - lastX, 0.35);
+    vy = lerp(vy, mouseY - lastY, 0.35);
+    lastX = mouseX;
+    lastY = mouseY;
+
+    let targetX = mouseX, targetY = mouseY;
+
+    if (magnetEl) {
+      const r = magnetEl.getBoundingClientRect();
+      targetX = r.left + r.width / 2;
+      targetY = r.top + r.height / 2;
+    }
+
+    coreX = lerp(coreX, targetX, magnetEl ? 0.22 : 0.35);
+    coreY = lerp(coreY, targetY, magnetEl ? 0.22 : 0.35);
+
+    const speed = Math.min(Math.hypot(vx, vy), 45);
+
+    if (speed > 1.2) {
+      const targetAngle = Math.atan2(vy, vx) * (180 / Math.PI) + 90;
+      smoothAngle = angleLerp(smoothAngle, targetAngle, 0.25);
+    }
+
+    const stretch = 1 + speed / 60;
+
+    core.style.transform =
+      `translate(${coreX}px, ${coreY}px) translate(-50%,-50%) rotate(${smoothAngle}deg) scale(1, ${stretch})`;
+
+    label.style.transform = `translate(${coreX}px, ${coreY}px) translate(-50%,-50%) scale(${hoverEl ? 1 : 0.6})`;
+
+    let px = coreX, py = coreY;
+    trail.forEach((t, i) => {
+      const lagFactor = 0.35 - i * 0.03;
+      t.x = lerp(t.x, px, Math.max(lagFactor, 0.08));
+      t.y = lerp(t.y, py, Math.max(lagFactor, 0.08));
+      t.el.style.transform = `translate(${t.x}px, ${t.y}px) translate(-50%,-50%)`;
+      px = t.x; py = t.y;
+    });
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-cursor-text], a, button, .btn');
+    if (!target) return;
+
+    hoverEl = target;
+    core.classList.add('hover');
+    core.style.opacity = target.hasAttribute('data-cursor-text') ? '0' : '1';
+
+    if (target.hasAttribute('data-cursor-text')) {
+      label.textContent = target.getAttribute('data-cursor-text');
+      label.classList.add('show');
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('[data-cursor-text], a, button, .btn');
+    if (!target) return;
+    if (target === hoverEl) {
+      hoverEl = null;
+      core.classList.remove('hover');
+      core.style.opacity = '1';
+      label.classList.remove('show');
+    }
+  });
+
+  const magnets = document.querySelectorAll('.magnetic');
+  magnets.forEach((el) => {
+    el.addEventListener('mouseenter', () => { magnetEl = el; });
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = (e.clientX - cx) * 0.3;
+      const dy = (e.clientY - cy) * 0.3;
+      el.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      magnetEl = null;
+      el.style.transform = 'translate(0,0)';
+    });
+  });
+
+  /* quick crack-flash SVG at the click point */
+  function spawnCrack(x, y) {
+    const crack = document.createElement('div');
+    crack.className = 'cursor-crack';
+    crack.style.left = x + 'px';
+    crack.style.top = y + 'px';
+    crack.innerHTML = `
+      <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#5d39ff" stroke-width="1.6" fill="none" opacity=".9">
+          <line x1="35" y1="35" x2="12" y2="10" />
+          <line x1="35" y1="35" x2="58" y2="14" />
+          <line x1="35" y1="35" x2="60" y2="45" />
+          <line x1="35" y1="35" x2="40" y2="62" />
+          <line x1="35" y1="35" x2="10" y2="52" />
+          <line x1="35" y1="35" x2="8" y2="30" />
+        </g>
+      </svg>`;
+    document.body.appendChild(crack);
+    crack.addEventListener('animationend', () => crack.remove());
+  }
+
+  function spawnClickBurst(x, y) {
+    const ring = document.createElement('div');
+    ring.className = 'cursor-shock';
+    ring.style.left = x + 'px';
+    ring.style.top = y + 'px';
+    document.body.appendChild(ring);
+    ring.addEventListener('animationend', () => ring.remove());
+
+    const shardCount = 10;
+    for (let i = 0; i < shardCount; i++) {
+      const shard = document.createElement('div');
+      shard.className = 'cursor-shard' + (i % 2 === 0 ? '' : ' alt');
+      shard.style.left = x + 'px';
+      shard.style.top = y + 'px';
+      document.body.appendChild(shard);
+
+      const ang = (Math.PI * 2 * i) / shardCount + Math.random() * 0.5;
+      const dist = 45 + Math.random() * 60;
+      const dx = Math.cos(ang) * dist;
+      const dy = Math.sin(ang) * dist;
+      const rot = Math.random() * 360;
+
+      shard.animate(
+        [
+          { transform: 'translate(-50%,-50%) rotate(0deg)', opacity: 1 },
+          {
+            transform: `translate(${dx - 5}px, ${dy - 5}px) rotate(${rot}deg)`,
+            opacity: 0,
+          },
+        ],
+        { duration: 500 + Math.random() * 200, easing: 'cubic-bezier(.16,1,.3,1)' }
+      ).onfinish = () => shard.remove();
+    }
+  }
+})();
+</script>
+
+<script>
+(function () {
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const connectorFill = document.getElementById('connectorFill');
+  const connectorDot = document.getElementById('connectorDot');
+  const connectorSvg = document.getElementById('stepsConnector');
+  const stepsGrid = document.getElementById('stepsGrid');
+
+  // staggered reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay || '0', 10);
+        setTimeout(() => el.classList.add('in-view'), delay);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  reveals.forEach((el) => observer.observe(el));
+
+  // animate the connecting line + traveling dot once the row is in view
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function setupConnector() {
+    if (!connectorSvg) return;
+
+    if (isMobile()) {
+      const height = stepsGrid.scrollHeight;
+      connectorSvg.setAttribute('viewBox', `0 0 2 ${height}`);
+      connectorSvg.querySelector('.connector-track').setAttribute('x1', 1);
+      connectorSvg.querySelector('.connector-track').setAttribute('y1', 0);
+      connectorSvg.querySelector('.connector-track').setAttribute('x2', 1);
+      connectorSvg.querySelector('.connector-track').setAttribute('y2', height);
+      connectorFill.setAttribute('x1', 1);
+      connectorFill.setAttribute('y1', 0);
+      connectorFill.setAttribute('x2', 1);
+      connectorFill.setAttribute('y2', height);
+    } else {
+      connectorSvg.setAttribute('viewBox', '0 0 1000 2');
+      connectorSvg.querySelector('.connector-track').setAttribute('x1', 0);
+      connectorSvg.querySelector('.connector-track').setAttribute('y1', 1);
+      connectorSvg.querySelector('.connector-track').setAttribute('x2', 1000);
+      connectorSvg.querySelector('.connector-track').setAttribute('y2', 1);
+      connectorFill.setAttribute('x1', 0);
+      connectorFill.setAttribute('y1', 1);
+      connectorFill.setAttribute('x2', 1000);
+      connectorFill.setAttribute('y2', 1);
+    }
+  }
+
+  let connectorAnimated = false;
+  const connectorObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !connectorAnimated) {
+        connectorAnimated = true;
+        setupConnector();
+        requestAnimationFrame(() => {
+          connectorFill.style.strokeDashoffset = '0';
+          animateDot();
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (stepsGrid) connectorObserver.observe(stepsGrid);
+
+  function animateDot() {
+    const start = performance.now();
+    const duration = 1400;
+
+    function frame(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+
+      if (isMobile()) {
+        const height = stepsGrid.scrollHeight;
+        connectorDot.setAttribute('cx', 1);
+        connectorDot.setAttribute('cy', eased * height);
+      } else {
+        connectorDot.setAttribute('cx', eased * 1000);
+        connectorDot.setAttribute('cy', 1);
+      }
+
+      if (t < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener('resize', () => {
+    if (connectorAnimated) setupConnector();
+  });
+
+  // subtle 3D tilt on card hover (desktop only)
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.step-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-8px) rotateX(${-py * 8}deg) rotateY(${px * 8}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+      });
+    });
+  }
+})();
 </script>
 
 </body>

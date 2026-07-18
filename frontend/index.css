@@ -1,6 +1,7 @@
 :root {
   --font-heading: 'Raleway', sans-serif;
   --font-body: 'Caveat', cursive;
+  --accent:#5d39ff;
 }
 
 
@@ -1426,173 +1427,6 @@ border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 
-/* HOW IT WORKS SECTION */
-.how-section {
-  background: #f5f5ff;
-  padding: 6rem 1rem;
-  font-family: 'Raleway', sans-serif;
-  color: #000;
-}
-
-.how-section .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Intro */
-.how-section .intro {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.how-section .headline {
-  font-family: 'Caveat', cursive;
-  font-size: 3rem;
-  color: #5d39ff;
-  margin: 0;
-}
-
-.how-section .subheading {
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
-  color: #333;
-}
-
-/* Steps Grid */
-.how-section .steps-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  position: relative;
-}
-
-/* Individual Step Card */
-.how-section .step-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 2rem;
-  width: 280px;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
-  position: relative;
-}
-
-.how-section .step-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-}
-
-/* Icon Bubble Animation */
-.how-section .step-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: inline-block;
-  padding: 1rem;
-  color: #fff;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-
-  /* Gradient background */
-  background: linear-gradient(135deg, #5d39ff, #9c69ff, #5d39ff);
-  background-size: 400% 400%;
-  transition: transform 0.3s ease;
-
-  /* Animate background like a flowing bubble */
-  animation: bubbleAnimation 6s ease-in-out infinite;
-}
-
-/* Bubble background animation */
-@keyframes bubbleAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Hover effect for scaling */
-.how-section .step-icon:hover {
-  transform: scale(1.1);
-}
-
-
-.how-section .step-card:hover .step-icon {
-  transform: rotate(15deg) scale(1.1);
-}
-
-/* Title & Text */
-.how-section .step-title {
-  font-family: 'Caveat', cursive;
-  font-size: 1.5rem;
-  color: #5d39ff;
-  margin-bottom: 0.5rem;
-}
-
-.how-section .step-text {
-  font-size: 1rem;
-  color: #000000;
-  line-height: 1.5;
-}
-
-/* Arrow Between Cards */
-.how-section .arrow {
-  font-size: 2rem;
-  margin: auto 1rem;
-  color: #5d39ff;
-  display: flex;
-  align-items: center;
-}
-
-/* CTA */
-.how-section .how-cta {
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.how-section .btn {
-  display: inline-block;
-  padding: 0.9rem 2.4rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.how-section .btn-primary {
-  background: #5d39ff;
-  color: #ffffff;
-}
-
-.how-section .btn-primary:hover {
-  background: #4b2ed6;
-  transform: scale(1.05);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .how-section .steps-grid {
-    flex-direction: column;
-  }
-
-  .how-section .arrow {
-    transform: rotate(90deg);
-    font-size: 1.8rem;
-    margin: 1rem 0;
-  }
-}
-
 
 /* FOOTER STYLES */
 footer {
@@ -1811,4 +1645,462 @@ footer::after {
   width: 100%;
   height: 100%;
   z-index: 1;
+}
+
+.parallax-section {
+  width: 100%;
+  background: #eee;
+  color: #000;
+  font-family: inherit;
+}
+
+
+.parallax-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  gap: 2vw;
+  height: 175vh;
+  overflow: hidden;
+  background: #fff;
+  padding: 2vw;
+}
+
+.parallax-column {
+  position: relative;
+  width: 25%;
+  min-width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  will-change: transform;
+}
+
+.parallax-column:nth-child(1) { top: -45%; }
+.parallax-column:nth-child(2) { top: -95%; }
+.parallax-column:nth-child(3) { top: -45%; }
+.parallax-column:nth-child(4) { top: -75%; }
+
+.parallax-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.parallax-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .parallax-column:nth-child(3),
+  .parallax-column:nth-child(4) {
+    display: none; /* keep it clean on mobile */
+  }
+}
+
+/* ============================================================
+   CRAZY LUXURY CURSOR — black / white / #5d39ff
+   Core mark: shattered dagger/shard — rotates with motion,
+   fractures into glass shards on click
+   ============================================================ */
+
+:root{
+  --c-ink:#000;
+  --c-paper:#fff;
+  --c-accent:#5d39ff;
+}
+
+body{ cursor:none; }
+a, button, input, textarea, .btn, [data-cursor-text]{ cursor:none; }
+
+#cursorGoo{
+  position:fixed;
+  top:0; left:0;
+  width:0; height:0;
+  pointer-events:none;
+  z-index:9998;
+  filter:url(#gooFilter);
+}
+
+.blob-dot{
+  position:fixed;
+  top:0; left:0;
+  border-radius:50%;
+  background:var(--c-accent);
+  pointer-events:none;
+  will-change:transform;
+}
+
+/* the dagger/shard core */
+#cursorCore{
+  position:fixed;
+  top:0; left:0;
+  width:34px;
+  height:34px;
+  pointer-events:none;
+  z-index:10000;
+  will-change:transform;
+  filter:drop-shadow(0 0 8px var(--c-accent)) drop-shadow(0 0 2px rgba(93,57,255,.8));
+  transition:width .18s ease, height .18s ease, filter .18s ease;
+}
+
+#cursorCore svg{
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:visible;
+}
+
+#daggerBlade{
+  fill:var(--c-paper);
+  stroke:var(--c-accent);
+  stroke-width:1;
+  mix-blend-mode:difference;
+}
+
+#cursorCore.hover{
+  width:46px;
+  height:46px;
+  filter:drop-shadow(0 0 18px var(--c-accent)) drop-shadow(0 0 4px rgba(93,57,255,.9));
+}
+
+/* quick crack-flash shown right at the impact point on click */
+.cursor-crack{
+  position:fixed;
+  top:0; left:0;
+  width:70px;
+  height:70px;
+  pointer-events:none;
+  z-index:9997;
+  transform:translate(-50%,-50%) scale(.4);
+  opacity:0;
+  animation:crackFlash .3s ease-out forwards;
+}
+
+@keyframes crackFlash{
+  0%{ opacity:1; transform:translate(-50%,-50%) scale(.3) rotate(0deg); }
+  100%{ opacity:0; transform:translate(-50%,-50%) scale(1.3) rotate(12deg); }
+}
+
+#cursorLabel{
+  position:fixed;
+  top:0; left:0;
+  pointer-events:none;
+  z-index:10001;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 6px;
+  font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--c-paper);
+  white-space:nowrap;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.6);
+  transition:opacity .18s ease;
+  mix-blend-mode:difference;
+}
+
+#cursorLabel.show{ opacity:1; }
+
+.cursor-shock{
+  position:fixed;
+  top:0; left:0;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid var(--c-accent);
+  pointer-events:none;
+  z-index:9996;
+  transform:translate(-50%,-50%);
+  animation:shockOut .55s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes shockOut{
+  0%{ width:16px; height:16px; opacity:1; border-width:3px; }
+  100%{ width:140px; height:140px; opacity:0; border-width:.5px; }
+}
+
+.cursor-shard{
+  position:fixed;
+  top:0; left:0;
+  width:0;
+  height:0;
+  pointer-events:none;
+  z-index:9995;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-bottom:10px solid var(--c-accent);
+  transform-origin:center;
+}
+
+.cursor-shard.alt{
+  border-bottom-color:var(--c-paper);
+  filter:drop-shadow(0 0 1px var(--c-ink));
+}
+
+@media (hover:none), (pointer:coarse){
+  #cursorGoo, #cursorCore, #cursorLabel{ display:none; }
+  body, a, button, [data-cursor-text]{ cursor:auto; }
+}
+
+
+
+/* HOW IT WORKS SECTION */
+.how-section {
+  background: #f5f5ff;
+  padding: 6rem 1rem;
+  font-family: 'Raleway', sans-serif;
+  color: #000;
+  overflow: hidden;
+}
+
+.how-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- reveal-on-scroll base state ---- */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+[data-reveal].in-view{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Intro */
+.how-section .intro {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.how-section .headline {
+  font-family: 'Caveat', cursive;
+  font-size: 3.2rem;
+  color: #5d39ff;
+  margin: 0;
+}
+
+.how-section .subheading {
+  font-size: 1.2rem;
+  margin-top: .5rem;
+  color: #333;
+}
+
+/* Steps Grid */
+.how-section .steps-grid {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* animated connecting line across the row (desktop) */
+.steps-connector{
+  position: absolute;
+  top: 68px;
+  left: 5%;
+  width: 90%;
+  height: 6px;
+  overflow: visible;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.connector-track{
+  stroke: #e2ddff;
+  stroke-width: 2;
+}
+
+.connector-fill{
+  stroke: #5d39ff;
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1);
+}
+
+.connector-dot{
+  fill: #5d39ff;
+  filter: drop-shadow(0 0 6px rgba(93,57,255,.7));
+  transition: cx 1.4s cubic-bezier(.22,1,.36,1);
+}
+
+/* Individual Step Card */
+.how-section .step-card {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.4rem 2rem 2rem;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  border: 1px solid rgba(93,57,255,0.06);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.how-section .step-card:hover {
+  box-shadow: 0 20px 45px rgba(93,57,255,0.18);
+  border-color: rgba(93,57,255,0.25);
+}
+
+/* Icon Bubble */
+.how-section .step-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(135deg, #5d39ff, #9c69ff, #5d39ff);
+  background-size: 400% 400%;
+  animation: bubbleAnimation 6s ease-in-out infinite;
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+
+.how-section .step-card:hover .step-icon {
+  transform: scale(1.08) rotate(8deg);
+}
+
+.how-section .step-icon svg{
+  width: 34px;
+  height: 34px;
+}
+
+.how-section .step-icon .draw{
+  stroke: #fff;
+  fill: none;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 1s cubic-bezier(.22,1,.36,1);
+}
+
+[data-reveal].in-view .step-icon .draw{
+  stroke-dashoffset: 0;
+}
+
+@keyframes bubbleAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Title & Text */
+.how-section .step-title {
+  font-family: 'Caveat', cursive;
+  font-size: 1.6rem;
+  color: #5d39ff;
+  margin-bottom: .5rem;
+}
+
+.how-section .step-text {
+  font-size: 1rem;
+  color: #000;
+  line-height: 1.55;
+}
+
+.how-section .step-num{
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: .8rem;
+  letter-spacing: .05em;
+  color: #d8d2ff;
+}
+
+/* CTA */
+.how-section .how-cta {
+  text-align: center;
+  margin-top: 4.5rem;
+}
+
+.how-section .btn {
+  position: relative;
+  display: inline-block;
+  padding: .95rem 2.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.how-section .btn-primary {
+  background: #5d39ff;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(93,57,255,0.35);
+}
+
+.how-section .btn-primary::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+}
+
+.how-section .btn-primary:hover::before{
+  left: 130%;
+}
+
+.how-section .btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(93,57,255,0.45);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .how-section { padding: 4.5rem 1rem; }
+
+  .how-section .steps-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .steps-connector{
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .connector-track, .connector-fill{
+    /* re-oriented vertically via JS-set coordinates, see script */
+  }
+
+  .how-section .step-card{
+    width: 100%;
+    max-width: 340px;
+  }
 }
