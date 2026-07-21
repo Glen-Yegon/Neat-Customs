@@ -8,13 +8,15 @@ const filterSelect = document.getElementById("filterSelect");
 let allProducts = [];
 
 // Load products from Firebase
+// Load products from Firebase
 async function initShop() {
   // Show loader
   const loader = document.getElementById("loaderWrapper");
   loader.style.display = "flex";
 
   const products = await loadShopProducts();
-allProducts = products; 
+  allProducts = products;
+
   // Hide loader
   loader.style.opacity = "0";
   setTimeout(() => loader.style.display = "none", 400);
@@ -38,15 +40,15 @@ allProducts = products;
           <img src="${product.creatorPhoto}" alt="${product.creatorName}">
           <span>Design by ${product.creatorName}</span>
         </div>
-        <button class="product-btn">Shop Now</button>
       </div>
     `;
+
+    card.style.cursor = "pointer";
+    card.addEventListener("click", () => {
+      window.location.href = `product-des.html?productId=${product.id}`;
+    });
+
     productContainer.appendChild(card);
-
-card.querySelector(".product-btn").addEventListener("click", () => {
-  window.location.href = `product-des.html?productId=${product.id}`;
-});
-
   });
 }
 

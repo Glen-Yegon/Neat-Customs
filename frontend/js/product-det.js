@@ -91,7 +91,7 @@ async function initProduct() {
       <!-- RIGHT: PRODUCT DETAILS -->
       <div class="info-column">
             <!-- BRAND -->
-      <div class="pd-brand">NEAT CUSTOMS</div>
+      <div class="pd-brand">heavychats</div>
 
         <h1 class="pd-name">${product.name}</h1>
 
@@ -154,7 +154,7 @@ async function initProduct() {
 
   <div class="rating-output" id="ratingOutput">Tap a star to rate</div>
 
-  <h1 class="nc-brand-watermark">Neat Customs</h1>
+  <h1 class="nc-brand-watermark">heavychats</h1>
 </section>
 
 

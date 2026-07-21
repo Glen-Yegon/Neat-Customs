@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Neat Customs</title>
+  <title>Products - heavychats</title>
   <link rel="stylesheet" href="css/product.css">
   <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Raleway&display=swap" rel="stylesheet">
 </head>
@@ -26,9 +26,9 @@
     </div>
 
     <div class="nav-right">
-  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
-    <img src="images/default-profile.png" alt="Profile" class="user-icon" id="userProfilePic" />
-  </a>
+<a href="profile.html" class="user-link" aria-label="User Account">
+  <img src="images/default-profile.png" alt="Profile" class="user-icon" id="userProfilePic" />
+</a>
     </div>
   </nav>
 
@@ -45,26 +45,103 @@
 <!-- Product Details Modal -->
 <div id="productModal" class="modal">
   <div class="modal-content">
-    <span class="modal-close">&times;</span>
+    <span class="modal-close" data-close="productModal">&times;</span>
 
     <div class="modal-images" id="modalImages">
-      <!-- Product images injected dynamically, 2 per row -->
+      <!-- Product images injected dynamically -->
     </div>
 
     <div class="modal-info">
+      <span class="modal-eyebrow">Product Details</span>
       <h2 id="modalProductName">Product Name</h2>
-      <p id="modalProductPrice">Price</p>
-      <p id="modalProductDesc">Description</p>
-      <p id="modalProductTags">Tags</p>
+      <p class="modal-price" id="modalProductPrice">Price</p>
+      <p class="modal-desc" id="modalProductDesc">Description</p>
+      <div class="modal-tags" id="modalProductTags"></div>
     </div>
 
     <div class="modal-actions">
-      <button id="editProductBtn" class="modal-btn edit-btn">Edit</button>
-      <button id="deleteProductBtn" class="modal-btn delete-btn">Delete</button>
+      <button id="editProductBtn" class="modal-btn edit-btn">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Edit Product
+      </button>
+      <button id="deleteProductBtn" class="modal-btn delete-btn">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Delete Product
+      </button>
     </div>
   </div>
 </div>
 
+<!-- Edit Product Modal -->
+<div id="editModal" class="modal form-modal">
+  <div class="modal-content form-content">
+    <span class="modal-close" data-close="editModal">&times;</span>
+
+    <span class="modal-eyebrow">Edit Listing</span>
+    <h2 class="form-title">Update Product</h2>
+    <p class="form-subtitle">Make changes to your listing below.</p>
+
+    <div class="form-field">
+      <label for="editName">Product Name</label>
+      <input type="text" id="editName" placeholder="e.g. Heavyweight Oversized Tee" />
+    </div>
+
+    <div class="form-field">
+      <label for="editPrice">Price</label>
+      <input type="number" id="editPrice" placeholder="0.00" step="0.01" min="0" />
+    </div>
+
+    <div class="form-field">
+      <label for="editDesc">Description</label>
+      <textarea id="editDesc" rows="4" placeholder="Describe your product..."></textarea>
+    </div>
+
+    <p class="form-error" id="editError"></p>
+
+    <div class="form-actions">
+      <button class="modal-btn cancel-btn" data-close="editModal">Cancel</button>
+      <button class="modal-btn edit-btn" id="editConfirmBtn">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal form-modal">
+  <div class="modal-content form-content delete-content">
+    <span class="modal-close" data-close="deleteModal">&times;</span>
+
+    <div class="delete-icon">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <h2 class="form-title">Delete this product?</h2>
+    <p class="form-subtitle">This action cannot be undone. Type the product name below to confirm.</p>
+
+    <p class="delete-target-name" id="deleteTargetName"></p>
+
+    <div class="form-field">
+      <label for="deleteConfirmInput">Confirm Product Name</label>
+      <input type="text" id="deleteConfirmInput" placeholder="Type product name exactly" autocomplete="off" />
+    </div>
+
+    <p class="form-error" id="deleteError"></p>
+
+    <div class="form-actions">
+      <button class="modal-btn cancel-btn" data-close="deleteModal">Cancel</button>
+      <button class="modal-btn delete-btn" id="deleteConfirmBtn">Delete Permanently</button>
+    </div>
+  </div>
+</div>
+
+<template id="skeletonCardTemplate">
+  <div class="product-card skeleton-card">
+    <div class="product-image skeleton-block"></div>
+    <div class="product-info">
+      <div class="skeleton-line skeleton-line-title"></div>
+      <div class="skeleton-line skeleton-line-price"></div>
+    </div>
+  </div>
+</template>
 
 
 <!-- FOOTER -->
@@ -72,7 +149,7 @@
   <div class="footer-top">
     <!-- Quote -->
     <div class="footer-quote">
-      <p>"Custom creations for your everyday lifestyle – Neat Customs."</p>
+      <p>"Custom creations for your everyday lifestyle – heavychats."</p>
     </div>
 
     <!-- Logo -->
@@ -94,7 +171,7 @@
 
   <!-- Legal -->
   <div class="footer-legal">
-    <p>&copy; 2025 Neat Customs. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    <p>&copy; 2026 heavychats. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
   </div>
 </footer>
   
@@ -145,12 +222,11 @@ onAuthStateChanged(auth, async (user) => {
   </script>
 
   <script type="module">
-    import { auth, db } from "./firebase/firebase.js";
+import { auth, db } from "./firebase/firebase.js";
 import { doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
-// Modal elements
+// Product modal elements
 const productModal = document.getElementById("productModal");
-const modalClose = document.querySelector(".modal-close");
 const modalImages = document.getElementById("modalImages");
 const modalProductName = document.getElementById("modalProductName");
 const modalProductPrice = document.getElementById("modalProductPrice");
@@ -159,10 +235,51 @@ const modalProductTags = document.getElementById("modalProductTags");
 const editProductBtn = document.getElementById("editProductBtn");
 const deleteProductBtn = document.getElementById("deleteProductBtn");
 
+// Edit modal elements
+const editModal = document.getElementById("editModal");
+const editName = document.getElementById("editName");
+const editPrice = document.getElementById("editPrice");
+const editDesc = document.getElementById("editDesc");
+const editError = document.getElementById("editError");
+const editConfirmBtn = document.getElementById("editConfirmBtn");
+
+// Delete modal elements
+const deleteModal = document.getElementById("deleteModal");
+const deleteTargetName = document.getElementById("deleteTargetName");
+const deleteConfirmInput = document.getElementById("deleteConfirmInput");
+const deleteError = document.getElementById("deleteError");
+const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
+
 let currentProductId = null;
 let currentProductData = null;
 
-// Open modal function
+// -----------------------------
+// 🔹 Modal open/close helpers
+// -----------------------------
+function openModal(modalEl) {
+  modalEl.style.display = "block";
+}
+
+function closeModal(modalEl) {
+  modalEl.style.display = "none";
+}
+
+document.querySelectorAll("[data-close]").forEach(el => {
+  el.addEventListener("click", () => {
+    closeModal(document.getElementById(el.dataset.close));
+  });
+});
+
+// Close any modal when clicking outside its content
+window.addEventListener("click", e => {
+  [productModal, editModal, deleteModal].forEach(modalEl => {
+    if (e.target === modalEl) closeModal(modalEl);
+  });
+});
+
+// -----------------------------
+// 🔹 Open product details modal
+// -----------------------------
 export function openProductModal(product) {
   currentProductId = product.id;
   currentProductData = product;
@@ -172,6 +289,7 @@ export function openProductModal(product) {
   product.images.forEach(img => {
     const imgEl = document.createElement("img");
     imgEl.src = img;
+    imgEl.loading = "lazy";
     modalImages.appendChild(imgEl);
   });
 
@@ -179,64 +297,111 @@ export function openProductModal(product) {
   modalProductName.textContent = product.name;
   modalProductPrice.textContent = `${product.currency} ${product.price.toLocaleString()}`;
   modalProductDesc.textContent = product.description;
-  modalProductTags.textContent = product.tags.join(", ");
 
-  productModal.style.display = "block";
+  modalProductTags.innerHTML = "";
+  (product.tags || []).forEach(tag => {
+    const tagEl = document.createElement("span");
+    tagEl.textContent = tag;
+    modalProductTags.appendChild(tagEl);
+  });
+
+  openModal(productModal);
 }
 
-// Close modal
-modalClose.addEventListener("click", () => productModal.style.display = "none");
+// -----------------------------
+// 🔹 Open Edit modal (pre-filled)
+// -----------------------------
+editProductBtn.addEventListener("click", () => {
+  editError.textContent = "";
+  editName.value = currentProductData.name;
+  editPrice.value = currentProductData.price;
+  editDesc.value = currentProductData.description;
+  openModal(editModal);
+});
 
-// Edit product
-editProductBtn.addEventListener("click", async () => {
-  const newName = prompt("Enter new product name:", currentProductData.name);
-  const newPrice = prompt("Enter new product price:", currentProductData.price);
-  const newDesc = prompt("Enter new product description:", currentProductData.description);
+// -----------------------------
+// 🔹 Save edit
+// -----------------------------
+editConfirmBtn.addEventListener("click", async () => {
+  const newName = editName.value.trim();
+  const newPrice = editPrice.value.trim();
+  const newDesc = editDesc.value.trim();
 
-  if (newName && newPrice && newDesc) {
-    try {
-      await updateDoc(doc(db, "user_merch", currentProductId), {
-        name: newName,
-        price: parseFloat(newPrice),
-        description: newDesc
-      });
-      alert("✅ Product updated successfully!");
-      // Refresh modal
-      currentProductData.name = newName;
-      currentProductData.price = parseFloat(newPrice);
-      currentProductData.description = newDesc;
-      openProductModal(currentProductData);
-    } catch (err) {
-      console.error("Error updating product:", err);
-      alert("❌ Failed to update product.");
-    }
+  if (!newName || !newPrice || !newDesc) {
+    editError.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  const parsedPrice = parseFloat(newPrice);
+  if (isNaN(parsedPrice) || parsedPrice < 0) {
+    editError.textContent = "Enter a valid price.";
+    return;
+  }
+
+  editConfirmBtn.disabled = true;
+  editConfirmBtn.textContent = "Saving...";
+
+  try {
+    await updateDoc(doc(db, "user_merch", currentProductId), {
+      name: newName,
+      price: parsedPrice,
+      description: newDesc
+    });
+
+    currentProductData.name = newName;
+    currentProductData.price = parsedPrice;
+    currentProductData.description = newDesc;
+
+    closeModal(editModal);
+    openProductModal(currentProductData);
+  } catch (err) {
+    console.error("Error updating product:", err);
+    editError.textContent = "Failed to update product. Please try again.";
+  } finally {
+    editConfirmBtn.disabled = false;
+    editConfirmBtn.textContent = "Save Changes";
   }
 });
 
-// Delete product
-deleteProductBtn.addEventListener("click", async () => {
-  const confirmName = prompt(`Type the product name (${currentProductData.name}) to confirm deletion:`);
-  if (confirmName === currentProductData.name) {
-    try {
-      await deleteDoc(doc(db, "user_merch", currentProductId));
-      alert("✅ Product deleted successfully!");
-      productModal.style.display = "none";
-      window.location.reload(); // refresh to remove product from UI
-    } catch (err) {
-      console.error("Error deleting product:", err);
-      alert("❌ Failed to delete product.");
-    }
-  } else {
-    alert("❌ Product name does not match. Deletion cancelled.");
+// -----------------------------
+// 🔹 Open Delete confirmation modal
+// -----------------------------
+deleteProductBtn.addEventListener("click", () => {
+  deleteError.textContent = "";
+  deleteConfirmInput.value = "";
+  deleteTargetName.textContent = currentProductData.name;
+  openModal(deleteModal);
+});
+
+// -----------------------------
+// 🔹 Confirm delete
+// -----------------------------
+deleteConfirmBtn.addEventListener("click", async () => {
+  const typedName = deleteConfirmInput.value.trim();
+
+  if (typedName !== currentProductData.name) {
+    deleteError.textContent = "Product name doesn't match. Please try again.";
+    return;
+  }
+
+  deleteConfirmBtn.disabled = true;
+  deleteConfirmBtn.textContent = "Deleting...";
+
+  try {
+    await deleteDoc(doc(db, "user_merch", currentProductId));
+    closeModal(deleteModal);
+    closeModal(productModal);
+    window.location.reload(); // refresh to remove product from UI
+  } catch (err) {
+    console.error("Error deleting product:", err);
+    deleteError.textContent = "Failed to delete product. Please try again.";
+    deleteConfirmBtn.disabled = false;
+    deleteConfirmBtn.textContent = "Delete Permanently";
   }
 });
-
-// Close modal when clicking outside content
-window.addEventListener("click", e => {
-  if (e.target === productModal) productModal.style.display = "none";
-});
-
   </script>
+
+
   <script>
 (function () {
   if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;

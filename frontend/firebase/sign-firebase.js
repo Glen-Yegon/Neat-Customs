@@ -40,18 +40,24 @@ function showStatus(message, type = "success") {
 }
 
 // ✅ Unified Firestore user updater
+// ✅ Unified Firestore user updater
 async function saveOrUpdateUser(userData) {
   const userRef = doc(db, "users", userData.uid);
   const existingDoc = await getDoc(userRef);
+
+  let finalName, finalPhoto;
 
   if (existingDoc.exists()) {
     // Merge new data with existing data
     const existingData = existingDoc.data();
 
+    finalName = userData.fullName || existingData.fullName || "Unknown User";
+    finalPhoto = userData.photoURL || existingData.photoURL || "";
+
     const updatedData = {
-      fullName: userData.fullName || existingData.fullName || "Unknown User",
+      fullName: finalName,
       email: userData.email || existingData.email,
-      photoURL: userData.photoURL || existingData.photoURL || "",
+      photoURL: finalPhoto,
       signupMethod: userData.signupMethod || existingData.signupMethod,
       lastLogin: serverTimestamp(), // Track most recent login
     };
@@ -63,16 +69,26 @@ async function saveOrUpdateUser(userData) {
 
     await updateDoc(userRef, updatedData);
   } else {
+    finalName = userData.fullName || "Unknown User";
+    finalPhoto = userData.photoURL || "";
+
     // ✅ Create new document if not existing
     await setDoc(userRef, {
-      fullName: userData.fullName || "Unknown User",
+      fullName: finalName,
       email: userData.email,
-      photoURL: userData.photoURL || "",
+      photoURL: finalPhoto,
       signupMethod: userData.signupMethod,
       createdAt: serverTimestamp(),
       lastLogin: serverTimestamp(),
     });
   }
+
+  // ✅ Keep the public-facing profile doc in sync (name + photo only)
+  const publicRef = doc(db, "publicProfiles", userData.uid);
+  await setDoc(publicRef, {
+    fullName: finalName,
+    photoURL: finalPhoto
+  });
 }
 
 // ✅ Handle Sign-up

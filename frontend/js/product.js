@@ -13,15 +13,17 @@ const logoutBtn = document.querySelector(".logout-btn");
 // -----------------------------
 // 🔹 Logout Button
 // -----------------------------
-logoutBtn.addEventListener("click", async () => {
-  try {
-    await auth.signOut();
-    alert("Logged out successfully!");
-    window.location.href = "sign.html";
-  } catch (error) {
-    console.error("Logout failed:", error);
-  }
-});
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await auth.signOut();
+      alert("Logged out successfully!");
+      window.location.href = "sign.html";
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  });
+}
 
 // -----------------------------
 // Back Button

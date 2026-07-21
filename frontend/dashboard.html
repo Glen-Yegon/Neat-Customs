@@ -26,7 +26,7 @@
     </div>
 
     <div class="nav-right">
-  <a href="profile.html" class="user-link logout-btn" aria-label="User Account">
+<a href="profile.html" class="user-link" aria-label="User Account">
     <img src="images/default-profile.png" alt="Profile" class="user-icon" id="userProfilePic" />
   </a>
     </div>
@@ -39,25 +39,107 @@
 
 
 <main class="seller-main">
-  <h1>Your Dashboard</h1>
 
-  <div class="dashboard-cards">
-    <div class="dashboard-card">
-      <div class="card-icon">📦</div>
-      <h2>My Products</h2>
-      <button class="card-btn">View</button>
-    </div>
-    <div class="dashboard-card">
-      <div class="card-icon">➕</div>
-      <h2>Create Product</h2>
-      <button class="card-btn">Add</button>
-    </div>
-    <div class="dashboard-card">
-      <div class="card-icon">🛒</div>
-      <h2>Orders</h2>
-      <button class="card-btn">View</button>
+  <div class="dash-header">
+    <div>
+      <span class="dash-eyebrow">Seller Console</span>
+      <h1>Your Dashboard</h1>
+      <p class="dash-subtitle">Manage your catalog, track performance, and fulfill orders.</p>
     </div>
   </div>
+
+  <!-- ===== STATS OVERVIEW ===== -->
+  <section class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 8L12 3L3 8L12 13L21 8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 8V16L12 21L21 16V8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value" id="statProducts">0</span>
+        <span class="stat-label">Products Listed</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6H21L19 14H7L5 3H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="20" r="1.4" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value" id="statOrders">0</span>
+        <span class="stat-label">Total Orders</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2V22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17 6H9.5C8.12 6 7 7.12 7 8.5C7 9.88 8.12 11 9.5 11H14.5C15.88 11 17 12.12 17 13.5C17 14.88 15.88 16 14.5 16H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value" id="statRevenue">$0</span>
+        <span class="stat-label">Total Revenue</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8V12L15 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value" id="statPending">0</span>
+        <span class="stat-label">Pending Orders</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACTION PANELS ===== -->
+  <section class="action-grid">
+
+    <div class="action-card">
+      <div class="action-top">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 8L12 3L3 8L12 13L21 8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 8V16L12 21L21 16V8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="action-tag">Catalog</span>
+      </div>
+      <h2>My Products</h2>
+      <p>View, edit, and manage every design you currently have listed.</p>
+      <button class="action-btn" data-action="view-products">
+        View Products
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="action-card featured">
+      <div class="action-top">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <span class="action-tag">Quick Start</span>
+      </div>
+      <h2>Create Product</h2>
+      <p>Upload a new design or start one from scratch to add to your store.</p>
+      <button class="action-btn primary" data-action="create-product">
+        Add New Product
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="action-card">
+      <div class="action-top">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 6H21L19 14H7L5 3H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="20" r="1.4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <span class="action-tag">Fulfillment</span>
+      </div>
+      <h2>Orders</h2>
+      <p>Track incoming orders and manage fulfillment status in one place.</p>
+      <button class="action-btn" data-action="view-orders">
+        View Orders
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+  </section>
 </main>
 
 

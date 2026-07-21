@@ -4,6 +4,7 @@ import { collection, query, where, getDocs, doc, deleteDoc, updateDoc } from "ht
 
 // Elements
 const productContainer = document.getElementById("userProducts");
+const skeletonTemplate = document.getElementById("skeletonCardTemplate");
 const productModal = document.getElementById("productModal");
 const modalClose = document.querySelector(".modal-close");
 const modalImages = document.getElementById("modalImages");
@@ -18,6 +19,19 @@ let products = [];
 let currentProductId = null;
 let currentProductData = null;
 
+// -----------------------------
+// 🔹 Show skeleton cards immediately — don't wait on auth to paint something
+// -----------------------------
+renderSkeletons(6);
+
+function renderSkeletons(count) {
+  if (!productContainer || !skeletonTemplate) return;
+  productContainer.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    productContainer.appendChild(skeletonTemplate.content.cloneNode(true));
+  }
+}
+
 // Fetch logged-in user's products
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -29,13 +43,16 @@ onAuthStateChanged(auth, async (user) => {
     const q = query(collection(db, "user_merch"), where("user.uid", "==", user.uid));
     const querySnapshot = await getDocs(q);
 
-    productContainer.innerHTML = "";
     products = [];
 
     if (querySnapshot.empty) {
       productContainer.innerHTML = `<p>You have no products yet.</p>`;
       return;
     }
+
+    // Build all cards in memory first, then paint once — avoids layout thrashing
+    // from appending one card at a time
+    const fragment = document.createDocumentFragment();
 
     querySnapshot.forEach(docSnap => {
       const product = docSnap.data();
@@ -46,7 +63,7 @@ onAuthStateChanged(auth, async (user) => {
       card.className = "product-card";
       card.innerHTML = `
         <div class="product-image">
-          <img src="${product.images[0] || 'images/placeholder.png'}" alt="${product.name}" />
+          <img src="${product.images[0] || 'images/placeholder.png'}" alt="${product.name}" loading="lazy" />
         </div>
         <div class="product-info">
           <h3 class="product-name">${product.name}</h3>
@@ -54,11 +71,13 @@ onAuthStateChanged(auth, async (user) => {
           <button class="product-btn">View Details</button>
         </div>
       `;
-      productContainer.appendChild(card);
 
-      // Open modal on click
       card.querySelector(".product-btn").addEventListener("click", () => openProductModal(product));
+      fragment.appendChild(card);
     });
+
+    productContainer.innerHTML = "";
+    productContainer.appendChild(fragment);
   } catch (err) {
     console.error("Error fetching products:", err);
     productContainer.innerHTML = `<p>Failed to load products. Check console for details.</p>`;
@@ -75,6 +94,7 @@ function openProductModal(product) {
   product.images.forEach(img => {
     const imgEl = document.createElement("img");
     imgEl.src = img;
+    imgEl.loading = "lazy";
     modalImages.appendChild(imgEl);
   });
 

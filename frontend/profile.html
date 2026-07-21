@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/profile.css" />
+</head>
+<body>
+
+  <!-- ===== AUTH GATE MODAL ===== -->
+  <div id="authModal" class="modal-overlay">
+    <div class="modal-box auth-box">
+      <span class="modal-logo">heavy<span class="accent">chats</span></span>
+      <h2>You're not signed in</h2>
+      <p>Sign in or create an account to view your profile.</p>
+      <div class="auth-actions">
+        <button id="goLogin" class="btn btn-primary">Log In</button>
+        <button id="goSignup" class="btn btn-outline">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE LOADER ===== -->
+  <div id="loaderWrapper" class="loader-wrapper">
+    <div class="loader-spinner"></div>
+  </div>
+
+<header class="topbar">
+    <a href="index.html" class="logo">
+      <img src="images/logo.png" alt="HeavyChats" class="logo-img" />
+    </a>
+    <button id="logoutBtn" class="btn btn-ghost">Log Out</button>
+  </header>
+
+  <!-- ===== PROFILE CONTENT ===== -->
+  <main id="profileContent" class="profile-wrap">
+
+    <section class="profile-card">
+      <div class="avatar-block">
+        <div class="avatar-ring">
+          <img id="avatarImg" src="images/placeholder-avatar.png" alt="Profile photo" />
+        </div>
+        <button id="editBtn" class="edit-icon-btn" title="Edit profile">✎</button>
+      </div>
+
+      <h1 id="fullNameDisplay" class="profile-name">—</h1>
+      <p id="emailDisplay" class="profile-email">—</p>
+
+      <span id="methodBadge" class="badge">—</span>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Email</span>
+        <span id="infoEmail" class="info-value">—</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Sign-up Method</span>
+        <span id="infoMethod" class="info-value">—</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Member Since</span>
+        <span id="infoCreated" class="info-value">—</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Last Login</span>
+        <span id="infoLastLogin" class="info-value">—</span>
+      </div>
+    </section>
+
+    <section class="actions-row">
+      <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
+      <a href="orders.html" class="btn btn-outline">My Orders</a>
+    </section>
+
+  </main>
+
+  <!-- ===== EDIT PROFILE MODAL ===== -->
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-box">
+      <h2>Edit Profile</h2>
+
+      <label class="field-label" for="editFullName">Full Name</label>
+      <input type="text" id="editFullName" class="field-input" placeholder="Your full name" />
+
+<label class="field-label">Profile Photo</label>
+      <div class="photo-upload-row">
+        <div class="photo-preview-ring">
+          <img id="photoPreview" src="images/placeholder-avatar.png" alt="Preview" />
+        </div>
+        <div class="photo-upload-actions">
+          <label for="editPhotoFile" class="btn btn-outline upload-btn">Choose Photo</label>
+          <input type="file" id="editPhotoFile" accept="image/*" hidden />
+          <span id="photoFileName" class="photo-file-name">No file selected</span>
+        </div>
+      </div>
+
+      <!-- ===== CROP PHOTO MODAL ===== -->
+  <div id="cropModal" class="modal-overlay">
+    <div class="modal-box crop-box">
+      <h2>Adjust Photo</h2>
+      <p>Drag to reposition, use the slider to zoom.</p>
+
+      <div class="crop-stage" id="cropStage">
+        <img id="cropImage" alt="Crop preview" draggable="false" />
+        <div class="crop-frame"></div>
+      </div>
+
+      <input type="range" id="cropZoom" class="crop-zoom-slider" min="1" max="3" step="0.01" value="1" />
+
+      <div class="modal-actions">
+        <button id="cropCancel" class="btn btn-outline">Cancel</button>
+        <button id="cropConfirm" class="btn btn-primary">Use Photo</button>
+      </div>
+    </div>
+  </div>
+
+      <p id="editStatus" class="edit-status"></p>
+
+      <div class="modal-actions">
+        <button id="cancelEdit" class="btn btn-outline">Cancel</button>
+        <button id="saveEdit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>

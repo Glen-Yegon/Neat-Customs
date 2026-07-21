@@ -174,7 +174,6 @@ body {
 /* Individual product card */
 .product-card {
   background: transparent; /* dark professional background */
-  box-shadow: 0 8px 20px rgba(93, 57, 255, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   display: flex;
@@ -257,92 +256,170 @@ body {
 
 
 
-/* Modal overlay */
+/* ================= MODAL BASE ================= */
 .modal {
   display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.307);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 999;
   overflow-y: auto;
   padding: 40px 20px;
+  animation: modalOverlayIn 0.25s ease;
+}
+
+@keyframes modalOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Modal content */
 .modal-content {
-  background: #000000;
-  border: 2px solid #5d39ff;
-  padding: 20px;
+  background: linear-gradient(160deg, #0a0a0a 0%, #14101f 100%);
+  border: 1px solid rgba(93, 57, 255, 0.35);
+  padding: 32px;
   max-width: 800px;
   margin: auto;
-  border-radius: 4px;
+  border-radius: 6px;
   color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(93,57,255,0.08) inset;
+  animation: modalContentIn 0.35s cubic-bezier(.19,1,.22,1);
+}
+
+@keyframes modalContentIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 /* Close button */
 .modal-close {
   position: absolute;
-  top: 5px; right: 7px;
-  font-size: 70px;
+  top: 14px; right: 18px;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
   cursor: pointer;
-  color: #fff;
-  transition: color 0.3s ease;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.25s ease, transform 0.25s ease;
+  z-index: 2;
 }
 
 .modal-close:hover {
   color: #5d39ff;
+  transform: rotate(90deg);
 }
 
-/* Modal images grid */
+/* Eyebrow label */
+.modal-eyebrow {
+  display: inline-block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b7a3ff;
+  margin-bottom: 4px;
+}
+
+/* ================= PRODUCT MODAL IMAGES ================= */
 .modal-images {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
+  gap: 6px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .modal-images img {
   width: 100%;
-  height: 290px;
+  height: 280px;
   object-fit: cover;
-  border: 1px solid #5d39ff;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
+  display: block;
 }
 
+.modal-images img:hover {
+  transform: scale(1.03);
+}
 
-/* Modal info */
+/* ================= PRODUCT MODAL INFO ================= */
 .modal-info h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-family: "Caveat", cursive;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.modal-price {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #5d39ff;
+  margin-bottom: 14px;
 }
 
-.modal-info p {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #d1d1ff;
+.modal-desc {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
 }
 
-/* Modal action buttons */
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modal-tags span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #b7a3ff;
+  background: rgba(93, 57, 255, 0.12);
+  border: 1px solid rgba(93, 57, 255, 0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+/* ================= ACTION BUTTONS ================= */
 .modal-actions {
   display: flex;
-  gap: 15px;
+  gap: 14px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 20px;
 }
 
 .modal-btn {
-  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
   border: none;
-  font-weight: 600;
+  border-radius: 4px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: all 0.25s ease;
+}
+
+.modal-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
 .edit-btn {
@@ -352,30 +429,178 @@ body {
 
 .edit-btn:hover {
   background: #7e5dff;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(93,57,255,0.4);
 }
 
 .delete-btn {
-  background: #ff3b3b;
-  color: #fff;
+  background: transparent;
+  color: #ff6b6b;
+  border: 1.5px solid rgba(255,107,107,0.4);
 }
 
 .delete-btn:hover {
-  background: #ff6161;
-  transform: scale(1.05);
+  background: rgba(255,59,59,0.1);
+  border-color: #ff3b3b;
+  transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
+.cancel-btn {
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  border: 1.5px solid rgba(255,255,255,0.15);
+}
+
+.cancel-btn:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ================= FORM MODALS (Edit / Delete) ================= */
+.form-modal .modal-content {
+  max-width: 440px;
+  padding: 36px 32px;
+}
+
+.form-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.form-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #b7a3ff;
+}
+
+.form-field input,
+.form-field textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.92rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+  resize: vertical;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #5d39ff;
+  background: rgba(93,57,255,0.06);
+}
+
+.form-error {
+  min-height: 18px;
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  font-family: 'Raleway', sans-serif;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.form-actions .modal-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ================= DELETE MODAL SPECIFIC ================= */
+.delete-content {
+  text-align: center;
+  align-items: center;
+}
+
+.delete-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255,59,59,0.12);
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.delete-content .form-subtitle {
+  text-align: center;
+}
+
+.delete-target-name {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.delete-content .form-field {
+  width: 100%;
+  text-align: left;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 600px) {
+  .modal-content {
+    padding: 22px;
+  }
+
   .modal-images img {
-    height: 140px;
+    height: 150px;
   }
 
   .modal-info h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .form-modal .modal-content {
+    padding: 28px 22px;
+  }
+
+  .form-actions {
+    flex-direction: column;
   }
 }
-
 
 
 /* ===================== FUTURISTIC FOOTER ===================== */
@@ -694,4 +919,46 @@ a, button, input, textarea, .btn, [data-cursor-text]{ cursor:none; }
 @media (hover:none), (pointer:coarse){
   #cursorGoo, #cursorCore, #cursorLabel{ display:none; }
   body, a, button, [data-cursor-text]{ cursor:auto; }
+}
+
+/* ================ PRODUCT SKELETON LOADER ================ */
+.skeleton-card{
+  pointer-events: none;
+}
+
+.skeleton-block,
+.skeleton-line{
+  background: linear-gradient(
+    90deg,
+    rgba(93,57,255,0.08) 25%,
+    rgba(93,57,255,0.18) 50%,
+    rgba(93,57,255,0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.2s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.skeleton-card .product-image.skeleton-block{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 4px;
+}
+
+.skeleton-line{
+  height: 14px;
+  margin: 10px 0;
+}
+
+.skeleton-line-title{
+  width: 70%;
+}
+
+.skeleton-line-price{
+  width: 40%;
+}
+
+@keyframes skeletonShimmer{
+  0%{ background-position: 200% 0; }
+  100%{ background-position: -200% 0; }
 }
