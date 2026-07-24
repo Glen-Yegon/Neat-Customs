@@ -5,6 +5,10 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-
 const cartContainer = document.getElementById("cartContainer");
 const totalAmountEl = document.getElementById("totalAmount");
 const backBtn = document.getElementById("backBtn");
+const checkoutBtn = document.getElementById("checkoutBtn");
+checkoutBtn.addEventListener("click", () => {
+  window.location.href = "checkout.html";
+});
 
 // Go back to previous page
 backBtn.addEventListener("click", () => window.history.back());
@@ -60,43 +64,44 @@ store.openCursor().onsuccess = async (event) => {
 
 // Render cart
 async function renderCart(selections) {
-  cartContainer.innerHTML = "";
   if (!selections.length) {
-    console.warn("[CART] No items in cart.");
-    cartContainer.innerHTML = "<p style='text-align:center; padding:50px;'>Your cart is empty.</p>";
-    totalAmountEl.textContent = "₦0";
+    cartContainer.innerHTML = "<p class='empty-cart-msg'>Your cart is empty.</p>";
+    totalAmountEl.textContent = "Ksh 0";
     return;
   }
 
-  let total = 0;
+  // Fetch every product in parallel instead of one at a time
+  const results = await Promise.all(
+    selections.map(async (sel) => {
+      const { productId, size, quantity } = sel.data;
+      const productDoc = await getDoc(doc(db, "user_merch", productId));
+      if (!productDoc.exists()) return null;
+      return { sel, product: productDoc.data(), size, quantity };
+    })
+  );
 
-  for (let sel of selections) {
-    // sel has structure: { id: "...", data: { productId, size, quantity } }
-    const { productId, size, quantity } = sel.data;
+  const validResults = results.filter(Boolean);
 
-    console.log("[CART] Fetching product from Firebase:", productId);
-    const productDoc = await getDoc(doc(db, "user_merch", productId));
+  cartContainer.innerHTML = "";
 
-    if (!productDoc.exists()) {
-      console.warn("[CART] Product not found in Firebase:", productId);
-      continue;
-    }
+  if (!validResults.length) {
+    cartContainer.innerHTML = "<p class='empty-cart-msg'>Your cart is empty.</p>";
+    totalAmountEl.textContent = "Ksh 0";
+    return;
+  }
 
-    const product = productDoc.data();
+  validResults.forEach(({ sel, product, size, quantity }) => {
     const price = product.price || 0;
-    const currency = product.currency || "₦";
-    const subtotal = price * quantity;
-    total += subtotal;
+    const currency = product.currency || "Ksh";
 
     const card = document.createElement("div");
     card.className = "cart-card";
-
     card.innerHTML = `
       <img src="${product.images?.[0] || ''}" alt="${product.name}">
       <div class="cart-card-info">
-        <div class="brand">Neat Customs</div>
+        <div class="brand">heavychats</div>
         <div class="name">${product.name}</div>
-        <div class="price">${currency}${price.toLocaleString()}</div>
+        <div class="price">${currency} ${price.toLocaleString()}</div>
         <div class="details size">Size: ${size}</div>
         <div class="details quantity">Quantity: ${quantity}</div>
       </div>
@@ -105,20 +110,17 @@ async function renderCart(selections) {
 
     const removeBtn = card.querySelector(".remove-btn");
     removeBtn.addEventListener("click", async () => {
-      console.log("[CART] Removing item:", sel.id);
-      const db = await openDB();
-      const tx = db.transaction(STORE_NAME, "readwrite");
+      const idb = await openDB();
+      const tx = idb.transaction(STORE_NAME, "readwrite");
       const store = tx.objectStore(STORE_NAME);
-      store.delete(sel.id); // sel.id now exists
+      store.delete(sel.id);
       card.remove();
       updateTotal();
-       window.refreshCartCount();
-      // Update cart count badge
       if (window.refreshCartCount) window.refreshCartCount();
     });
 
     cartContainer.appendChild(card);
-  }
+  });
 
   updateTotal();
 
@@ -131,8 +133,7 @@ async function renderCart(selections) {
       const qty = parseInt(qtyText) || 1;
       sum += parseInt(priceText) * qty;
     });
-    console.log("[CART] Calculated total:", sum);
-    totalAmountEl.textContent = `₦${sum.toLocaleString()}`;
+    totalAmountEl.textContent = `Ksh ${sum.toLocaleString()}`;
   }
 }
 

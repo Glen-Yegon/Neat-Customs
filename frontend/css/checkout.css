@@ -1,0 +1,467 @@
+/* ===================== TRANSPARENT SCROLLBAR ===================== */
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;  /* fully transparent track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5d39ff;       /* your branding color */
+  border-radius: 10px;
+  border: 2px solid black; /* optional spacing for a clean look */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7f5aff;       /* slightly lighter glow on hover */
+  box-shadow: 0 0 8px #5d39ff; /* subtle glow for futuristic look */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #5d39ff black;
+}
+
+/* Hide scrollbar on mobile (Safari, Chrome Android) */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+
+
+
+
+/* ===========================================================
+   CHECKOUT — heavychats
+   Brand: black / white / #5d39ff
+   Fonts: Caveat (display accents), Raleway (everything else)
+   =========================================================== */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root{
+  --ink:#0b0b0c;
+  --paper:#ffffff;
+  --bg:#f7f6fb;
+  --accent:#5d39ff;
+  --accent-dark:#4527d1;
+  --line:#e6e4ee;
+  --sub:#6f6d78;
+  --radius:14px;
+}
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:'Raleway', sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Navbar ---------- */
+.co-navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 22px;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.co-back-btn{
+  width:38px; height:38px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  border-radius:10px;
+  font-size:16px;
+  color:var(--ink);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:border-color .15s ease, background .15s ease;
+}
+.co-back-btn:hover{ border-color:var(--accent); background:#f5f3ff; color:var(--accent); }
+.co-nav-logo img{ height:28px; width:auto; display:block; }
+.co-nav-spacer{ width:38px; } /* balances the back button so the logo stays centered */
+
+/* ---------- Layout ---------- */
+.checkout-wrap{
+  max-width:660px;
+  margin:0 auto;
+  padding:32px 20px 90px;
+}
+
+.checkout-title{
+  font-family:'Caveat', cursive;
+  font-weight:700;
+  font-size:44px;
+  color:var(--ink);
+  margin-bottom:22px;
+}
+
+.checkout-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  margin-bottom:16px;
+}
+.checkout-card h2{
+  font-family:'Raleway', sans-serif;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--sub);
+  margin-bottom:16px;
+}
+
+/* ---------- Order summary ---------- */
+.order-items{ display:flex; flex-direction:column; gap:14px; }
+
+.loading-note{ font-size:14px; color:var(--sub); }
+
+.order-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+.order-item:last-child{ border-bottom:none; padding-bottom:0; }
+
+.order-item img{
+  width:84px;
+  height:84px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid var(--line);
+  flex-shrink:0;
+  background:#f2f1f7;
+}
+
+.order-item-info{ flex:1; min-width:0; }
+.order-item-name{
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.order-item-meta{
+  font-size:13px;
+  color:var(--sub);
+  margin-top:3px;
+}
+.order-item-price{
+  font-size:14px;
+  font-weight:600;
+  color:var(--ink);
+  white-space:nowrap;
+}
+
+.order-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:16px;
+  font-weight:700;
+}
+.order-total.hidden{ display:none; }
+
+.empty-order{
+  text-align:center;
+  padding:30px 10px;
+}
+.empty-order p{ color:var(--sub); margin-bottom:12px; font-size:14px; }
+.empty-link{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  padding:10px 20px;
+  border-radius:8px;
+  transition:background .15s ease;
+}
+.empty-link:hover{ background:var(--accent-dark); }
+
+.checkout-forms.hidden{ display:none; }
+
+/* ---------- Fields ---------- */
+.field{ margin-bottom:14px; }
+.field:last-of-type{ margin-bottom:0; }
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:500;
+  color:var(--sub);
+  margin-bottom:6px;
+}
+.field input,
+.field select{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:14px;
+  font-family:inherit;
+  color:var(--ink);
+  background:var(--paper);
+}
+.field input:focus,
+.field select:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(93,57,255,.12);
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:6px;
+}
+.checkbox-row label{ font-size:13px; color:var(--sub); margin:0; }
+
+.notice{
+  font-size:13px;
+  color:var(--sub);
+  background:#f5f3ff;
+  border-radius:8px;
+  padding:12px 14px;
+  margin-top:16px;
+}
+
+/* ---------- Payment ---------- */
+.pay-note{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  color:var(--sub);
+  margin-bottom:16px;
+}
+.pay-note i{ color:var(--accent); font-size:15px; }
+
+.pay-btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:var(--accent);
+  color:#fff;
+  font-family:'Raleway', sans-serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:.01em;
+  cursor:pointer;
+  transition:background .15s ease, transform .1s ease;
+}
+.pay-btn:hover{ background:var(--accent-dark); }
+.pay-btn:active{ transform:scale(.99); }
+.pay-btn:disabled{ background:#c7c1e6; cursor:not-allowed; }
+
+.secure-note{
+  text-align:center;
+  font-size:12px;
+  color:var(--sub);
+  margin-top:12px;
+}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;
+  top:20px; left:50%;
+  transform:translateX(-50%);
+  background:var(--ink);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:8px;
+  font-size:14px;
+  z-index:1000;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  max-width:90%;
+  text-align:center;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width:480px){
+  .checkout-wrap{ padding:22px 14px 70px; }
+  .checkout-title{ font-size:36px; margin-bottom:16px; }
+  .checkout-card{ padding:18px; }
+  .order-item img{ width:64px; height:64px; }
+  .order-item-name{ font-size:14px; }
+  .order-item-price{ font-size:13px; }
+}
+
+
+/* ============================================================
+   CRAZY LUXURY CURSOR — black / white / #5d39ff
+   Core mark: shattered dagger/shard — rotates with motion,
+   fractures into glass shards on click
+   ============================================================ */
+
+:root{
+  --c-ink:#000;
+  --c-paper:#fff;
+  --c-accent:#5d39ff;
+}
+
+body{ cursor:none; }
+a, button, input, textarea, .btn, [data-cursor-text]{ cursor:none; }
+
+#cursorGoo{
+  position:fixed;
+  top:0; left:0;
+  width:0; height:0;
+  pointer-events:none;
+  z-index:9998;
+  filter:url(#gooFilter);
+}
+
+.blob-dot{
+  position:fixed;
+  top:0; left:0;
+  border-radius:50%;
+  background:var(--c-accent);
+  pointer-events:none;
+  will-change:transform;
+}
+
+/* the dagger/shard core */
+#cursorCore{
+  position:fixed;
+  top:0; left:0;
+  width:34px;
+  height:34px;
+  pointer-events:none;
+  z-index:10000;
+  will-change:transform;
+  filter:drop-shadow(0 0 8px var(--c-accent)) drop-shadow(0 0 2px rgba(93,57,255,.8));
+  transition:width .18s ease, height .18s ease, filter .18s ease;
+}
+
+#cursorCore svg{
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:visible;
+}
+
+#daggerBlade{
+  fill:var(--c-paper);
+  stroke:var(--c-accent);
+  stroke-width:1;
+  mix-blend-mode:difference;
+}
+
+#cursorCore.hover{
+  width:46px;
+  height:46px;
+  filter:drop-shadow(0 0 18px var(--c-accent)) drop-shadow(0 0 4px rgba(93,57,255,.9));
+}
+
+/* quick crack-flash shown right at the impact point on click */
+.cursor-crack{
+  position:fixed;
+  top:0; left:0;
+  width:70px;
+  height:70px;
+  pointer-events:none;
+  z-index:9997;
+  transform:translate(-50%,-50%) scale(.4);
+  opacity:0;
+  animation:crackFlash .3s ease-out forwards;
+}
+
+@keyframes crackFlash{
+  0%{ opacity:1; transform:translate(-50%,-50%) scale(.3) rotate(0deg); }
+  100%{ opacity:0; transform:translate(-50%,-50%) scale(1.3) rotate(12deg); }
+}
+
+#cursorLabel{
+  position:fixed;
+  top:0; left:0;
+  pointer-events:none;
+  z-index:10001;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 6px;
+  font-family:-apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--c-paper);
+  white-space:nowrap;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.6);
+  transition:opacity .18s ease;
+  mix-blend-mode:difference;
+}
+
+#cursorLabel.show{ opacity:1; }
+
+.cursor-shock{
+  position:fixed;
+  top:0; left:0;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid var(--c-accent);
+  pointer-events:none;
+  z-index:9996;
+  transform:translate(-50%,-50%);
+  animation:shockOut .55s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes shockOut{
+  0%{ width:16px; height:16px; opacity:1; border-width:3px; }
+  100%{ width:140px; height:140px; opacity:0; border-width:.5px; }
+}
+
+.cursor-shard{
+  position:fixed;
+  top:0; left:0;
+  width:0;
+  height:0;
+  pointer-events:none;
+  z-index:9995;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-bottom:10px solid var(--c-accent);
+  transform-origin:center;
+}
+
+.cursor-shard.alt{
+  border-bottom-color:var(--c-paper);
+  filter:drop-shadow(0 0 1px var(--c-ink));
+}
+
+@media (hover:none), (pointer:coarse){
+  #cursorGoo, #cursorCore, #cursorLabel{ display:none; }
+  body, a, button, [data-cursor-text]{ cursor:auto; }
+}

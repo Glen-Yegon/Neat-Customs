@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     revealCard(card, delay);
   });
 });
+
 window.addEventListener("load", () => {
   const slides = document.querySelectorAll(".slideshow img");
   const navbar = document.getElementById("navbar");
@@ -115,7 +116,7 @@ window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   const mainContent = document.getElementById("main-content");
 
-  const delay = 200;
+  const delay = 140;
   let current = 0;
 
   // -------------------------------

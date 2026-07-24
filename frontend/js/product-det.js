@@ -131,10 +131,9 @@ async function initProduct() {
         <h2 class="pd-description-title">Product Description</h2>
         <p class="pd-description">${product.description || "No description available."}</p>
 
-              <!-- ADD TO CART & CHECKOUT BUTTONS -->
+        <!-- ADD TO CART BUTTON -->
       <div class="product-buttons">
         <button id="addToCartBtn">Add to Cart</button>
-        <button id="checkoutBtn">Checkout</button>
       </div>
       </div>
 
@@ -283,10 +282,8 @@ function highlightStars(level) {
 const addToCartBtn = document.getElementById("addToCartBtn");
 
 // -----------------------------
-// Handle Add to Cart & Checkout
+// Handle Add to Cart
 // -----------------------------
-const checkoutBtn = document.getElementById("checkoutBtn");
-
 function saveSelection() {
   const selectedSize = document.querySelector(".size-box.selected-size")?.dataset.size;
   const quantity = parseInt(document.getElementById("qtyInput").value) || 1;
@@ -317,22 +314,19 @@ function saveSelection() {
 
 
 
-// Add to Cart
+// Add to Cart — first click adds the item, then the button becomes "Go to Cart"
 addToCartBtn.addEventListener("click", () => {
+  if (addToCartBtn.dataset.added === "true") {
+    window.location.href = "cart.html";
+    return;
+  }
+
   const data = saveSelection();
   if (!data) return; // size not selected
-  // Redirect to cart
-  window.location.href = "cart.html";
-});
 
-// Checkout (can go to checkout page later)
-checkoutBtn.addEventListener("click", () => {
-  const data = saveSelection();
-  if (!data) return;
-  // Redirect to cart for now
-  window.location.href = "cart.html";
+  addToCartBtn.textContent = "Go to Cart";
+  addToCartBtn.dataset.added = "true";
 });
-
 
 
 }
