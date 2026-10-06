@@ -220,13 +220,13 @@ body {
 }
 
 .product-form {
-  background: #0b0b0b;
+  background: #010101;
   border-radius: 2px;
   margin-bottom: 20px;
   padding: 30px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 0 30px rgba(93, 57, 255, 0.4);
+  border: 1px solid #5d39ff95;
   color: white;
 }
 
@@ -240,7 +240,7 @@ body {
   margin-bottom: 5px;
   font-weight: bold;
   font-family: "Caveat", cursive;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #5d39ff;
 }
 
